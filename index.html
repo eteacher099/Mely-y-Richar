@@ -19,6 +19,31 @@ body{font-family:Nunito,system-ui,sans-serif;color:var(--navy);-webkit-tap-highl
 .ib{background:none;border:0;font-size:26px;color:var(--navy);cursor:pointer;text-decoration:none;padding:4px 8px}
 h1,h2,.t{font-family:"Kaushan Script",cursive;font-weight:400;color:var(--navy);line-height:1.05}
 h1{font-size:60px}h2{font-size:42px;margin-bottom:6px}
+.couple-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Kaushan Script", cursive;
+  color: var(--navy);
+  line-height: 0.95;
+}
+
+.name-first {
+  font-size: 65px;
+  transform: translateX(25px);
+}
+
+.name-first span {
+  display: inline-block;
+  font-size: 55px;
+  margin-left: 3px;
+}
+
+.name-second {
+  font-size: 82px;
+  transform: translateX(-5px);
+  margin-top: -2px;
+}
 .sub{font-size:15px;margin-bottom:18px}
 .btn{display:inline-block;border:0;border-radius:40px;background:var(--navy);color:#fff;font:800 18px Nunito;padding:13px 34px;cursor:pointer;text-decoration:none}
 .btn.sun{background:var(--sun);color:var(--navy)}
@@ -27,6 +52,143 @@ h1{font-size:60px}h2{font-size:42px;margin-bottom:6px}
 .sea{background:linear-gradient(var(--sky),#fff0 70%)}
 .hero{background:linear-gradient(180deg,#8fd0f0,#d9f0fa 55%,var(--sand));padding-top:90px;display:flex;flex-direction:column;align-items:center}
 .hero .pic{width:78%;aspect-ratio:1;border-radius:50%;background:var(--sand) center/cover;display:grid;place-items:center;font-size:110px;margin:18px 0 26px;border:6px solid #fff;box-shadow:0 10px 30px #14337a33}
+  /* NUEVO HOME */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 105px 18px 85px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(
+    180deg,
+    #91ccef 0%,
+    #d5edfa 37%,
+    #fff1d9 68%,
+    #f1d5a7 100%
+  );
+}
+
+.home-names {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  color: #14337A;
+  font-family: "Kaushan Script", cursive;
+}
+
+.name-line-one {
+  font-size: clamp(54px, 15vw, 70px);
+  line-height: 1.05;
+  transform: translateX(-5px);
+  white-space: nowrap;
+}
+
+.name-line-one span:first-child {
+  font-size: .85em;
+}
+
+.name-line-two {
+  font-size: clamp(72px, 19vw, 88px);
+  line-height: .95;
+  margin-top: -2px;
+  transform: translateX(-8px);
+}
+
+.heart {
+  color: #E2553F;
+  font-family: sans-serif;
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.home-subtitle {
+  font-family: "Kaushan Script", cursive;
+  font-size: 27px;
+  color: #14337A;
+  margin-top: 12px;
+  transform: rotate(-5deg);
+}
+
+.home-tagline {
+  font-size: 14px;
+  color: #14337A;
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+.home-illustration {
+  width: 115%;
+  max-width: 490px;
+  height: 42vh;
+  min-height: 270px;
+  max-height: 390px;
+  margin-top: 8px;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
+  font-size: 100px;
+  flex-shrink: 0;
+}
+
+.home-enter {
+  position: relative;
+  z-index: 3;
+  min-width: 175px;
+  margin-top: -8px;
+  background: #14337A;
+  color: white;
+  box-shadow: 0 5px 12px #14337a33;
+  font-size: 19px;
+}
+
+.tropical {
+  position: absolute;
+  z-index: 1;
+  font-size: 65px;
+  pointer-events: none;
+}
+
+.palm-left {
+  top: 8px;
+  left: -15px;
+  transform: rotate(-20deg);
+}
+
+.flower-right {
+  right: 8px;
+  top: 225px;
+  font-size: 38px;
+}
+
+.hero .sun {
+  top: 25px;
+  right: 25px;
+  font-size: 55px;
+}
+
+.starfish {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  font-size: 35px;
+}
+
+@media(max-height:700px) {
+  .hero { padding-top: 80px; }
+  .home-illustration {
+    height: 34vh;
+    min-height: 210px;
+  }
+}
 .sun{position:absolute;top:24px;right:28px;font-size:54px}
 .tl{list-style:none;padding:0;margin:20px 0}
 .tl li{display:flex;align-items:center;gap:16px;text-align:left;margin:0 0 14px 6px;font-size:18px}
@@ -111,11 +273,40 @@ const wave='<div class="wave"></div>';
 function show(html,init){clearInterval(timer);$('#menu').hidden=true;app.innerHTML=html+wave;window.scrollTo(0,0);init&&init()}
 
 const R={
-home(){show(`<section class="s hero"><span class="sun">☀️</span>
-  <h1>${esc(CONFIG.novios)}</h1><p class="t" style="font-size:30px;margin-top:4px">Nuestra Boda</p><p>Una aventura juntos 🌊</p>
-  <div class="pic" id="pic" style="${CONFIG.portada?`background-image:url('${esc(CONFIG.portada)}')`:''}">🐶</div>
-  <a class="btn" href="#itin">Entrar →</a></section>`,()=>{
-    if(CONFIG.portada){const i=new Image();i.onload=()=>{$('#pic').textContent=''};i.src=CONFIG.portada}})},
+home(){
+  show(`
+    <section class="s hero">
+      <span class="sun">☀️</span>
+      <span class="tropical palm-left">🌴</span>
+      <span class="tropical flower-right">🌺</span>
+
+      <div class="home-names">
+        <div class="name-line-one">
+          Meli <span>&</span> <span class="heart">♥</span>
+        </div>
+        <div class="name-line-two">Richi</div>
+      </div>
+
+      <p class="home-subtitle">Nuestra Boda</p>
+      <p class="home-tagline">Una aventura juntos</p>
+
+      <div class="home-illustration" id="pic"
+        style="${CONFIG.portada ? `background-image:url('${esc(CONFIG.portada)}')` : ''}">
+        ${CONFIG.portada ? '' : '🐶'}
+      </div>
+
+      <a class="btn home-enter" href="#itin">Entrar →</a>
+      <span class="starfish">⭐</span>
+    </section>
+  `,()=>{
+    if(CONFIG.portada){
+      const i=new Image();
+      i.onload=()=>{$('#pic').textContent=''};
+      i.onerror=()=>{$('#pic').textContent='🐶'};
+      i.src=CONFIG.portada;
+    }
+  });
+},
 
 itin(){show(`${bar()}<section class="s sea"><h2>Itinerario</h2><p class="sub">¡No te pierdas ningún momento!</p>
   <ul class="tl">${CONFIG.itinerario.map(([i,h,t])=>`<li><i>${i}</i><span><b>${esc(h)}</b>${esc(t)}</span></li>`).join('')}</ul>
