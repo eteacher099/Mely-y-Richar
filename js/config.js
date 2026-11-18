@@ -9,7 +9,7 @@ export const CONFIG = {
   mapa: 'https://maps.google.com/?q=Salon+Playa+Azul',
   playlist: 'https://open.spotify.com/',  // enlace a la playlist colaborativa de Spotify
   perro: 'Tesla',
-  portada: 'img/portada.jpg',             // foto/ilustración de portada (opcional; '' para usar emoji)
+  portada: 'img/couple.svg',              // ilustración de portada; cámbiala por img/portada.jpg/.png si tienes arte final
 
   // [icono, hora, actividad]
   itinerario: [

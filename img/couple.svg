@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380">
+  <title>Meli, Richi y Tesla</title>
+  <defs>
+    <g id="anchor" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="0" cy="-11" r="3.2"/>
+      <path d="M0 -7.8V12M-6.5 -3H6.5M-11 3c1 7 6 10 11 10s10-3 11-10M-13.5 5.5l2.5-3 3 2M13.5 5.5l-2.5-3-3 2"/>
+    </g>
+    <clipPath id="shirtClip">
+      <path d="M14 380C16 304 42 266 92 252l38-8 44 6c32 6 56 30 64 130Z"/>
+    </clipPath>
+    <radialGradient id="skinM" cx=".45" cy=".4" r=".7">
+      <stop offset="0" stop-color="#f0c29a"/><stop offset="1" stop-color="#d99d70"/>
+    </radialGradient>
+    <radialGradient id="skinW" cx=".45" cy=".4" r=".7">
+      <stop offset="0" stop-color="#fbd7b5"/><stop offset="1" stop-color="#eab48b"/>
+    </radialGradient>
+    <radialGradient id="dogHead" cx=".45" cy=".35" r=".75">
+      <stop offset="0" stop-color="#4a4a57"/><stop offset="1" stop-color="#25252d"/>
+    </radialGradient>
+    <linearGradient id="hairW" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8723f"/><stop offset=".5" stop-color="#cf9a5e"/><stop offset="1" stop-color="#e3bb82"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- ===== Meli: cabello de atrás ===== -->
+    <path fill="url(#hairW)" d="M214 146c-12 50-6 96-12 140-6 40 6 74 22 94h150c8-36-8-70-4-108 4-42-18-96-48-124-30-22-86-28-108-2Z"/>
+    <path fill="none" stroke="#f1cf98" stroke-width="3" d="M340 190c12 30 4 56 12 84 6 22 2 50-4 70M326 230c8 26-2 50 6 74M228 230c-6 30 0 54-6 80"/>
+
+    <!-- ===== Meli: cuerpo ===== -->
+    <path fill="url(#skinW)" d="M228 380c-4-40 8-82 40-100 26-12 62-8 82 14 18 22 18 56 16 86Z"/>
+    <path fill="#2a4d93" d="M236 380c2-22 8-40 22-50 30-8 66-6 98 8 6 14 8 28 8 42Z"/>
+    <path fill="none" stroke="#2a4d93" stroke-width="5" d="M262 332l-6-40M338 338l8-36"/>
+
+    <!-- ===== Richi: camisa a rayas ===== -->
+    <g clip-path="url(#shirtClip)" stroke="none">
+      <rect x="0" y="230" width="260" height="150" fill="#fdfbf5"/>
+      <g fill="#223a70">
+        <rect x="0" y="262" width="260" height="11"/><rect x="0" y="285" width="260" height="11"/>
+        <rect x="0" y="308" width="260" height="11"/><rect x="0" y="331" width="260" height="11"/>
+        <rect x="0" y="354" width="260" height="11"/><rect x="0" y="377" width="260" height="11"/>
+      </g>
+    </g>
+    <path fill="none" d="M14 380C16 304 42 266 92 252l38-8 44 6c32 6 56 30 64 130"/>
+    <path fill="none" stroke="#c9c2b5" d="M70 300c4 30 4 56 2 80"/>
+
+    <!-- ===== Richi: cabeza ===== -->
+    <g transform="rotate(7 142 160)">
+      <path fill="url(#skinM)" d="M120 196v52c16 12 40 10 52-2l-2-50Z"/>
+      <path fill="#fdfbf5" d="M106 250c10 10 30 16 46 14 14-2 26-8 32-16l-8-6c-10 10-48 12-62-2Z"/>
+      <ellipse cx="95" cy="140" rx="10" ry="15" fill="#e0a77b"/>
+      <ellipse cx="190" cy="138" rx="10" ry="15" fill="#e0a77b"/>
+      <path fill="url(#skinM)" d="M96 122c-2-52 92-56 94-2 2 42-16 90-48 92-34-2-46-48-46-90Z"/>
+      <!-- barba -->
+      <path fill="#3b2a20" d="M95 118c-4 34 6 92 47 98 42-6 52-62 48-98-2 22-6 36-16 44-12-6-52-6-64 0-10-8-14-24-15-44Z"/>
+      <path fill="#3b2a20" d="M120 172c10-9 34-9 44 0-8 4-36 4-44 0Z"/>
+      <path fill="#8e3d33" d="M124 180c8 12 30 12 38 0-10 4-28 4-38 0Z"/>
+      <path fill="#fff" stroke="none" d="M128 181c8 4 22 4 30 0l-2 3c-8 3-18 3-26 0Z"/>
+      <!-- cabello -->
+      <path fill="#2e211a" d="M90 128C76 98 84 66 110 54c4-16 24-22 38-14 12-12 36-10 46 4 14 4 22 18 18 34 2 16-4 30-12 40-4-16-10-26-20-30-14 8-36 6-50-4-12 8-26 14-28 36-4 0-8 2-12 8Z"/>
+      <path fill="none" stroke="#5a4334" stroke-width="2.4" d="M118 62c10-6 22-6 30 2M152 58c12-2 24 4 30 14M104 82c6-8 14-12 22-12"/>
+      <!-- cejas -->
+      <path fill="none" stroke="#2e211a" stroke-width="6" d="M106 110q16-8 32-2M152 106q16-6 32 2"/>
+      <!-- nariz -->
+      <path fill="none" stroke="#b97a55" d="M145 138c-3 9-6 15-2 18 3 2 8 2 10-1"/>
+      <!-- lentes de sol -->
+      <path fill="none" stroke="#1b1b22" stroke-width="3" d="M98 124l6 2M184 122l7-3M139 126q5-4 10 0"/>
+      <rect x="102" y="116" width="38" height="28" rx="11" fill="#26262f" stroke="#1b1b22" stroke-width="3"/>
+      <rect x="148" y="114" width="38" height="28" rx="11" fill="#26262f" stroke="#1b1b22" stroke-width="3"/>
+      <path fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3" d="M110 124l8-4M156 122l8-4"/>
+    </g>
+
+    <!-- ===== Meli: cabeza ===== -->
+    <g transform="translate(8 -18) rotate(-9 268 185)">
+      <path fill="url(#skinW)" d="M250 218v76c12 10 30 10 40 0l-2-76Z"/>
+      <path fill="url(#skinW)" d="M218 172c0-46 100-48 100-2 0 48-26 70-50 70-26 0-50-22-50-68Z"/>
+      <!-- mechones -->
+      <path fill="#c48d52" d="M220 150c-16 34-14 76-2 108 0-30 0-62 8-90Z"/>
+      <path fill="#c48d52" d="M316 150c16 36 12 80-2 110 2-32 0-64-8-92Z"/>
+      <!-- ojos -->
+      <ellipse cx="248" cy="180" rx="6.5" ry="7.5" fill="#3a2418"/>
+      <ellipse cx="288" cy="180" rx="6.5" ry="7.5" fill="#3a2418"/>
+      <circle cx="250" cy="177" r="2.2" fill="#fff" stroke="none"/>
+      <circle cx="290" cy="177" r="2.2" fill="#fff" stroke="none"/>
+      <path fill="none" stroke-width="2.4" d="M239 174l-5-3M297 174l5-3M240 162q8-5 16-1M280 161q8-4 16 1"/>
+      <!-- nariz, rubor, sonrisa -->
+      <path fill="none" stroke="#c98a62" d="M268 192q4 5-1 8"/>
+      <ellipse cx="238" cy="203" rx="9" ry="5" fill="#f08a7a" fill-opacity=".45" stroke="none"/>
+      <ellipse cx="298" cy="203" rx="9" ry="5" fill="#f08a7a" fill-opacity=".45" stroke="none"/>
+      <path fill="#9c3a3a" d="M250 207c8 16 30 16 38 0-12 4-26 4-38 0Z"/>
+      <path fill="#fff" stroke="none" d="M253 208c9 4 23 4 32 0l-2 4c-9 3-19 3-28 0Z"/>
+      <circle cx="223" cy="204" r="3.2" fill="#f2c14e"/>
+      <!-- gorra -->
+      <path fill="#e2665a" d="M216 158c-4-46 30-64 62-62 36 2 50 30 42 68-24-14-76-16-104-6Z"/>
+      <path fill="none" stroke="#c4483f" d="M268 98c-6 20-6 40-2 56M246 104c-10 16-14 34-12 52"/>
+      <circle cx="270" cy="97" r="4" fill="#c4483f"/>
+      <path fill="#c4483f" d="M200 166c14-18 72-24 120-4-30-6-70-2-98 10-10 4-18 2-22-6Z"/>
+      <use href="#anchor" transform="translate(286 128) scale(.95)"/>
+    </g>
+
+    <!-- ===== Brazos ===== -->
+    <path fill="url(#skinM)" d="M96 380c-6-26 4-48 26-56 14-4 26 2 30 12 4 10-6 18-18 18-12 2-16 14-14 26Z"/>
+
+    <!-- ===== Tesla ===== -->
+    <g transform="translate(0 4)">
+      <!-- orejas -->
+      <path fill="#2b2b33" d="M150 262C124 244 114 208 124 188c4-7 13-8 20-3 20 13 36 31 44 53Z"/>
+      <path fill="#c98d8e" stroke="none" d="M154 248c-16-14-24-36-20-52 3-4 8-4 12 0 14 10 24 24 30 38Z"/>
+      <path fill="#2b2b33" d="M250 262c26-18 36-54 26-74-4-7-13-8-20-3-20 13-36 31-44 53Z"/>
+      <path fill="#c98d8e" stroke="none" d="M246 248c16-14 24-36 20-52-3-4-8-4-12 0-14 10-24 24-30 38Z"/>
+      <!-- cuerpo + pañoleta -->
+      <path fill="#2b2b33" d="M150 380c-4-30 10-52 50-54 40 2 54 24 50 54Z"/>
+      <path fill="#1f3a75" d="M146 322c34 20 74 20 108 0l-6 16c-14 22-32 36-48 42-16-6-34-20-48-42Z"/>
+      <use href="#anchor" transform="translate(200 352)"/>
+      <!-- cabeza -->
+      <path fill="url(#dogHead)" d="M140 282c-2-42 28-56 60-56s62 14 60 56c-2 36-28 52-60 52s-58-16-60-52Z"/>
+      <path fill="none" stroke="#1d1d24" stroke-width="2.2" d="M186 246q14-6 28 0M182 254q18-6 36 0M162 300q-6 8-2 18M238 300q6 8 2 18"/>
+      <!-- ojos -->
+      <circle cx="175" cy="273" r="12.5" fill="#6b4426"/>
+      <circle cx="225" cy="273" r="12.5" fill="#6b4426"/>
+      <circle cx="175" cy="274" r="8" fill="#1c1209" stroke="none"/>
+      <circle cx="225" cy="274" r="8" fill="#1c1209" stroke="none"/>
+      <circle cx="179" cy="269" r="3.6" fill="#fff" stroke="none"/>
+      <circle cx="229" cy="269" r="3.6" fill="#fff" stroke="none"/>
+      <circle cx="172" cy="278" r="1.6" fill="#fff" stroke="none"/>
+      <circle cx="222" cy="278" r="1.6" fill="#fff" stroke="none"/>
+      <!-- hocico -->
+      <ellipse cx="200" cy="303" rx="31" ry="21" fill="#3f3f4a"/>
+      <path fill="#121216" d="M189 291c0-7 22-7 22 0 0 6-6 10-11 10s-11-4-11-10Z"/>
+      <circle cx="195" cy="291" r="2" fill="#fff" fill-opacity=".5" stroke="none"/>
+      <path fill="#5a1f25" d="M172 306c10 8 46 8 56 0-4 22-52 22-56 0Z"/>
+      <path fill="#f08a9a" d="M187 312c-2 30 28 30 26 0-8 3-18 3-26 0Z"/>
+      <path fill="none" stroke="#c45567" stroke-width="1.6" d="M200 316v14"/>
+      <path fill="none" stroke="#1d1d24" d="M200 301v6M188 308q12 6 24 0"/>
+    </g>
+
+    <!-- Mano de Richi sobre Tesla -->
+    <path fill="url(#skinM)" d="M126 352c4-12 16-18 28-14 8 4 8 12 2 16-6 4-6 10-4 26h-24c-4-10-4-20-2-28Z"/>
+  </g>
+
+  <!-- ===== Arena en primer plano ===== -->
+  <path fill="#f0d6a2" d="M0 364c70-12 140 6 214 2 74-4 130-18 186-10v24H0Z"/>
+  <path fill="none" stroke="#f9e8c6" stroke-width="4" stroke-linecap="round" d="M20 362c60-10 120 4 190 2M250 360c50-4 100-16 140-10"/>
+  <g fill="#e2c084"><circle cx="60" cy="372" r="2"/><circle cx="150" cy="374" r="1.6"/><circle cx="300" cy="372" r="2"/><circle cx="350" cy="372" r="1.6"/></g>
+</svg>

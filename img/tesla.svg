@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -14 200 234">
+  <title>Tesla</title>
+  <defs>
+    <g id="anchor" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="0" cy="-11" r="3.2"/>
+      <path d="M0 -7.8V12M-6.5 -3H6.5M-11 3c1 7 6 10 11 10s10-3 11-10M-13.5 5.5l2.5-3 3 2M13.5 5.5l-2.5-3-3 2"/>
+    </g>
+    <radialGradient id="fur" cx=".45" cy=".35" r=".75">
+      <stop offset="0" stop-color="#4a4a57"/><stop offset="1" stop-color="#25252d"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="100" cy="212" rx="62" ry="7" fill="#000" fill-opacity=".12"/>
+
+  <g stroke="#1d1d24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- cuerpo -->
+    <path fill="#2b2b33" d="M148 168c10-4 16-12 14-20" />
+    <path fill="url(#fur)" d="M48 170c0-30 22-48 52-48s54 18 54 48c0 22-14 34-26 36H74c-14-2-26-14-26-36Z"/>
+    <path fill="#e9e4dc" d="M86 150c4 18 24 18 28 0 2 20-4 38-14 46-10-8-16-26-14-46Z"/>
+    <!-- patas -->
+    <path fill="#2b2b33" d="M66 178h20v26c0 5-4 8-10 8s-10-3-10-8Z"/>
+    <path fill="#2b2b33" d="M114 178h20v26c0 5-4 8-10 8s-10-3-10-8Z"/>
+    <path fill="#f4f0ea" d="M66 200h20v4c0 5-4 8-10 8s-10-3-10-8Z"/>
+    <path fill="#f4f0ea" d="M114 200h20v4c0 5-4 8-10 8s-10-3-10-8Z"/>
+    <path fill="none" stroke-width="1.5" d="M72 207v4M80 207v4M120 207v4M128 207v4"/>
+    <ellipse cx="56" cy="192" rx="12" ry="16" fill="#2b2b33"/>
+    <ellipse cx="144" cy="192" rx="12" ry="16" fill="#2b2b33"/>
+
+    <!-- cabeza (mismos trazos que couple.svg) -->
+    <g transform="translate(-100 -190)">
+      <path fill="#2b2b33" d="M150 262C124 244 114 208 124 188c4-7 13-8 20-3 20 13 36 31 44 53Z"/>
+      <path fill="#c98d8e" stroke="none" d="M154 248c-16-14-24-36-20-52 3-4 8-4 12 0 14 10 24 24 30 38Z"/>
+      <path fill="#2b2b33" d="M250 262c26-18 36-54 26-74-4-7-13-8-20-3-20 13-36 31-44 53Z"/>
+      <path fill="#c98d8e" stroke="none" d="M246 248c16-14 24-36 20-52-3-4-8-4-12 0-14 10-24 24-30 38Z"/>
+      <path fill="#1f3a75" d="M146 322c34 20 74 20 108 0l-6 16c-14 22-32 36-48 42-16-6-34-20-48-42Z"/>
+      <use href="#anchor" transform="translate(200 350)"/>
+      <path fill="url(#fur)" d="M140 282c-2-42 28-56 60-56s62 14 60 56c-2 36-28 52-60 52s-58-16-60-52Z"/>
+      <path fill="none" stroke-width="2.2" d="M186 246q14-6 28 0M182 254q18-6 36 0M162 300q-6 8-2 18M238 300q6 8 2 18"/>
+      <circle cx="175" cy="273" r="12.5" fill="#6b4426"/>
+      <circle cx="225" cy="273" r="12.5" fill="#6b4426"/>
+      <circle cx="175" cy="274" r="8" fill="#1c1209" stroke="none"/>
+      <circle cx="225" cy="274" r="8" fill="#1c1209" stroke="none"/>
+      <circle cx="179" cy="269" r="3.6" fill="#fff" stroke="none"/>
+      <circle cx="229" cy="269" r="3.6" fill="#fff" stroke="none"/>
+      <circle cx="172" cy="278" r="1.6" fill="#fff" stroke="none"/>
+      <circle cx="222" cy="278" r="1.6" fill="#fff" stroke="none"/>
+      <ellipse cx="200" cy="303" rx="31" ry="21" fill="#3f3f4a"/>
+      <path fill="#121216" d="M189 291c0-7 22-7 22 0 0 6-6 10-11 10s-11-4-11-10Z"/>
+      <circle cx="195" cy="291" r="2" fill="#fff" fill-opacity=".5" stroke="none"/>
+      <path fill="#5a1f25" d="M172 306c10 8 46 8 56 0-4 22-52 22-56 0Z"/>
+      <path fill="#f08a9a" d="M187 312c-2 30 28 30 26 0-8 3-18 3-26 0Z"/>
+      <path fill="none" stroke="#c45567" stroke-width="1.6" d="M200 316v14"/>
+      <path fill="none" d="M200 301v6M188 308q12 6 24 0"/>
+    </g>
+  </g>
+</svg>

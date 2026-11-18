@@ -10,7 +10,7 @@
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: calc(var(--safe-top) + 14px) 18px;
+  padding: calc(var(--safe-top) + 64px) 14px 0;
   z-index: 5;
 }
 
@@ -37,7 +37,10 @@
   cursor: pointer;
   text-decoration: none;
 }
-.btn--sun { background: var(--sun); color: var(--navy); }
+.btn--sun { background: var(--sun); color: var(--navy); box-shadow: 0 5px 0 #d9a21f; }
+.btn--big { font-size: 26px; padding: 12px 54px; display: inline-flex; align-items: center; gap: 10px; }
+.btn .icon { margin-right: 6px; }
+.card--sand { background: #f6e6c6; border-color: #e7cf9f; }
 .btn--block { display: block; width: 100%; }
 
 /* Tarjetas */

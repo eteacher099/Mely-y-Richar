@@ -2,13 +2,15 @@
  * Router por hash (#home, #itin, ...) y "layout" común.
  *
  * Contrato de una vista (js/views/*.js): una función que devuelve
- *   { html: string, bar?: boolean = true, mount?: (root) => (cleanup | void) }
+ *   { html: string, bar?: boolean = true, wave?: boolean = true, mount?: (root) => (cleanup | void) }
  * - html  : se inserta en #app (todo dato variable debe pasar por esc()).
  * - bar   : muestra la barra superior (inicio + menú).
+ * - wave  : muestra las olas al pie de la pantalla.
  * - mount : enlaza eventos después de pintar; puede devolver una función
  *           de limpieza (timers, etc.) que se ejecuta al cambiar de vista.
  */
 import { $ } from './lib/dom.js';
+import { icon } from './lib/icons.js';
 import { routes, DEFAULT_ROUTE } from './views/index.js';
 
 const app = $('#app');
@@ -17,8 +19,8 @@ const menu = $('#menu');
 const WAVE = '<div class="wave" aria-hidden="true"></div>';
 const topBar = () => `
   <div class="bar">
-    <a class="ib" href="#home" aria-label="Inicio">🏠</a>
-    <button class="ib" type="button" data-menu-toggle aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <a class="ib" href="#home" aria-label="Inicio">${icon('home', 30)}</a>
+    <button class="ib" type="button" data-menu-toggle aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">${icon('menu', 30)}</button>
   </div>`;
 
 let cleanup = null;
@@ -37,8 +39,8 @@ function render() {
   menu.hidden = true;
 
   const view = routes[location.hash.slice(1)] ?? routes[DEFAULT_ROUTE];
-  const { html, mount, bar = true } = view();
-  app.innerHTML = (bar ? topBar() : '') + html + WAVE;
+  const { html, mount, bar = true, wave = true } = view();
+  app.innerHTML = (bar ? topBar() : '') + html + (wave ? WAVE : '');
   window.scrollTo(0, 0);
   cleanup = mount?.(app) ?? null;
 }

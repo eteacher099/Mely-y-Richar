@@ -1,44 +1,43 @@
 import { CONFIG } from '../config.js';
 import { $, esc } from '../lib/dom.js';
+import { bird } from '../lib/icons.js';
 
-const FALLBACK_EMOJI = '🐶';
+const FALLBACK = 'img/couple.svg';
 
 export default function home() {
   const [first, second] = CONFIG.nombres.map(esc);
-  const cover = CONFIG.portada;
+  const cover = CONFIG.portada || FALLBACK;
 
   return {
     bar: false,
+    wave: false,
     html: `
       <section class="s hero">
-        <span class="sun-deco" aria-hidden="true">☀️</span>
-        <span class="tropical palm-left" aria-hidden="true">🌴</span>
-        <span class="tropical flower-right" aria-hidden="true">🌺</span>
+        <img class="deco hero-leaves" src="img/palm-leaves.svg" alt="">
+        <img class="deco hero-palm" src="img/palm.svg" alt="">
+        <img class="deco sun-deco" src="img/sun.svg" alt="">
 
         <h1 class="home-names">
-          <span class="name-line-one">${first} <span>&amp;</span> <span class="heart" aria-hidden="true">♥</span></span>
+          <span class="name-line-one">${first} <span class="amp">&amp;</span><span class="heart" aria-hidden="true">♥</span></span>
           <span class="name-line-two">${second}</span>
         </h1>
-
         <p class="home-subtitle">Nuestra Boda</p>
         <p class="home-tagline">Una aventura juntos</p>
+        ${bird}
 
-        <div class="home-illustration" id="pic" role="img" aria-label="Ilustración de los novios"
-          style="${cover ? `background-image:url('${esc(cover)}')` : ''}">${cover ? '' : FALLBACK_EMOJI}</div>
+        <div class="home-art">
+          <img class="home-illustration" id="pic" src="${esc(cover)}" alt="Ilustración de ${first}, ${second} y ${esc(CONFIG.perro)}">
+          <a class="btn home-enter" href="#itin">Entrar →</a>
+        </div>
 
-        <a class="btn home-enter" href="#itin">Entrar →</a>
-        <span class="starfish" aria-hidden="true">⭐</span>
+        <img class="deco hero-hibiscus" src="img/hibiscus.svg" alt="">
+        <img class="deco hero-starfish" src="img/starfish.svg" alt="">
       </section>`,
 
     mount(root) {
-      if (!cover) return;
+      // Si la portada configurada no existe, vuelve a la ilustración incluida.
       const pic = $('#pic', root);
-      const probe = new Image();
-      probe.onerror = () => {
-        pic.style.backgroundImage = '';
-        pic.textContent = FALLBACK_EMOJI;
-      };
-      probe.src = cover;
+      pic.addEventListener('error', () => { if (!pic.src.endsWith(FALLBACK)) pic.src = FALLBACK; }, { once: true });
     },
   };
 }

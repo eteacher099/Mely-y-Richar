@@ -40,22 +40,40 @@ body {
 
 /* Sección / pantalla */
 .s {
-  padding: calc(var(--safe-top) + 70px) 22px 40px;
+  position: relative;
+  padding: calc(var(--safe-top) + 112px) 22px 40px;
   text-align: center;
   min-height: 100vh;
 }
 .s--compact { padding-top: calc(var(--safe-top) + 24px); }
 
-.sea { background: linear-gradient(var(--sky), #fff0 70%); }
+/* Pantallas interiores: fondo crema con olas en la parte superior (como el storyboard) */
+.sea {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 72' preserveAspectRatio='none'%3E%3Cpath d='M0 0H400V16C320 32 250 22 180 42 120 58 60 72 0 66Z' fill='%232A5CAA'/%3E%3Cpath d='M0 0H400V6C320 22 250 12 180 30 120 46 60 58 0 52Z' fill='%2314337A'/%3E%3C/svg%3E") top / 100% 72px no-repeat,
+    var(--cream);
+}
 
 h2 {
   font-family: var(--font-script);
   font-weight: 400;
   color: var(--navy);
   line-height: 1.05;
-  font-size: 42px;
+  font-size: 46px;
   margin-bottom: 6px;
 }
+/* Rayitos de sol sobre el título (se omiten si la pantalla tiene icono) */
+.sea h2::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 24px;
+  margin: 0 auto 4px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 26'%3E%3Cg stroke='%23F7B731' stroke-width='4' stroke-linecap='round'%3E%3Cpath d='M30 4v10M12 9l6 8M48 9l-6 8'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+}
+.sea .view-icon + h2::before { display: none; }
+.view-icon { display: block; margin: -26px auto 2px; color: var(--navy); }
+.icon { display: inline-block; vertical-align: middle; flex: none; }
 
 .sub { font-size: 15px; margin-bottom: 18px; }
 .strong { font-weight: 800; }
