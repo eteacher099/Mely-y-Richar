@@ -1,0 +1,254 @@
+/* ==========================================================
+   Estilos específicos de cada pantalla
+   ========================================================== */
+
+/* ---------- Home ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 105px 18px 85px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #91ccef 0%, #d5edfa 37%, #fff1d9 68%, #f1d5a7 100%);
+}
+
+.home-names {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  color: var(--navy);
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: inherit;
+}
+.name-line-one,
+.name-line-two { display: block; }
+.name-line-one {
+  font-size: clamp(54px, 15vw, 70px);
+  line-height: 1.05;
+  transform: translateX(-5px);
+  white-space: nowrap;
+}
+.name-line-one span:first-child { font-size: .85em; }
+.name-line-two {
+  font-size: clamp(72px, 19vw, 88px);
+  line-height: .95;
+  margin-top: -2px;
+  transform: translateX(-8px);
+}
+
+.heart {
+  color: var(--coral);
+  font-family: sans-serif;
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.home-subtitle {
+  font-family: var(--font-script);
+  font-size: 27px;
+  margin-top: 12px;
+  transform: rotate(-5deg);
+}
+.home-tagline { font-size: 14px; margin-top: 12px; font-weight: 700; }
+
+.home-illustration {
+  width: 115%;
+  max-width: 490px;
+  height: 42vh;
+  min-height: 270px;
+  max-height: 390px;
+  margin-top: 8px;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  font-size: 100px;
+  flex-shrink: 0;
+}
+
+.home-enter {
+  position: relative;
+  z-index: 3;
+  min-width: 175px;
+  margin-top: -8px;
+  box-shadow: 0 5px 12px #14337a33;
+  font-size: 19px;
+}
+
+/* Decoraciones (emojis) */
+.sun-deco { position: absolute; top: 25px; right: 25px; font-size: 55px; }
+.tropical { position: absolute; z-index: 1; font-size: 65px; pointer-events: none; }
+.palm-left { top: 8px; left: -15px; transform: rotate(-20deg); }
+.flower-right { right: 8px; top: 225px; font-size: 38px; }
+.starfish { position: absolute; right: 22px; bottom: 22px; font-size: 35px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun-deco { animation: sun-spin 8s ease-in-out infinite alternate; }
+  @keyframes sun-spin { to { transform: rotate(25deg) scale(1.08); } }
+}
+
+@media (max-height: 700px) {
+  .hero { padding-top: 80px; }
+  .home-illustration { height: 34vh; min-height: 210px; }
+}
+
+/* ---------- Itinerario ---------- */
+.tl { list-style: none; padding: 0; margin: 20px 0; }
+.tl li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  margin: 0 0 14px 6px;
+  font-size: 18px;
+}
+.tl i {
+  font-style: normal;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #f7c64a55;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  flex: none;
+  border: 3px solid var(--sun);
+}
+.tl b { display: block; }
+
+.cd { display: flex; justify-content: center; gap: 10px; font-size: 34px; font-weight: 800; }
+.cd small { display: block; font-size: 12px; font-weight: 700; text-align: center; }
+.cd-done { font-size: 22px; }
+
+/* ---------- Juegos (hub) ---------- */
+.big-emoji { font-size: 84px; margin-bottom: 14px; }
+.play-cta { margin: 8px 0 18px; }
+.mini { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
+.mini a {
+  flex: 1;
+  background: #fff8;
+  border-radius: 14px;
+  padding: 10px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+.mini a span { display: block; font-size: 32px; }
+
+/* ---------- Trivia ---------- */
+.q { font-size: 20px; font-weight: 800; margin: 22px 0; }
+.o {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 14px;
+  border-radius: 14px;
+  border: 2px solid var(--navy);
+  background: #fff;
+  color: var(--navy);
+  font: 700 16px var(--font-body);
+  cursor: pointer;
+}
+.o.ok { background: #bfe8c4; border-color: #2e8b4a; }
+.o.no { background: #f7c2bb; border-color: var(--coral); }
+.result-emoji { font-size: 70px; margin: 24px; }
+
+/* ---------- Encuentra a Tesla ---------- */
+.hud { display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 6px; }
+.beach {
+  position: relative;
+  height: 52vh;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(#bfe3f5 0 25%, #6bb7e0 25% 40%, #f1ddb5 40%);
+  margin: 14px 0;
+}
+.beach span {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+.game-actions { margin-top: 18px; }
+
+/* ---------- Bingo ---------- */
+.bing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px 0; }
+.bing button {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  border: 2px solid var(--navy);
+  background: #fff;
+  color: var(--navy);
+  font: 700 13px var(--font-body);
+  padding: 6px;
+  cursor: pointer;
+}
+.bing button.on { background: var(--sun); }
+
+/* ---------- Playlist ---------- */
+.player {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 22px;
+  padding: 16px;
+  text-align: left;
+  margin: 18px 0;
+}
+.player .row { display: flex; gap: 14px; align-items: center; }
+.player-title { font-size: 18px; }
+.cover {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background: linear-gradient(var(--sun), var(--coral));
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+}
+.prog { height: 4px; background: #fff4; border-radius: 4px; margin: 16px 0 10px; }
+.prog i { display: block; width: 30%; height: 100%; background: #fff; border-radius: 4px; }
+.ctl { display: flex; justify-content: center; gap: 26px; align-items: center; font-size: 24px; }
+.play {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  border: 0;
+  cursor: pointer;
+}
+.suggest { margin-top: 20px; }
+.suggest-title { display: block; margin-bottom: 14px; }
+.sug-item { margin-top: 10px; }
+
+/* ---------- Álbum ---------- */
+.drop {
+  display: block;
+  border: 2px dashed #14337a66;
+  border-radius: 18px;
+  padding: 22px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+.drop-icon { font-size: 34px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+
+/* ---------- Mensajes ---------- */
+.msg-list { margin-top: 18px; }
+.msg small { float: right; opacity: .6; font-size: 12px; }
+
+/* ---------- Información ---------- */
+.info-deco { font-size: 56px; }

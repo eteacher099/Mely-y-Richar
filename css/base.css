@@ -1,0 +1,78 @@
+/* ==========================================================
+   Base: tokens de diseño, reset y layout general
+   ========================================================== */
+:root {
+  --cream: #FBF3E4;
+  --navy: #14337A;
+  --blue: #2A5CAA;
+  --sun: #F7C64A;
+  --coral: #E2553F;
+  --sand: #F1DDB5;
+  --sky: #BFE3F5;
+  --page: #e9dcc3;
+
+  --font-body: Nunito, system-ui, sans-serif;
+  --font-script: "Kaushan Script", cursive;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html, body { background: var(--page); }
+
+body {
+  font-family: var(--font-body);
+  color: var(--navy);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Contenedor tipo "teléfono": la invitación está pensada para móvil */
+#app {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 90px;
+}
+
+/* Sección / pantalla */
+.s {
+  padding: calc(var(--safe-top) + 70px) 22px 40px;
+  text-align: center;
+  min-height: 100vh;
+}
+.s--compact { padding-top: calc(var(--safe-top) + 24px); }
+
+.sea { background: linear-gradient(var(--sky), #fff0 70%); }
+
+h2 {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.05;
+  font-size: 42px;
+  margin-bottom: 6px;
+}
+
+.sub { font-size: 15px; margin-bottom: 18px; }
+.strong { font-weight: 800; }
+.link { color: var(--blue); }
+
+:where(a, button, input, summary):focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 2px;
+}
+
+/* Olas decorativas al pie de cada pantalla */
+.wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 70' preserveAspectRatio='none'%3E%3Cpath d='M0 30Q50 0 100 25T200 25T300 20T400 15V70H0Z' fill='%232A5CAA'/%3E%3Cpath d='M0 45Q60 25 120 42T250 40T400 35V70H0Z' fill='%2314337A'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+}

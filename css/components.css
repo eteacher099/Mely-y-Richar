@@ -1,0 +1,137 @@
+/* ==========================================================
+   Componentes reutilizables
+   ========================================================== */
+
+/* Barra superior (inicio + menú) */
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: calc(var(--safe-top) + 14px) 18px;
+  z-index: 5;
+}
+
+/* Botón de icono */
+.ib {
+  background: none;
+  border: 0;
+  font-size: 26px;
+  color: var(--navy);
+  cursor: pointer;
+  text-decoration: none;
+  padding: 4px 8px;
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 40px;
+  background: var(--navy);
+  color: #fff;
+  font: 800 18px var(--font-body);
+  padding: 13px 34px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn--sun { background: var(--sun); color: var(--navy); }
+.btn--block { display: block; width: 100%; }
+
+/* Tarjetas */
+.card {
+  background: #fff8;
+  border: 1px solid #14337a22;
+  border-radius: 18px;
+  padding: 14px;
+  margin: 12px 0;
+  text-align: left;
+}
+.card--center { text-align: center; }
+.card-title { font-size: 20px; }
+
+/* Formularios */
+input[type=text] {
+  width: 100%;
+  border: 2px solid #14337a55;
+  border-radius: 30px;
+  padding: 13px 18px;
+  font: 16px var(--font-body);
+  margin-bottom: 10px;
+  background: #fff;
+  color: var(--navy);
+}
+.field-label {
+  display: block;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 6px 8px;
+}
+
+/* Acordeón (FAQ) */
+details {
+  text-align: left;
+  margin: 8px 0;
+  background: #fff8;
+  border-radius: 14px;
+  padding: 12px;
+}
+summary { font-weight: 800; cursor: pointer; }
+details p { margin-top: 6px; }
+
+/* Etiqueta tipo píldora */
+.pill {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 26px;
+  font-weight: 800;
+}
+
+/* Menú de navegación a pantalla completa */
+.menu {
+  position: fixed;
+  inset: 0;
+  background: #14337af2;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.menu[hidden] { display: none; }
+.menu a {
+  color: #fff;
+  font: 400 34px var(--font-script);
+  text-decoration: none;
+  padding: 6px;
+}
+.menu-close { position: absolute; top: 16px; right: 16px; color: #fff; }
+
+/* Panel de puntaje / ranking (juegos) */
+.score-panel { margin: 6px 0 22px; }
+.status { font-weight: 700; font-size: 14px; margin: 8px 0 4px; }
+.ranking-title { font-weight: 800; margin-top: 16px; }
+.ranking {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px 14px;
+  text-align: left;
+  background: #fff8;
+  border: 1px solid #14337a22;
+  border-radius: 18px;
+}
+.ranking li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #14337a14;
+}
+.ranking li:last-child { border-bottom: 0; }
+.ranking .me { color: var(--coral); font-weight: 800; }
