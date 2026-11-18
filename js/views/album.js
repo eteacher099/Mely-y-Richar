@@ -1,5 +1,6 @@
 import { $, esc } from '../lib/dom.js';
 import { storage } from '../lib/storage.js';
+import { icon } from '../lib/icons.js';
 
 const MAX_SIDE = 600;   // px del lado mayor tras comprimir
 const QUALITY = 0.7;    // calidad JPEG
@@ -32,10 +33,12 @@ export default function album() {
   return {
     html: `
       <section class="s sea">
+        <img class="deco al-shell" src="img/shell.svg" alt="">
+        ${icon('camera', 64, 'view-icon')}
         <h2>Nuestro Álbum</h2>
         <p class="sub">Comparte tus fotos y videos</p>
         <label class="drop">
-          <span class="drop-icon" aria-hidden="true">📷</span><br>
+          ${icon('camera', 38, 'drop-icon')}<br>
           <b>Sube tus recuerdos</b><br>
           <small>Toca para elegir fotos</small>
           <input type="file" id="fi" accept="image/*" multiple hidden>
