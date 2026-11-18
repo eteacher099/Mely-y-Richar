@@ -46,9 +46,9 @@ export const CONFIG = {
   // Ranking de juegos en Google Sheets (ver google-scripts/README.md).
   // Con endpoint vacío los puntajes solo se guardan en el dispositivo.
   scores: {
-    endpoint: '',      // URL ".../exec" del Web App de Apps Script
+    endpoint: 'https://script.google.com/macros/s/AKfycbwOkKk-sJMk-tqW-Pw3yB_eCMx5M4SLRAx8tg7dUokQty8vl3hvSPxjIaJPcB2B_MP2_w/exec',      // URL ".../exec" del Web App de Apps Script
     token: '',         // opcional: debe coincidir con SCORES_TOKEN del script
-    rankingSize: 5,    // cuántos puestos mostrar al terminar un juego
+    rankingSize: 10,    // cuántos puestos mostrar al terminar un juego
   },
 };
 /* ================================================================== */
