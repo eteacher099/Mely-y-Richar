@@ -1,6 +1,7 @@
 import { CONFIG } from '../config.js';
 import { $, esc } from '../lib/dom.js';
 import { submitScore } from '../lib/scores.js';
+import { icon } from '../lib/icons.js';
 import { scorePanelHtml, mountScorePanel } from '../components/score-panel.js';
 
 const DECOYS = ['🌴', '⛱️', '🐚', '🦀', '🏄', '🏖️', '🏐', '🌺', '⭐', '🪣'];
@@ -13,12 +14,12 @@ export default function tesla() {
   return {
     bar: false,
     html: `
-      <section class="s sea s--compact">
-        <div class="hud"><span id="hp"></span><b id="pt"></b></div>
-        <h2>¡Encuentra a ${esc(CONFIG.perro)}!</h2>
+      <section class="s s--compact tesla-screen">
+        <div class="hud"><span id="hp"></span><b class="pill" id="pt"></b></div>
+        <h2 class="banner">¡Encuentra a ${esc(CONFIG.perro)}!</h2>
         <p class="sub">Busca a nuestro perrito en la playa 🐾</p>
         <div class="beach" id="bc"></div>
-        <div class="pill" id="ck" aria-live="off"></div>
+        <div class="pill">${icon('clock', 20)}<span id="ck"></span></div>
         <div id="tesla-result"></div>
         <div class="game-actions"><a class="btn" href="#juego">Volver a juegos</a></div>
       </section>`,
@@ -40,7 +41,8 @@ export default function tesla() {
 
       const place = (emoji, kind) => {
         const s = document.createElement('span');
-        s.textContent = emoji;
+        if (kind === 'dog') s.innerHTML = `<img class="dog" src="img/tesla.svg" alt="${esc(CONFIG.perro)}">`;
+        else s.textContent = emoji;
         s.dataset.k = kind;
         s.style.left = `${Math.random() * 88}%`;
         s.style.top = `${Math.random() * 85 + 4}%`;
@@ -51,7 +53,7 @@ export default function tesla() {
       const newRound = () => {
         beach.replaceChildren();
         for (let i = 0; i < DECOY_COUNT; i++) place(DECOYS[i % DECOYS.length], 'decoy');
-        place('🐶', 'dog');
+        place(null, 'dog');
       };
 
       const end = () => {
@@ -66,14 +68,15 @@ export default function tesla() {
       };
 
       beach.addEventListener('click', e => {
-        const kind = e.target.dataset?.k;
+        const target = e.target.closest('[data-k]');
+        const kind = target?.dataset.k;
         if (over || !kind) return;
         if (kind === 'dog') {
           points += POINTS_PER_FIND;
           newRound();
         } else {
           lives--;
-          e.target.remove();
+          target.remove();
           if (lives <= 0) return end();
         }
         hud();
