@@ -122,7 +122,6 @@
 .cd-done { font-size: 22px; }
 
 /* ---------- Juegos (hub) ---------- */
-.big-emoji { font-size: 84px; margin-bottom: 14px; }
 .play-cta { margin: 8px 0 18px; }
 .mini { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
 .mini a {
@@ -237,7 +236,6 @@
   cursor: pointer;
   margin-bottom: 16px;
 }
-.drop-icon { font-size: 34px; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
 
@@ -246,7 +244,6 @@
 .msg small { float: right; opacity: .6; font-size: 12px; }
 
 /* ---------- Información ---------- */
-.info-deco { font-size: 56px; }
 
 /* ==========================================================
    Ilustraciones y detalles del storyboard
@@ -268,7 +265,7 @@
 .it-starfish { right: 14px; bottom: 96px; width: 46px; transform: rotate(-12deg); }
 
 /* Juegos */
-.hub-art { display: block; width: 92%; max-width: 360px; margin: 4px auto -6px; }
+.hub-art { display: block; width: 92%; max-width: 360px; margin: 4px auto -6px; -webkit-mask-image: linear-gradient(#000 88%, transparent); mask-image: linear-gradient(#000 88%, transparent); }
 .hub-palm-l { left: -18px; top: 190px; width: 96px; }
 .hub-palm-r { right: -18px; top: 210px; width: 90px; transform: scaleX(-1); }
 .games-card { background: #fff8; border: 1px solid #14337a22; border-radius: 22px; padding: 12px; margin-top: 8px; }
@@ -324,6 +321,6 @@
   box-shadow: 0 4px 0 #0c2257;
 }
 .tesla-screen h2.banner { color: #fff; font-size: 34px; margin: 8px 0 10px; }
-.beach { background: url("../img/beach.svg") center 70% / cover; border: 3px solid #fff; box-shadow: 0 4px 14px #14337a33; }
+.beach { background: url("../img/beach.svg") center 100% / auto 165% no-repeat, #f3e0b5; border: 3px solid #fff; box-shadow: 0 4px 14px #14337a33; }
 .beach .dog { width: 1.35em; height: auto; display: block; pointer-events: none; }
 .pill .icon { margin-right: 6px; }

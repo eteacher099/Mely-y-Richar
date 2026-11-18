@@ -32,9 +32,11 @@ js/
   lib/storage.js        localStorage con prefijo "boda_" y JSON, nunca lanza
   lib/player.js         Nombre e id del invitado en este dispositivo
   lib/scores.js         Cliente de la API de puntajes (envío, cola offline, ranking)
+  lib/icons.js          Iconos SVG inline (icon('camera', 56)), rayitos de sol y gaviota
   components/score-panel.js   Panel de resultado: estado del envío + ranking
   views/index.js        Registro de rutas hash → vista
   views/*.js            Una pantalla por archivo
+img/                    Ilustraciones SVG del storyboard (ver abajo)
 google-scripts/         Apps Script (Web App) que guarda puntajes en Google Sheets
 TODO.md                 Pendientes del proyecto
 ```
@@ -47,7 +49,7 @@ TODO.md                 Pendientes del proyecto
 **Contrato de una vista**: función que devuelve
 
 ```js
-{ html: string, bar?: boolean /* default true */, mount?: (root) => cleanup | void }
+{ html: string, bar?: boolean, wave?: boolean /* ambos default true */, mount?: (root) => cleanup | void }
 ```
 
 - `router.render()` ejecuta el cleanup anterior, pinta `bar + html + ola` en `#app` y
@@ -60,6 +62,20 @@ TODO.md                 Pendientes del proyecto
 
 **Agregar una pantalla**: crear `js/views/x.js`, registrarla en `views/index.js`,
 añadir el enlace al `<nav id="menu">` de `index.html` y sus estilos en `css/views.css`.
+
+## Diseño visual (storyboard)
+
+El diseño sigue un storyboard ilustrado: playa, azul marino `--navy`, crema, títulos en
+Kaushan Script, olas arriba (fondo de `.sea`) y abajo (`.wave`), rayitos de sol sobre los
+títulos (`.sea h2::before`; se omiten si la pantalla tiene un `.view-icon`).
+
+Ilustraciones en `img/`, todas SVG dibujadas a mano (nítidas en cualquier pantalla):
+`couple.svg` (Meli, Richi y Tesla; portada y hub de juegos), `tesla.svg` (perrito del juego
+y de Mensajes), `beach.svg` (fondo de portada, juego y carátula de la playlist) y
+decoraciones (`sun`, `palm`, `palm-leaves`, `hibiscus`, `starfish`, `shell`, `surfboard`,
+`lighthouse`). Las decoraciones usan `<img class="deco ...">` posicionadas en CSS;
+dentro de `.sea` quedan detrás del contenido. Para usar arte final (PNG/JPG), cambiar
+`CONFIG.portada`; si la imagen no carga, la portada vuelve a `img/couple.svg`.
 
 ## Puntajes → Google Sheets
 
