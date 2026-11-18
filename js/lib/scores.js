@@ -25,7 +25,7 @@ export const bestScore = game => storage.get(BEST_KEY, {})[game] ?? null;
  * Registra un puntaje. Nunca lanza.
  * @returns {Promise<{status: 'local'|'sent'|'queued'|'rejected'}>}
  */
-export function submitScore({ game, score, max = null, durationMs = null }) {
+export function submitScore({ game, score, max = null, level = null, durationMs = null }) {
   rememberBest(game, score);
   return send({
     action: 'score',
@@ -35,12 +35,13 @@ export function submitScore({ game, score, max = null, durationMs = null }) {
     juego: game,
     puntaje: score,
     maximo: max,
+    nivel: level,
     duracionMs: durationMs,
   });
 }
 
 /**
- * Top de un juego: [{pos, nombre, puntaje, maximo, me}]
+ * Top de un juego: [{pos, nombre, puntaje, maximo, nivel, me}]
  * Lanza si no hay conexión; quien lo use debe tratarlo como opcional.
  */
 export async function getLeaderboard(game, limit = CONFIG.scores?.rankingSize ?? 5) {

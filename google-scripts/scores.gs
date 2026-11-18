@@ -4,11 +4,11 @@
  *
  * Endpoints (URL .../exec de la implementación):
  *   GET  ?action=leaderboard&game=tesla&limit=5&player=<playerId>
- *        → { ok, rows: [{ pos, nombre, puntaje, maximo, me }] }   (mejor puntaje por jugador)
+ *        → { ok, rows: [{ pos, nombre, puntaje, maximo, nivel, me }] }   (mejor puntaje por jugador)
  *   GET  (sin action)
  *        → { ok, service, games }                                   (health check)
  *   POST body JSON (Content-Type: text/plain):
- *        { action: 'score', id, playerId, nombre, juego, puntaje, maximo?, duracionMs?, token? }
+ *        { action: 'score', id, playerId, nombre, juego, puntaje, maximo?, nivel?, duracionMs?, token? }
  *        → { ok, saved } | { ok, duplicate } | { ok: false, error }
  *   POST body JSON (Content-Type: text/plain):
  *        { action: 'menu', id, playerId, nombre, plato, postre, restricciones?, token? }
@@ -25,14 +25,14 @@
  */
 
 const SHEET_NAME = 'Scores';
-const HEADERS = ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Juego', 'Puntaje', 'Máximo', 'Duración (s)'];
-const COL = { fecha: 0, id: 1, playerId: 2, nombre: 3, juego: 4, puntaje: 5, maximo: 6 };
+const HEADERS = ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Juego', 'Puntaje', 'Máximo', 'Duración (s)', 'Nivel'];
+const COL = { fecha: 0, id: 1, playerId: 2, nombre: 3, juego: 4, puntaje: 5, maximo: 6, nivel: 8 };
 
 /** Juegos aceptados y puntaje máximo posible (validación básica anti-trampa). */
 const GAMES = {
   trivia: { maxScore: 50 },     // aciertos
   marina: { maxScore: 50 },     // aciertos
-  tesla: { maxScore: 20000 },   // 100 por perrito encontrado en 60 s
+  tesla: { maxScore: 200000, maxLevel: 200 },   // nivel × (50..200) por perrito, en 60 s
 };
 
 const MENU_SHEET = 'Menu';
@@ -75,6 +75,9 @@ function doPost(e) {
 function setup() {
   const sheet = getSheet_();
   ensureMenuSheets_();
+  const header = sheet.getRange(1, 1, 1, HEADERS.length);
+  const current = header.getValues()[0];
+  if (current.some((v, i) => v !== HEADERS[i])) header.setValues([HEADERS]).setFontWeight('bold');
   Logger.log('Hoja lista: %s (pestañas "%s", "%s" y "%s")', sheet.getParent().getUrl(), SHEET_NAME, MENU_SHEET, SUMMARY_SHEET);
 }
 
@@ -103,12 +106,18 @@ function saveScore_(b) {
   const ms = Number(b.duracionMs);
   const seconds = ms > 0 && ms < 864e5 ? Math.round(ms / 100) / 10 : '';
 
+  let level = '';
+  if (b.nivel !== null && b.nivel !== undefined && b.nivel !== '') {
+    level = Number(b.nivel);
+    if (!rules.maxLevel || !Number.isInteger(level) || level < 1 || level > rules.maxLevel) throw new Error('invalid_level');
+  }
+
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     const sheet = getSheet_();
     if (isDuplicate_(sheet, id)) return { duplicate: true };
-    sheet.appendRow([new Date(), id, playerId, name, game, score, max, seconds]);
+    sheet.appendRow([new Date(), id, playerId, name, game, score, max, seconds, level]);
   } finally {
     lock.releaseLock();
   }
@@ -181,6 +190,7 @@ function leaderboard_(game, limit, me) {
     nombre: r.nombre,
     puntaje: r.puntaje,
     maximo: r.maximo,
+    nivel: r.nivel,
     me: Boolean(me) && r.playerId === me,
   }));
 }
@@ -200,6 +210,7 @@ function bestByPlayer_(game) {
       nombre: String(row[COL.nombre]).replace(/^'/, ''),
       puntaje: Number(row[COL.puntaje]),
       maximo: row[COL.maximo] === '' ? null : Number(row[COL.maximo]),
+      nivel: row[COL.nivel] === '' || row[COL.nivel] === undefined ? null : Number(row[COL.nivel]),
       t: new Date(row[COL.fecha]).getTime() || 0,
     };
     const prev = byPlayer[entry.playerId];

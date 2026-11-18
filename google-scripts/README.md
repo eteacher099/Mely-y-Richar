@@ -91,8 +91,8 @@ la URL cambia y hay que actualizar `js/config.js`.
 | Método | Parámetros | Respuesta |
 |---|---|---|
 | `GET` | — | `{ ok, service, games }` |
-| `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, me }] }` |
-| `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
+| `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, nivel, me }] }` |
+| `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, nivel?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
 | `POST` | body JSON `{ action:'menu', id, playerId, nombre, plato, postre, restricciones?, token? }` | `{ ok, saved, updated? }` · `{ ok:false, error }` |
 
 Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado) y
