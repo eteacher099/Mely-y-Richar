@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-Invitación web de la boda de **Meli & Richi** (20 mar 2027). Sitio estático, móvil
+Invitación web de la boda de **Mely & Richar**: 19 y 20 de diciembre de 2026 en Cartagena de
+Indias, Colombia (Día 1 ceremonia + Fénix Beach Club, Día 2 Boat Day). Sitio estático, móvil
 primero, sin build ni dependencias: HTML + CSS + JavaScript con módulos ES nativos.
 Los textos de la interfaz van en español.
 
@@ -31,7 +32,9 @@ js/
   lib/dom.js            $, $$, esc (escape HTML), timeAgo, uid
   lib/storage.js        localStorage con prefijo "boda_" y JSON, nunca lanza
   lib/player.js         Nombre e id del invitado en este dispositivo
-  lib/scores.js         Cliente de la API de puntajes (envío, cola offline, ranking)
+  lib/api.js            Cliente del Apps Script: POST/GET, cola offline, reintentos
+  lib/scores.js         Puntajes de juegos y ranking (usa api.js)
+  lib/menu.js           Elección del menú de la cena (usa api.js)
   lib/icons.js          Iconos SVG inline (icon('camera', 56)), rayitos de sol y gaviota
   components/score-panel.js   Panel de resultado: estado del envío + ranking
   views/index.js        Registro de rutas hash → vista
@@ -43,8 +46,9 @@ TODO.md                 Pendientes del proyecto
 
 ## Arquitectura
 
-**Rutas** (`js/views/index.js`): `#home`, `#itin`, `#juego`, `#trivia`, `#marina`,
-`#tesla`, `#bingo`, `#playlist`, `#album`, `#mensajes`, `#info`. Hash desconocido → home.
+**Rutas** (`js/views/index.js`): `#home`, `#historia`, `#itin`, `#carta` (menú de boda),
+`#juego`, `#trivia`, `#marina`, `#tesla`, `#bingo`, `#playlist`, `#album`, `#mensajes`, `#info`.
+Hash desconocido → home. **No usar `#menu`** como ruta: choca con `<nav id="menu">`.
 
 **Contrato de una vista**: función que devuelve
 
@@ -70,17 +74,32 @@ Kaushan Script, olas arriba (fondo de `.sea`) y abajo (`.wave`), rayitos de sol 
 títulos (`.sea h2::before`; se omiten si la pantalla tiene un `.view-icon`).
 
 Ilustraciones en `img/`, todas SVG dibujadas a mano (nítidas en cualquier pantalla):
-`couple.svg` (Meli, Richi y Tesla; portada y hub de juegos), `tesla.svg` (perrito del juego
+`couple.svg` (Mely, Richar y Tesla; portada y hub de juegos), `tesla.svg` (perrito del juego
 y de Mensajes), `beach.svg` (fondo de portada, juego y carátula de la playlist) y
 decoraciones (`sun`, `palm`, `palm-leaves`, `hibiscus`, `starfish`, `shell`, `surfboard`,
 `lighthouse`). Las decoraciones usan `<img class="deco ...">` posicionadas en CSS;
 dentro de `.sea` quedan detrás del contenido. Para usar arte final (PNG/JPG), cambiar
 `CONFIG.portada`; si la imagen no carga, la portada vuelve a `img/couple.svg`.
 
-## Puntajes → Google Sheets
+## Datos de la boda
 
-Flujo: juego termina → `submitScore()` → `POST` al Web App → fila en la hoja `Scores`
+Todo sale de `js/config.js`: `fecha`/`fin` con desfase `-05:00` (la cuenta regresiva es
+correcta en cualquier zona horaria), `dias` (itinerario por día; cada evento puede tener
+`lugar` → clave de `lugares` con su mapa, y `link` interno), `lugares`, `menu`
+(platos incluidos, sin costo extra, del PDF `menu_boda_mely_richar_19122026.pdf`),
+`vestimenta` por día, `rsvp`, `viaje`, `historia` y `faq`. Fuente de los textos: la
+invitación de Canva (meliyrichar.my.canva.site).
+
+La pantalla `#carta` usa su propio estilo (el del PDF: crema, dorado, Cormorant Garamond)
+con variables `--mn-*` dentro de `.menu-screen`; no lleva olas (`wave:false`, sin `.sea`).
+
+## Google Sheets (puntajes + menú)
+
+Flujo juegos: juego termina → `submitScore()` → `POST` (`action:'score'`) → fila en `Scores`
 → `getLeaderboard()` → ranking en `score-panel`.
+Flujo menú: `#carta` → `saveMenuChoice()` → `POST` (`action:'menu'`) → **una fila por
+invitado** (playerId) en `Menu`; la última elección reemplaza a la anterior. La pestaña
+`Resumen menú` cuenta platos y postres con `QUERY`.
 
 - Se activa al poner la URL `/exec` en `CONFIG.scores.endpoint`. Vacío = solo local
   (mejor puntaje por dispositivo).

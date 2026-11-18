@@ -13,6 +13,8 @@
   padding: calc(var(--safe-top) + 64px) 14px 0;
   z-index: 5;
 }
+/* El menú de boda no tiene ola superior: la barra sube */
+#app:has(.menu-screen) .bar { padding-top: calc(var(--safe-top) + 18px); }
 
 /* Botón de icono */
 .ib {
@@ -110,7 +112,7 @@ details p { margin-top: 6px; }
 .menu[hidden] { display: none; }
 .menu a {
   color: #fff;
-  font: 400 34px var(--font-script);
+  font: 400 30px var(--font-script);
   text-decoration: none;
   padding: 6px;
 }

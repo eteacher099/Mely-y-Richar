@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380">
-  <title>Meli, Richi y Tesla</title>
+  <title>Mely, Richar y Tesla</title>
   <defs>
     <g id="anchor" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="0" cy="-11" r="3.2"/>
@@ -24,16 +24,16 @@
 
   <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
 
-    <!-- ===== Meli: cabello de atrás ===== -->
+    <!-- ===== Mely: cabello de atrás ===== -->
     <path fill="url(#hairW)" d="M214 146c-12 50-6 96-12 140-6 40 6 74 22 94h150c8-36-8-70-4-108 4-42-18-96-48-124-30-22-86-28-108-2Z"/>
     <path fill="none" stroke="#f1cf98" stroke-width="3" d="M340 190c12 30 4 56 12 84 6 22 2 50-4 70M326 230c8 26-2 50 6 74M228 230c-6 30 0 54-6 80"/>
 
-    <!-- ===== Meli: cuerpo ===== -->
+    <!-- ===== Mely: cuerpo ===== -->
     <path fill="url(#skinW)" d="M228 380c-4-40 8-82 40-100 26-12 62-8 82 14 18 22 18 56 16 86Z"/>
     <path fill="#2a4d93" d="M236 380c2-22 8-40 22-50 30-8 66-6 98 8 6 14 8 28 8 42Z"/>
     <path fill="none" stroke="#2a4d93" stroke-width="5" d="M262 332l-6-40M338 338l8-36"/>
 
-    <!-- ===== Richi: camisa a rayas ===== -->
+    <!-- ===== Richar: camisa a rayas ===== -->
     <g clip-path="url(#shirtClip)" stroke="none">
       <rect x="0" y="230" width="260" height="150" fill="#fdfbf5"/>
       <g fill="#223a70">
@@ -45,7 +45,7 @@
     <path fill="none" d="M14 380C16 304 42 266 92 252l38-8 44 6c32 6 56 30 64 130"/>
     <path fill="none" stroke="#c9c2b5" d="M70 300c4 30 4 56 2 80"/>
 
-    <!-- ===== Richi: cabeza ===== -->
+    <!-- ===== Richar: cabeza ===== -->
     <g transform="rotate(7 142 160)">
       <path fill="url(#skinM)" d="M120 196v52c16 12 40 10 52-2l-2-50Z"/>
       <path fill="#fdfbf5" d="M106 250c10 10 30 16 46 14 14-2 26-8 32-16l-8-6c-10 10-48 12-62-2Z"/>
@@ -71,7 +71,7 @@
       <path fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3" d="M110 124l8-4M156 122l8-4"/>
     </g>
 
-    <!-- ===== Meli: cabeza ===== -->
+    <!-- ===== Mely: cabeza ===== -->
     <g transform="translate(8 -18) rotate(-9 268 185)">
       <path fill="url(#skinW)" d="M250 218v76c12 10 30 10 40 0l-2-76Z"/>
       <path fill="url(#skinW)" d="M218 172c0-46 100-48 100-2 0 48-26 70-50 70-26 0-50-22-50-68Z"/>
@@ -135,7 +135,7 @@
       <path fill="none" stroke="#1d1d24" d="M200 301v6M188 308q12 6 24 0"/>
     </g>
 
-    <!-- Mano de Richi sobre Tesla -->
+    <!-- Mano de Richar sobre Tesla -->
     <path fill="url(#skinM)" d="M126 352c4-12 16-18 28-14 8 4 8 12 2 16-6 4-6 10-4 26h-24c-4-10-4-20-2-28Z"/>
   </g>
 

@@ -3,28 +3,100 @@
    Todo el contenido de la invitación sale de este objeto.
    ================================================================== */
 export const CONFIG = {
-  nombres: ['Meli', 'Richi'],
-  fecha: '2027-03-20T16:00:00',          // fecha y hora de la ceremonia (hora local)
-  lugar: 'Salón Playa Azul',
-  mapa: 'https://maps.google.com/?q=Salon+Playa+Azul',
+  nombres: ['Mely', 'Richar'],
+  ciudad: 'Cartagena de Indias',
+  // Inicio de la boda (ceremonia civil). Con desfase de Colombia (-05:00) para que la
+  // cuenta regresiva sea correcta aunque el invitado esté en otra zona horaria.
+  fecha: '2026-12-19T14:00:00-05:00',
+  fin: '2026-12-20T17:00:00-05:00',       // regreso a Cartagena del Día 2
   playlist: 'https://open.spotify.com/',  // enlace a la playlist colaborativa de Spotify
   perro: 'Tesla',
   portada: 'img/couple.svg',              // ilustración de portada; cámbiala por img/portada.jpg/.png si tienes arte final
 
-  // [icono, hora, actividad]
-  itinerario: [
-    ['💍', '4:00 PM', 'Ceremonia'],
-    ['🍸', '5:00 PM', 'Cóctel'],
-    ['🍴', '7:00 PM', 'Cena'],
-    ['🎵', '9:00 PM', 'Fiesta'],
-    ['⭐', '12:00 AM', '¡Hasta el final!'],
+  // Lugares (se usan en Itinerario e Información)
+  lugares: {
+    notaria: { nombre: 'Notaría 2 de Cartagena', detalle: 'Ceremonia · Centro Histórico', mapa: 'https://www.google.com/maps?q=place_id:ChIJ6fmgpgcv9o4R8Q1TVxQLkmA' },
+    muelle: { nombre: 'Muelle La Bodeguita', detalle: 'Traslado a Tierra Bomba', mapa: 'https://www.google.com/maps/search/?api=1&query=Muelle+La+Bodeguita+Cartagena' },
+    fenix: { nombre: 'Fénix Beach Club', detalle: 'Recepción · Tierra Bomba', mapa: 'https://www.google.com/maps?q=place_id:ChIJ3Sx6WNUo9o4RgrpHElrzJrU' },
+    nautico: { nombre: 'Club Náutico', detalle: 'Boat Day · salida del catamarán', mapa: 'https://www.google.com/maps?q=place_id:ChIJb8CLp9ZDYw0RQl_1sv6Wb30' },
+  },
+
+  // Itinerario por día. lugar = clave de `lugares` (muestra "Ver mapa"); link = enlace interno.
+  dias: [
+    {
+      titulo: 'Día 1',
+      fecha: 'Sábado 19 de diciembre',
+      corto: 'Sáb 19',
+      dia: '2026-12-19',
+      eventos: [
+        { icono: '💍', hora: '2:00 PM', titulo: 'Ceremonia civil', detalle: 'Notaría 2 de Cartagena, en el corazón del Centro Histórico.', lugar: 'notaria' },
+        { icono: '📸', hora: '4:00 PM', titulo: 'Sesión de fotos', detalle: 'Recorreremos juntos las calles del Centro Histórico capturando los primeros recuerdos de nuestro nuevo capítulo.' },
+        { icono: '🚤', hora: '5:00 PM', titulo: 'Traslado hacia Tierra Bomba', detalle: 'Nos encontraremos en el Muelle La Bodeguita.', lugar: 'muelle' },
+        { icono: '🍹', hora: '5:30 PM', titulo: 'Llegada a Fénix Beach Club', detalle: 'Welcome drink frente al mar.', lugar: 'fenix' },
+        { icono: '🍽️', hora: '7:30 PM', titulo: 'Cena y celebración', detalle: 'Disfrutaremos una cena a la carta, bebidas suaves y postre.', link: ['#carta', 'Elige tu plato →'] },
+        { icono: '🌙', hora: '11:00 PM', titulo: 'Regreso a Cartagena' },
+      ],
+    },
+    {
+      titulo: 'Día 2',
+      fecha: 'Domingo 20 de diciembre',
+      corto: 'Dom 20',
+      dia: '2026-12-20',
+      eventos: [
+        { icono: '⛵', hora: '8:30 AM', titulo: 'Salida en catamarán', detalle: 'Desde el Club Náutico.', lugar: 'nautico' },
+        { icono: '🏝️', hora: '10:30 AM', titulo: 'Parada en Islas del Rosario', detalle: 'Tiempo para nadar y relajarse.' },
+        { icono: '🏊', hora: '11:30 AM', titulo: 'Parada en La Piscinita', detalle: 'Un lugar donde el mar se vuelve tranquilo. Perfecto para disfrutar el paisaje y compartir.' },
+        { icono: '🥂', hora: '12:30 PM', titulo: 'Almuerzo a bordo', detalle: 'Un momento para brindar, saborear y celebrar juntos.' },
+        { icono: '🏖️', hora: '2:00 PM', titulo: 'Parada en Playa Blanca', detalle: 'Tiempo libre para disfrutar la playa, caminar por la arena y seguir creando recuerdos inolvidables.' },
+        { icono: '🌅', hora: '5:00 PM', titulo: 'Regreso a Cartagena', detalle: 'Cerramos este fin de semana con el corazón lleno de alegría, recuerdos hermosos y el inicio de nuestro para siempre.' },
+      ],
+    },
   ],
+
+  // Menú de la cena del Día 1 (Fénix Beach Club). Solo platos incluidos, sin costo adicional.
+  menu: {
+    whatsapp: '573105902167',   // con indicativo, solo dígitos (el de confirmación de la invitación de Canva); '' = sin botón
+    principales: [
+      ['Pasta Alfredo con Pollo', 'Pasta en salsa Alfredo con pollo.'],
+      ['Tacos de Camarones', 'Camarones al ajillo, mojo de cebolla roja y alioli.'],
+      ['Pasta de Mar', 'Salsa cremosa y atomatada con mix de mariscos.'],
+      ['Tacos de Pescado Blanco', 'Pescado apanado, repollo encurtido, cilantro y alioli.'],
+      ['Paella de la Huerta', 'Preparación de arroz con vegetales.'],
+      ['Poke de Salmón', 'Salmón, arroz, aguacate, mango, pepino, lechugas y aderezo de yogur.'],
+      ['Pescado Isleño Entero', 'Acompañado de arroz con coco, patacones y ensalada.'],
+      ['Poke Costeño', 'Camarón apanado, arroz de coco, aguacate, tomate, cebolla, lechuga, chips de plátano y suero.'],
+      ['Filete de Corvina', 'A la sartén, con sabores cítricos; acompañado de arroz con coco y yuca con mojo.'],
+      ['Poke de Quinua', 'Quinua, aguacate, cebolla encurtida, zanahoria, pepino, coliflor, lechugas y aderezo ponzu.'],
+      ['Posta Negra Cartagenera', 'Tradicional preparación de posta de res con arroz con coco y plátano en tentación.'],
+      ['Poke Acevichado', 'Corvina, salsa acevichada, arroz, aguacate, maíz crocante, mango y chips de plátano.'],
+      ['Sancocho de Pescado', 'Al estilo de la isla, con posta de sierra local.'],
+      ['Pizza Margarita', 'Pizza de estilo clásico.'],
+      ['Pollo con Salsa Criolla', 'Acompañado de arroz con coco y patacón.'],
+      ['Pizza Cuatro Quesos', 'Mozzarella, búfala, queso azul, brie y salsa napolitana.'],
+      ['Hamburguesa Vegana', 'Mezcla de vegetales, proteínas y granos.'],
+      ['Pizza Hawaiana', 'Jamón, mozzarella, salsa napolitana y piña.'],
+      ['Hamburguesa de Pescado', 'Robalo al grill con coleslaw de repollo morado y bastones de yuca.'],
+      ['Uramaki de Salmón', 'Salmón, arroz, alga nori, queso crema, aguacate, masago y ajonjolí.'],
+      ['Hamburguesa Fénix', 'Carne de res con verduras y salsas de la casa, acompañada de papas rústicas.'],
+      ['Tempura Roll', 'Corvina, arroz, alga nori, queso crema, aguacate, camarón, mayonesa y sriracha.'],
+      ['Tacos de Pollo', 'Pollo a la parrilla, piña asada, guacamole y mojo de cebolla blanca.'],
+      ['Camarón Sweet', 'Camarón, arroz, alga nori, plátano amarillo, kanikama y sweet chili.'],
+    ],
+    postres: [
+      ['Arroz con Leche de la Abuela'],
+      ['Cremoso Frío de Limón'],
+      ['Flan de Coco'],
+      ['Torta de Chocolate'],
+      ['Copa de Helado', 'Vainilla o vegano.'],
+      ['Helado de Pistacho'],
+    ],
+  },
 
   // q = pregunta, o = opciones, a = índice de la respuesta correcta
   trivia: [
-    { q: '¿Dónde se conocieron Meli y Richi?', o: ['En la playa', 'En la universidad', 'En una fiesta'], a: 0 },
+    { q: '¿Dónde se conocieron Mely y Richar?', o: ['En la playa', 'En la universidad', 'En una fiesta'], a: 0 },
     { q: '¿Cómo se llama nuestro perrito?', o: ['Tesla', 'Edison', 'Newton'], a: 0 },
-    { q: '¿Quién dijo "te quiero" primero?', o: ['Meli', 'Richi', 'Los dos a la vez'], a: 1 },
+    { q: '¿Quién dijo "te quiero" primero?', o: ['Mely', 'Richar', 'Los dos a la vez'], a: 1 },
     { q: '¿Cuál es nuestro plan favorito?', o: ['Ir al cine', 'Viajar', 'Cocinar en casa'], a: 1 },
   ],
   marina: [
@@ -36,15 +108,47 @@ export const CONFIG = {
   bingo: ['Foto con los novios', 'Alguien llora', 'Baile de papás', 'Brindis', 'Foto con Tesla',
     'Lanzan el ramo', 'Selfie grupal', 'Canción de playa', 'Abrazo a los novios'],
 
-  vestimenta: 'Casual elegante (azul, blanco y toques de rojo y amarillo)',
+  intro: 'Después de tantos momentos juntos, llegó el día de decir “sí”. Queremos celebrarlo contigo en un fin de semana lleno de amor, sol y mar.',
+
+  // Dress code por día
+  vestimenta: [
+    { dia: 'Día 1 · Sábado 19', estilo: 'White Party', tip: 'Look fresco, cómodo y acorde al ambiente playero.' },
+    { dia: 'Día 2 · Domingo 20', estilo: 'Boat Day', tip: 'Look fresco y relajado. Lleva vestido de baño.' },
+  ],
+
+  // Confirmación de asistencia por WhatsApp
+  rsvp: {
+    whatsapp: '573105902167',
+    mensaje: 'Hola, soy ________ y confirmo mi asistencia a su boda.',
+  },
+
+  // Planifica tu viaje: [título, texto, [[nombre, url], ...]]
+  viaje: [
+    ['✈️ Buscar vuelos', 'Las mejores opciones de vuelo hacia Cartagena (CTG).',
+      [['Google Flights', 'https://www.google.com/travel/flights?gl=CO&hl=es'], ['Kayak', 'https://www.kayak.com.co/flights'], ['Skyscanner', 'https://www.skyscanner.com.co']]],
+    ['🏨 Buscar alojamiento', 'Hoteles o apartamentos según tu presupuesto.',
+      [['Airbnb', 'https://www.airbnb.com.co'], ['Booking', 'https://www.booking.com/index.es.html']]],
+    ['🗺️ Explora Cartagena', 'Restaurantes, tours y actividades.',
+      [['Tripadvisor', 'https://www.tripadvisor.co'], ['Civitatis', 'https://www.civitatis.com/es/']]],
+  ],
+
+  // Nuestra historia (un párrafo por elemento)
+  historia: [
+    'Nuestra historia no comenzó con un gran momento planeado, sino de la manera más bonita: con dos vidas que se encontraron en el momento justo y, casi sin darse cuenta, empezaron a convertirse en un hogar la una para la otra.',
+    'Desde entonces, hemos crecido juntos, aprendiendo a apoyarnos en los momentos difíciles, a celebrar cada logro y a descubrir que el amor vive en los detalles más simples: una risa compartida, un desayuno sorpresa, los sueños planeados en voz baja y la tranquilidad de saber que siempre estamos el uno para el otro.',
+    'Con el tiempo construimos algo que siempre soñamos: un hogar lleno de amor, complicidad y sueños, junto a nuestro perrito, que también hace parte de esta historia.',
+    'Richar, con su dulzura, responsabilidad y forma tranquila de cuidar, se convirtió en el lugar seguro. Mely, con su creatividad, sensibilidad y alegría, es el corazón soñador que impulsa cada aventura.',
+    'Y juntos encontramos el equilibrio perfecto: un amor que no solo se dice, sino que se demuestra todos los días.',
+    'Hoy, después de tantos años eligiéndonos una y otra vez, damos un paso más en nuestra historia… y queremos celebrarlo rodeados de las personas que más queremos.',
+  ],
+
   faq: [
     ['¿Puedo llevar acompañante?', 'Solo las personas indicadas en tu invitación.'],
-    ['¿Habrá estacionamiento?', 'Sí, el salón cuenta con estacionamiento.'],
     ['¿Se permiten niños?', 'Escríbenos y lo coordinamos.'],
   ],
 
-  // Ranking de juegos en Google Sheets (ver google-scripts/README.md).
-  // Con endpoint vacío los puntajes solo se guardan en el dispositivo.
+  // Google Sheets (ver google-scripts/README.md): ranking de juegos Y elecciones del menú.
+  // Con endpoint vacío todo se guarda solo en el dispositivo.
   scores: {
     endpoint: 'https://script.google.com/macros/s/AKfycbwOkKk-sJMk-tqW-Pw3yB_eCMx5M4SLRAx8tg7dUokQty8vl3hvSPxjIaJPcB2B_MP2_w/exec',      // URL ".../exec" del Web App de Apps Script
     token: '',         // opcional: debe coincidir con SCORES_TOKEN del script

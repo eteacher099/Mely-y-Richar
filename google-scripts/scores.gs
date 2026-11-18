@@ -1,5 +1,5 @@
 /**
- * Boda Meli & Richi — API de puntajes de los juegos.
+ * Boda Mely & Richar — API de la invitación (puntajes de juegos + menú de la cena).
  * Google Apps Script publicado como Web App; guarda en una hoja de Google Sheets.
  *
  * Endpoints (URL .../exec de la implementación):
@@ -10,6 +10,11 @@
  *   POST body JSON (Content-Type: text/plain):
  *        { action: 'score', id, playerId, nombre, juego, puntaje, maximo?, duracionMs?, token? }
  *        → { ok, saved } | { ok, duplicate } | { ok: false, error }
+ *   POST body JSON (Content-Type: text/plain):
+ *        { action: 'menu', id, playerId, nombre, plato, postre, restricciones?, token? }
+ *        → { ok, saved, updated? } | { ok: false, error }
+ *        Una fila por invitado (playerId) en la pestaña "Menu": la última elección reemplaza a la anterior.
+ *        La pestaña "Resumen menú" cuenta platos y postres con fórmulas QUERY.
  *
  * Script Properties opcionales (Configuración del proyecto → Propiedades de la secuencia de comandos):
  *   SPREADSHEET_ID  id de la hoja si el script NO está vinculado a ella.
@@ -29,6 +34,10 @@ const GAMES = {
   marina: { maxScore: 50 },     // aciertos
   tesla: { maxScore: 20000 },   // 100 por perrito encontrado en 60 s
 };
+
+const MENU_SHEET = 'Menu';
+const MENU_HEADERS = ['Fecha', 'Jugador ID', 'Nombre', 'Plato principal', 'Postre', 'Alergias / restricciones'];
+const SUMMARY_SHEET = 'Resumen menú';
 
 const MAX_LIMIT = 50;
 const CACHE_SECONDS = 30;
@@ -55,6 +64,7 @@ function doPost(e) {
     const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     checkToken_(body.token);
     if (body.action === 'score') return json_(Object.assign({ ok: true }, saveScore_(body)));
+    if (body.action === 'menu') return json_(Object.assign({ ok: true }, saveMenu_(body)));
     throw new Error('unknown_action');
   } catch (err) {
     return json_({ ok: false, error: err.message });
@@ -64,7 +74,8 @@ function doPost(e) {
 /** Ejecuta esto una vez desde el editor para crear la hoja y autorizar permisos. */
 function setup() {
   const sheet = getSheet_();
-  Logger.log('Hoja lista: %s (pestaña "%s")', sheet.getParent().getUrl(), SHEET_NAME);
+  ensureMenuSheets_();
+  Logger.log('Hoja lista: %s (pestañas "%s", "%s" y "%s")', sheet.getParent().getUrl(), SHEET_NAME, MENU_SHEET, SUMMARY_SHEET);
 }
 
 /* ------------------------------------------------------------------ */
@@ -104,6 +115,53 @@ function saveScore_(b) {
 
   CacheService.getScriptCache().remove(cacheKey_(game));
   return { saved: true };
+}
+
+function saveMenu_(b) {
+  const playerId = cleanText_(b.playerId, 64);
+  const nombre = cleanText_(b.nombre, 60);
+  const plato = cleanText_(b.plato, 60);
+  const postre = cleanText_(b.postre, 60);
+  const restricciones = cleanText_(b.restricciones, 300);
+  if (!playerId) throw new Error('missing_player');
+  if (!nombre || !plato || !postre) throw new Error('missing_fields');
+
+  const row = [new Date(), playerId, nombre, plato, postre, restricciones];
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = ensureMenuSheets_();
+    const last = sheet.getLastRow();
+    const found = last < 2 ? null : sheet.getRange(2, 2, last - 1, 1)
+      .createTextFinder(playerId).matchEntireCell(true).findNext();
+    if (found) {
+      sheet.getRange(found.getRow(), 1, 1, row.length).setValues([row]);
+      return { saved: true, updated: true };
+    }
+    sheet.appendRow(row);
+    return { saved: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Crea (si faltan) la pestaña "Menu" y la de resumen con conteos por plato y postre. */
+function ensureMenuSheets_() {
+  const ss = getSpreadsheet_();
+  const menu = getOrCreateSheet_(ss, MENU_SHEET, MENU_HEADERS);
+  if (!ss.getSheetByName(SUMMARY_SHEET)) {
+    const sum = ss.insertSheet(SUMMARY_SHEET);
+    // Conteo por opción, de mayor a menor. setFormula usa sintaxis en inglés (comas).
+    const count = col =>
+      `=QUERY('${MENU_SHEET}'!${col}:${col}, "select ${col}, count(${col}) where ${col} <> '' ` +
+      `group by ${col} order by count(${col}) desc label count(${col}) 'Cantidad'", 1)`;
+    sum.getRange('A1').setFormula(count('D'));   // Plato principal
+    sum.getRange('D1').setFormula(count('E'));   // Postre
+    sum.getRange('G1').setValue('Invitados que eligieron').setFontWeight('bold');
+    sum.getRange('G2').setFormula(`=COUNTA('${MENU_SHEET}'!B2:B)`);
+    sum.setFrozenRows(1);
+  }
+  return menu;
 }
 
 function leaderboard_(game, limit, me) {
@@ -167,13 +225,16 @@ function getSpreadsheet_() {
 }
 
 function getSheet_() {
-  const ss = getSpreadsheet_();
-  let sheet = ss.getSheetByName(SHEET_NAME);
+  return getOrCreateSheet_(getSpreadsheet_(), SHEET_NAME, HEADERS);
+}
+
+function getOrCreateSheet_(ss, name, headers) {
+  let sheet = ss.getSheetByName(name);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(HEADERS);
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
     sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
   }
   return sheet;
 }

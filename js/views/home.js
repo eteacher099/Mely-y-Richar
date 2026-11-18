@@ -23,6 +23,7 @@ export default function home() {
         </h1>
         <p class="home-subtitle">Nuestra Boda</p>
         <p class="home-tagline">Una aventura juntos</p>
+        <p class="home-date">19 · 12 · 2026 — ${esc(CONFIG.ciudad)}</p>
         ${bird}
 
         <div class="home-art">

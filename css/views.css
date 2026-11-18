@@ -302,8 +302,8 @@
 
 /* Información */
 .info-row { display: flex; gap: 14px; align-items: flex-start; text-align: left; margin: 18px 0; }
-.info-row .info-ic { flex: none; width: 58px; height: 58px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 32px; color: var(--coral); box-shadow: 0 2px 6px #14337a22; }
-.info-row .info-ic.navy { color: var(--navy); }
+.info-ic { flex: none; width: 58px; height: 58px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 32px; color: var(--coral); box-shadow: 0 2px 6px #14337a22; }
+.info-ic.navy { color: var(--navy); }
 .info-row h3 { font-size: 19px; margin-bottom: 2px; }
 .info-row details { margin: 6px 0 0; }
 .info-scene { display: block; width: 100%; margin: 10px 0 -40px; }
@@ -324,3 +324,137 @@
 .beach { background: url("../img/beach.svg") center 100% / auto 165% no-repeat, #f3e0b5; border: 3px solid #fff; box-shadow: 0 4px 14px #14337a33; }
 .beach .dog { width: 1.35em; height: auto; display: block; pointer-events: none; }
 .pill .icon { margin-right: 6px; }
+
+/* ==========================================================
+   Boda en Cartagena: itinerario de 2 días, historia, info
+   ========================================================== */
+.home-date { position: relative; z-index: 2; font-size: 13px; font-weight: 800; letter-spacing: .5px; margin-top: 4px; transform: translateX(44px); }
+
+/* Pestañas de día */
+.day-tabs { display: flex; gap: 8px; justify-content: center; margin: 4px 0 10px; }
+.day-tabs [role=tab] {
+  flex: 1;
+  border: 2px solid var(--navy);
+  border-radius: 30px;
+  background: #fff;
+  color: var(--navy);
+  font: 800 14px var(--font-body);
+  padding: 9px 6px;
+  cursor: pointer;
+}
+.day-tabs [role=tab][aria-selected=true] { background: var(--navy); color: #fff; }
+.day-date { font-weight: 800; font-size: 15px; margin-bottom: 4px; }
+.tl li { align-items: flex-start; }
+.tl-hora, .tl-titulo { display: block; }
+.tl-hora { font-size: 15px; color: var(--blue); }
+.tl-titulo { font-size: 18px; }
+.tl-detalle, .tl-links { display: block; font-size: 13.5px; line-height: 1.35; margin-top: 2px; }
+.tl-links { font-weight: 700; margin-top: 4px; }
+.tl li:not(:last-child)::after { top: 64px; height: calc(100% - 50px); }
+
+/* Historia */
+.story-art { display: block; width: 78%; margin: 0 auto -4px; -webkit-mask-image: linear-gradient(#000 85%, transparent); mask-image: linear-gradient(#000 85%, transparent); }
+.story p { line-height: 1.55; margin: 0 0 12px; }
+.story p:last-child { margin-bottom: 0; }
+
+/* Información */
+.dress, .place, .trip { margin: 6px 0 10px; line-height: 1.4; }
+.menu-card { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--navy); background: #f6e6c6; border-color: #e7cf9f; }
+.rsvp { margin-top: 10px; }
+.rsvp-note { font-family: var(--font-script); font-size: 22px; margin-top: 12px; }
+
+/* ==========================================================
+   Menú de boda (estilo del PDF)
+   ========================================================== */
+.menu-screen {
+  --mn-bg: #F6F3EC;
+  --mn-ink: #2b2a26;
+  --mn-muted: #77736a;
+  --mn-gold: #B39A6B;
+  --mn-olive: #7d7d62;
+  --mn-line: #ddd8cc;
+  --mn-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  background: var(--mn-bg);
+  color: var(--mn-ink);
+  padding: calc(var(--safe-top) + 66px) 14px 24px;
+}
+#app:has(.menu-screen) { background: #F6F3EC; padding-bottom: 0; }
+.mn-frame { border: 1px solid var(--mn-line); padding: 26px 16px 28px; }
+.mn-head { text-align: center; }
+.mn-couple { font: italic 500 24px var(--mn-serif); color: var(--mn-gold); letter-spacing: .5px; }
+.mn-kicker { font-size: 11px; letter-spacing: 1px; color: var(--mn-muted); margin-top: 2px; }
+.menu-screen .mn-title { font: 500 48px/1.05 var(--mn-serif); color: var(--mn-ink); margin: 14px 0 4px; }
+.menu-screen .mn-title::before { display: none; }
+.mn-lead { font: italic 500 19px var(--mn-serif); color: var(--mn-muted); }
+.mn-rule { width: 120px; border: 0; border-top: 1px solid var(--mn-gold); margin: 18px auto; }
+.mn-divider { border: 0; border-top: 1px solid var(--mn-line); margin: 26px -4px; }
+.mn-section { border: 0; padding: 0; margin: 0; min-width: 0; }
+.mn-h3 { display: block; width: 100%; text-align: center; font: 500 32px var(--mn-serif); color: var(--mn-ink); margin: 6px 0 6px; }
+.mn-note { display: block; width: 100%; text-align: center; font-style: italic; font-size: 13px; color: var(--mn-muted); margin: 0 0 14px; }
+
+.mn-list { display: grid; gap: 2px; text-align: left; }
+.mn-opt {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 10px 10px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.mn-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.mn-mark {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1.5px solid var(--mn-olive);
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+.mn-text b { display: block; font-size: 15px; color: var(--mn-ink); }
+.mn-text small { display: block; font-size: 13px; line-height: 1.35; color: var(--mn-muted); margin-top: 2px; }
+.mn-opt:has(input:checked) { border-color: var(--mn-gold); background: #fffdf7; }
+.mn-opt input:checked + .mn-mark { background: var(--mn-olive); }
+.mn-opt input:checked + .mn-mark::after { content: "✓"; color: #fff; font-size: 12px; font-weight: 800; line-height: 1; }
+.mn-opt:has(input:focus-visible) { outline: 3px solid var(--mn-gold); outline-offset: 1px; }
+.mn-list--desserts .mn-opt { border-radius: 0; border-bottom-color: var(--mn-line); }
+.mn-list--desserts .mn-opt:has(input:checked) { border-color: var(--mn-gold); border-radius: 8px; }
+.mn-list--desserts .mn-mark { border: 0; background: var(--mn-olive); opacity: .45; }
+.mn-list--desserts input:checked + .mn-mark { opacity: 1; }
+
+.mn-confirm { text-align: center; }
+.mn-field { display: block; text-align: left; margin: 12px 0; font-size: 13px; font-weight: 700; }
+.mn-field span { display: block; margin-bottom: 6px; }
+.mn-field input,
+.mn-field textarea {
+  width: 100%;
+  border: 1px solid #cfc8b8;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--mn-ink);
+  font: 15px var(--font-body);
+  padding: 11px 12px;
+  margin: 0;
+}
+.mn-field textarea { resize: vertical; }
+.mn-btn {
+  width: 100%;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--mn-ink);
+  color: #fff;
+  font: 700 16px var(--font-body);
+  letter-spacing: .5px;
+  padding: 14px;
+  cursor: pointer;
+}
+.mn-btn:disabled { opacity: .6; cursor: progress; }
+.mn-status { min-height: 1.2em; margin-top: 12px; font-size: 14px; font-weight: 700; }
+.mn-status.is-ok { color: #3f6b3f; }
+.mn-status.is-error { color: #b0402c; }
+.mn-wa { display: inline-block; margin-top: 4px; color: #1f7a45; font-weight: 800; }
+.mn-foot { text-align: center; font-size: 11px; letter-spacing: .5px; color: var(--mn-muted); margin-top: 8px; }

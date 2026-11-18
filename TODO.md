@@ -5,6 +5,8 @@
 - [ ] Ejecutar `setup()` y autorizar permisos
 - [x] Publicar como Web App (*Ejecutar como: Yo*, *Acceso: Cualquier persona*)
 - [x] Pegar la URL `/exec` en `CONFIG.scores.endpoint` (`js/config.js`)
+- [ ] **Menú de boda:** pegar el `scores.gs` nuevo, ejecutar `setup()` y desplegar como *Nueva versión*
+      (crea las pestañas `Menu` y `Resumen menú`; la URL `/exec` no cambia)
 - [ ] Probar con `curl` y desde el celular; borrar las filas de prueba
 - [ ] Confirmar `timeZone` en `google-scripts/appsscript.json` (está `America/Bogota`)
 - [ ] (Opcional) Definir `SCORES_TOKEN` en el script y en `CONFIG.scores.token`
@@ -12,10 +14,13 @@
 ## ✏️ Contenido real (hoy hay datos de ejemplo)
 - [ ] (Opcional) Reemplazar las ilustraciones SVG por el arte final en alta resolución
       (exportar del generador del storyboard y apuntar `CONFIG.portada` a ese archivo)
-- [ ] Confirmar fecha/hora, nombre del salón y enlace de Google Maps
+- [ ] Verificar que los 3 mapas tomados de Canva abren el lugar correcto (Notaría 2, Fénix, Club Náutico)
+      y el del Muelle La Bodeguita (búsqueda de Google Maps)
+- [ ] Confirmar el número de WhatsApp de `menu.whatsapp` y `rsvp.whatsapp` (tomado de Canva)
+- [ ] Colores permitidos del dress code (en Canva son imágenes; no se copiaron)
 - [ ] Enlace real de la playlist colaborativa de Spotify
 - [ ] Respuestas reales de la trivia de los novios (las actuales son supuestas)
-- [ ] Revisar itinerario, dress code y FAQ
+- [ ] FAQ: qué llevar el Día 2, lanchas/traslados, hora límite del muelle, etc.
 
 ## 🐛 Funcionalidad incompleta
 - [ ] **Mensajes**: solo se guardan en el teléfono del invitado → los novios nunca los leen.
@@ -50,6 +55,10 @@
 - [x] Apps Script de puntajes con validación, deduplicado, lock y ranking cacheado
 - [x] Cliente de puntajes con cola offline y ranking al terminar cada juego
 - [x] `CLAUDE.md` y este `TODO.md`
-- [x] Rediseño según el storyboard: portada con escena de playa e ilustración de Meli,
-      Richi y Tesla; olas superiores, iconos, juego de Tesla con el perrito ilustrado
+- [x] Rediseño según el storyboard: portada con escena de playa e ilustración de Mely,
+      Richar y Tesla; olas superiores, iconos, juego de Tesla con el perrito ilustrado
 - [x] Ilustraciones SVG en `img/` (pareja, Tesla, playa, sol, palmeras, hibisco, etc.)
+- [x] Datos reales: Mely & Richar, 19–20 dic 2026, Cartagena; itinerario de 2 días con pestañas y mapas
+- [x] Cuenta regresiva con zona horaria de Colombia (-05:00)
+- [x] Menú de boda (`#carta`) estilo PDF: elegir plato + postre y guardar en Google Sheets
+- [x] Nuestra historia, dress code por día, planifica tu viaje y RSVP por WhatsApp (de Canva)

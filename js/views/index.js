@@ -14,6 +14,8 @@ import playlist from './playlist.js';
 import album from './album.js';
 import mensajes from './mensajes.js';
 import info from './info.js';
+import menu from './menu.js';
+import historia from './historia.js';
 
 export const DEFAULT_ROUTE = 'home';
 
@@ -29,4 +31,6 @@ export const routes = {
   album,
   mensajes,
   info,
+  carta: menu,      // no usar #menu: choca con <nav id="menu">
+  historia,
 };

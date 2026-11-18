@@ -1,7 +1,7 @@
-# API de puntajes (Google Apps Script → Google Sheets)
+# API de la invitación (Google Apps Script → Google Sheets)
 
-`scores.gs` guarda los puntajes de los juegos (trivia, trivia marina y "Encuentra a Tesla")
-en una hoja de cálculo y devuelve el ranking. Se publica como **Web App** y la invitación
+`scores.gs` guarda en una hoja de cálculo los puntajes de los juegos (trivia, trivia marina y
+"Encuentra a Tesla"), devuelve el ranking y registra la elección del **menú de boda** de cada invitado. Se publica como **Web App** y la invitación
 le habla por `fetch`.
 
 | Archivo | Qué es |
@@ -9,16 +9,20 @@ le habla por `fetch`.
 | `scores.gs` | Código del Web App (`doGet` / `doPost`) |
 | `appsscript.json` | Manifiesto: runtime V8, zona horaria y permisos del Web App |
 
+> **Actualización (menú de boda):** si ya tenías el Web App publicado, pega el `scores.gs`
+> nuevo en el editor, ejecuta `setup()` una vez (crea `Menu` y `Resumen menú`) y luego
+> **Implementar → Gestionar implementaciones → ✏ → Nueva versión**. La URL `/exec` no cambia.
+
 ## 1. Crear la hoja y pegar el script
 
-1. Crea una hoja nueva en Google Sheets (p. ej. **"Boda Meli & Richi – Juegos"**).
+1. Crea una hoja nueva en Google Sheets (p. ej. **"Boda Mely & Richar"**).
 2. Menú **Extensiones → Apps Script**. Así el script queda *vinculado* a esa hoja.
 3. Borra el contenido de `Código.gs` y pega todo `scores.gs`.
 4. (Opcional) **Configuración del proyecto ⚙ → "Mostrar el archivo de manifiesto appsscript.json"**
    y pega `appsscript.json`. Ajusta `timeZone` si la boda no es en Colombia
    (p. ej. `America/Mexico_City`).
 5. Selecciona la función **`setup`** y pulsa **Ejecutar**. Acepta los permisos.
-   Se crea la pestaña `Scores` con los encabezados.
+   Se crean las pestañas `Scores`, `Menu` y `Resumen menú`.
 
 ## 2. Publicar ("postear") el Web App
 
@@ -55,6 +59,11 @@ curl -L -H "Content-Type: text/plain" \
 
 # Ranking
 curl -L "$URL?action=leaderboard&game=tesla&limit=5"
+
+# Guardar una elección del menú (repetirlo con el mismo playerId reemplaza la fila)
+curl -L -H "Content-Type: text/plain" \
+  -d '{"action":"menu","id":"prueba-m1","playerId":"p1","nombre":"Prueba","plato":"Poke de Salmón","postre":"Flan de Coco","restricciones":""}' \
+  "$URL"
 ```
 
 `-L` es necesario: Apps Script responde con una redirección.
@@ -84,6 +93,10 @@ la URL cambia y hay que actualizar `js/config.js`.
 | `GET` | — | `{ ok, service, games }` |
 | `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, me }] }` |
 | `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
+| `POST` | body JSON `{ action:'menu', id, playerId, nombre, plato, postre, restricciones?, token? }` | `{ ok, saved, updated? }` · `{ ok:false, error }` |
+
+Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado) y
+`Resumen menú` (conteo por plato y por postre, con `QUERY`).
 
 - El ranking muestra el **mejor puntaje por jugador**; en empate gana quien lo logró primero.
   Se cachea 30 s.
