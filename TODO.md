@@ -5,8 +5,9 @@
 - [ ] Ejecutar `setup()` y autorizar permisos
 - [x] Publicar como Web App (*Ejecutar como: Yo*, *Acceso: Cualquier persona*)
 - [x] Pegar la URL `/exec` en `CONFIG.scores.endpoint` (`js/config.js`)
-- [ ] **Menú de boda:** pegar el `scores.gs` nuevo, ejecutar `setup()` y desplegar como *Nueva versión*
-      (crea las pestañas `Menu` y `Resumen menú`; la URL `/exec` no cambia)
+- [ ] **Menú de boda + niveles de Tesla:** pegar el `scores.gs` nuevo, ejecutar `setup()` y desplegar como
+      *Nueva versión* (crea `Menu` y `Resumen menú`, agrega la columna `Nivel` y sube el tope de puntaje
+      de Tesla a 200 000; sin esto, los puntajes de Tesla > 20 000 se rechazan). La URL `/exec` no cambia
 - [ ] Probar con `curl` y desde el celular; borrar las filas de prueba
 - [ ] Confirmar `timeZone` en `google-scripts/appsscript.json` (está `America/Bogota`)
 - [ ] (Opcional) Definir `SCORES_TOKEN` en el script y en `CONFIG.scores.token`
@@ -62,3 +63,5 @@
 - [x] Cuenta regresiva con zona horaria de Colombia (-05:00)
 - [x] Menú de boda (`#carta`) estilo PDF: elegir plato + postre y guardar en Google Sheets
 - [x] Nuestra historia, dress code por día, planifica tu viaje y RSVP por WhatsApp (de Canva)
+- [x] Encuentra a Tesla con niveles: más distractores y emojis oscuros (águila, hormiga, mono, burro,
+      gato negro…), Tesla más pequeño/tapado/girado; puntos = nivel × rapidez; nivel en el ranking

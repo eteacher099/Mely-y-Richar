@@ -93,6 +93,15 @@ invitación de Canva (meliyrichar.my.canva.site).
 La pantalla `#carta` usa su propio estilo (el del PDF: crema, dorado, Cormorant Garamond)
 con variables `--mn-*` dentro de `.menu-screen`; no lleva olas (`wave:false`, sin `.sea`).
 
+## Juego "Encuentra a Tesla" (`js/views/tesla.js`)
+
+Nivel = perritos encontrados + 1. `levelSettings(level)` define la dificultad (distractores,
+proporción de emojis oscuros `DARK`, perros parecidos `LOOKALIKES` desde el nivel 6, tamaño,
+Tesla tapado desde el 4 y girado desde el 5). `pointsFor(level, ms)` = nivel × (50 + hasta 150
+por rapidez; 0 de bono a los 10 s). `supportedEmojis()` descarta los emojis que el dispositivo no
+puede dibujar (comparando contra el glifo de "caja vacía" en un canvas). El nivel se envía como
+`nivel` y se guarda en la columna `Nivel`; `GAMES.tesla` en `scores.gs` limita puntaje y nivel.
+
 ## Google Sheets (puntajes + menú)
 
 Flujo juegos: juego termina → `submitScore()` → `POST` (`action:'score'`) → fila en `Scores`

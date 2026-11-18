@@ -45,6 +45,36 @@ export function pointsFor(level, ms) {
   return Math.round(level * (50 + 150 * speed));
 }
 
+/**
+ * Quita los emojis que este dispositivo no sabe dibujar (p. ej. 🫏 o 🐦‍⬛ en sistemas
+ * viejos), que saldrían como cajas vacías o partidos en dos (🐦 + ⬛).
+ * Se calcula una vez; sin canvas (navegadores muy limitados) usa las listas completas.
+ */
+let emojiSets;
+function supportedEmojis() {
+  if (emojiSets) return emojiSets;
+  let ctx = null;
+  try { ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true }); } catch { /* sin canvas */ }
+  if (!ctx) return (emojiSets = { light: LIGHT, dark: DARK, look: LOOKALIKES });
+
+  const SIZE = 40;
+  ctx.canvas.width = ctx.canvas.height = SIZE;
+  ctx.font = `${SIZE - 8}px sans-serif`;
+  ctx.textBaseline = 'top';
+  const draw = e => {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    ctx.fillText(e, 0, 0);
+    return ctx.getImageData(0, 0, SIZE, SIZE).data.join(',');
+  };
+  const tofu = draw('\u{10FFFD}');                 // carácter sin glifo → "caja vacía"
+  const ref = ctx.measureText('🐶').width;
+  const ok = e => ctx.measureText(e).width < ref * 1.4 && draw(e) !== tofu;
+
+  emojiSets = { light: LIGHT.filter(ok), dark: DARK.filter(ok), look: LOOKALIKES.filter(ok) };
+  if (!emojiSets.light.length) emojiSets = { light: LIGHT, dark: DARK, look: LOOKALIKES };
+  return emojiSets;
+}
+
 const pick = list => list[Math.floor(Math.random() * list.length)];
 const rand = (min, max) => min + Math.random() * (max - min);
 const shuffle = arr => {
@@ -120,12 +150,14 @@ export default function tesla() {
 
       const newRound = () => {
         const cfg = levelSettings(level);
-        const dark = Math.round(cfg.decoys * cfg.darkRatio);
+        const sets = supportedEmojis();
+        const dark = sets.dark.length ? Math.round(cfg.decoys * cfg.darkRatio) : 0;
+        const look = sets.look.length ? cfg.lookalikes : 0;
         const emojis = [
-          ...Array.from({ length: cfg.lookalikes }, () => pick(LOOKALIKES)),
-          ...Array.from({ length: dark }, () => pick(DARK)),
+          ...Array.from({ length: look }, () => pick(sets.look)),
+          ...Array.from({ length: dark }, () => pick(sets.dark)),
         ];
-        while (emojis.length < cfg.decoys) emojis.push(pick(LIGHT));
+        while (emojis.length < cfg.decoys) emojis.push(pick(sets.light));
 
         const items = shuffle(emojis).map(e => makeItem(e, 'decoy', rand(cfg.minSize, cfg.maxSize), cfg.rotate));
         const dog = makeItem(null, 'dog', cfg.dogSize, cfg.rotate);
