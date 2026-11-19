@@ -265,7 +265,30 @@
 .it-starfish { right: 14px; bottom: 96px; width: 46px; transform: rotate(-12deg); }
 
 /* Juegos */
-.hub-art { display: block; width: 92%; max-width: 360px; margin: 4px auto -6px; -webkit-mask-image: linear-gradient(#000 88%, transparent); mask-image: linear-gradient(#000 88%, transparent); }
+/* Richar, Tesla y Mely de pie sobre la arena (como el storyboard) */
+.hub-trio {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 236px;
+  margin: 2px auto 0;
+  max-width: 340px;
+}
+.hub-trio::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -6px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(#f1d9a8, #f1d9a800 70%);
+}
+.hub-trio img { position: relative; display: block; height: auto; }
+.trio-richar { width: 132px; margin-right: -26px; }
+.trio-tesla { width: 96px; z-index: 1; margin-bottom: -4px; }
+.trio-mely { width: 122px; margin-left: -24px; }
 .hub-palm-l { left: -18px; top: 190px; width: 96px; }
 .hub-palm-r { right: -18px; top: 210px; width: 90px; transform: scaleX(-1); }
 .games-card { background: #fff8; border: 1px solid #14337a22; border-radius: 22px; padding: 12px; margin-top: 8px; }
@@ -323,6 +346,7 @@
 .tesla-screen h2.banner { color: #fff; font-size: 34px; margin: 8px 0 10px; }
 .beach { background: url("../img/beach.svg") center 100% / auto 165% no-repeat, #f3e0b5; border: 3px solid #fff; box-shadow: 0 4px 14px #14337a33; }
 .beach .dog { width: 1.35em; height: auto; display: block; pointer-events: none; }
+.beach [data-k="dog"] { z-index: 2; }   /* Tesla siempre por encima de los demás emojis */
 .hud { align-items: center; gap: 8px; }
 .pill--sun { background: var(--sun); color: var(--navy); }
 .tesla-summary { font-weight: 700; margin: 14px 0 0; }

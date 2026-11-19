@@ -14,7 +14,8 @@
  *        { action: 'menu', id, playerId, nombre, plato, postre, restricciones?, token? }
  *        → { ok, saved, updated? } | { ok: false, error }
  *        Una fila por invitado (playerId) en la pestaña "Menu": la última elección reemplaza a la anterior.
- *        La pestaña "Resumen menú" cuenta platos y postres con fórmulas QUERY.
+ *        La pestaña "Resumen menú" se reescribe con valores (conteo por plato y postre,
+ *        restricciones) en cada elección; también desde el menú de la hoja "Boda".
  *
  * Script Properties opcionales (Configuración del proyecto → Propiedades de la secuencia de comandos):
  *   SPREADSHEET_ID  id de la hoja si el script NO está vinculado a ella.
@@ -74,7 +75,7 @@ function doPost(e) {
 /** Ejecuta esto una vez desde el editor para crear la hoja y autorizar permisos. */
 function setup() {
   const sheet = getSheet_();
-  ensureMenuSheets_();
+  refreshMenuSummary_();   // crea "Menu" y reescribe "Resumen menú" (corrige el #ERROR! de versiones con QUERY)
   const header = sheet.getRange(1, 1, 1, HEADERS.length);
   const current = header.getValues()[0];
   if (current.some((v, i) => v !== HEADERS[i])) header.setValues([HEADERS]).setFontWeight('bold');
@@ -143,34 +144,78 @@ function saveMenu_(b) {
     const last = sheet.getLastRow();
     const found = last < 2 ? null : sheet.getRange(2, 2, last - 1, 1)
       .createTextFinder(playerId).matchEntireCell(true).findNext();
-    if (found) {
-      sheet.getRange(found.getRow(), 1, 1, row.length).setValues([row]);
-      return { saved: true, updated: true };
-    }
-    sheet.appendRow(row);
-    return { saved: true };
+    if (found) sheet.getRange(found.getRow(), 1, 1, row.length).setValues([row]);
+    else sheet.appendRow(row);
+    refreshMenuSummary_();
+    return found ? { saved: true, updated: true } : { saved: true };
   } finally {
     lock.releaseLock();
   }
 }
 
-/** Crea (si faltan) la pestaña "Menu" y la de resumen con conteos por plato y postre. */
+/** Crea (si falta) la pestaña "Menu". */
 function ensureMenuSheets_() {
+  return getOrCreateSheet_(getSpreadsheet_(), MENU_SHEET, MENU_HEADERS);
+}
+
+/**
+ * Reescribe la pestaña "Resumen menú" con VALORES calculados aquí (sin fórmulas,
+ * para que funcione igual en hojas en español —separador ";"— o en inglés).
+ *   A:B  Plato principal | Cantidad      (de mayor a menor)
+ *   D:E  Postre | Cantidad
+ *   G    Invitados que eligieron, fecha de actualización
+ *   I:J  Nombre | Alergias / restricciones (solo quienes escribieron algo)
+ */
+function refreshMenuSummary_() {
   const ss = getSpreadsheet_();
   const menu = getOrCreateSheet_(ss, MENU_SHEET, MENU_HEADERS);
-  if (!ss.getSheetByName(SUMMARY_SHEET)) {
-    const sum = ss.insertSheet(SUMMARY_SHEET);
-    // Conteo por opción, de mayor a menor. setFormula usa sintaxis en inglés (comas).
-    const count = col =>
-      `=QUERY('${MENU_SHEET}'!${col}:${col}, "select ${col}, count(${col}) where ${col} <> '' ` +
-      `group by ${col} order by count(${col}) desc label count(${col}) 'Cantidad'", 1)`;
-    sum.getRange('A1').setFormula(count('D'));   // Plato principal
-    sum.getRange('D1').setFormula(count('E'));   // Postre
-    sum.getRange('G1').setValue('Invitados que eligieron').setFontWeight('bold');
-    sum.getRange('G2').setFormula(`=COUNTA('${MENU_SHEET}'!B2:B)`);
-    sum.setFrozenRows(1);
-  }
-  return menu;
+  const sum = ss.getSheetByName(SUMMARY_SHEET) || ss.insertSheet(SUMMARY_SHEET);
+
+  const last = menu.getLastRow();
+  const rows = last < 2 ? [] : menu.getRange(2, 1, last - 1, MENU_HEADERS.length).getValues();
+
+  const tally = col => {
+    const counts = {};
+    rows.forEach(r => {
+      const key = String(r[col]).trim();
+      if (key) counts[key] = (counts[key] || 0) + 1;
+    });
+    return Object.keys(counts)
+      .map(k => [asText_(k), counts[k]])
+      .sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])));
+  };
+  const notes = rows
+    .filter(r => String(r[5]).trim())
+    .map(r => [asText_(r[2]), asText_(r[5])]);
+
+  const write = (row, col, values) =>
+    sum.getRange(row, col, values.length, values[0].length).setValues(values);
+
+  sum.clear();
+  write(1, 1, [['Plato principal', 'Cantidad']].concat(tally(3)));
+  write(1, 4, [['Postre', 'Cantidad']].concat(tally(4)));
+  write(1, 7, [['Invitados que eligieron'], [rows.length], [''], ['Actualizado'], [new Date()]]);
+  write(1, 9, [['Nombre', 'Alergias / restricciones']].concat(notes));
+  sum.getRange(1, 1, 1, 10).setFontWeight('bold');
+  sum.setFrozenRows(1);
+}
+
+/** Menú "Boda" en la hoja para refrescar el resumen a mano (p. ej. tras borrar filas). */
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu('Boda')
+    .addItem('Actualizar resumen del menú', 'refreshMenuSummary')
+    .addToUi();
+}
+
+function refreshMenuSummary() {
+  refreshMenuSummary_();
+}
+
+/** Al reescribir textos de invitados, evita que "=…" se interprete como fórmula. */
+function asText_(value) {
+  const text = String(value == null ? '' : value);
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 
 function leaderboard_(game, limit, me) {

@@ -20,7 +20,7 @@ const LOOKALIKES = ['🐕‍⬛', '🐕', '🐩', '🐾'];
 /**
  * Dificultad de cada nivel (nivel = perritos encontrados + 1).
  * Sube: cantidad de distractores, proporción de emojis oscuros, perros parecidos,
- * tamaño más pequeño, Tesla puede quedar tapado y girado.
+ * tamaño más pequeño y Tesla girado. Tesla siempre queda encima (nunca tapado).
  */
 export function levelSettings(level) {
   const L = Math.max(1, Math.floor(level));
@@ -31,7 +31,6 @@ export function levelSettings(level) {
     minSize: Math.max(16, 26 - L),           // px de los distractores
     maxSize: Math.max(24, 38 - L),
     dogSize: Math.max(16, 34 - L * 1.6),     // px base de Tesla (la imagen mide 1.35em)
-    covered: L >= 4,                         // Tesla puede quedar debajo de otros emojis
     rotate: L >= 5 ? Math.min(12 * (L - 4), 70) : 0,   // giro máximo en grados
   };
 }
@@ -161,9 +160,7 @@ export default function tesla() {
 
         const items = shuffle(emojis).map(e => makeItem(e, 'decoy', rand(cfg.minSize, cfg.maxSize), cfg.rotate));
         const dog = makeItem(null, 'dog', cfg.dogSize, cfg.rotate);
-        // Niveles bajos: Tesla siempre encima. Altos: en cualquier capa (puede quedar tapado).
-        const at = cfg.covered ? Math.floor(Math.random() * (items.length + 1)) : items.length;
-        items.splice(at, 0, dog);
+        items.push(dog);   // Tesla siempre en la capa de arriba: nunca queda tapado
 
         beach.replaceChildren(...items);
         roundStart = performance.now();

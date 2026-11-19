@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 400">
+  <title>Mely</title>
+  <defs>
+    <g id="mAnchor" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="0" cy="-11" r="3.2"/>
+      <path d="M0 -7.8V12M-6.5 -3H6.5M-11 3c1 7 6 10 11 10s10-3 11-10M-13.5 5.5l2.5-3 3 2M13.5 5.5l-2.5-3-3 2"/>
+    </g>
+    <radialGradient id="mSkin" cx=".45" cy=".38" r=".75">
+      <stop offset="0" stop-color="#f6cfb2"/><stop offset="1" stop-color="#e3a684"/>
+    </radialGradient>
+    <!-- balayage: raíz castaña oscura → largos caramelo → puntas rubias -->
+    <linearGradient id="mHair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4e2d1f"/>
+      <stop offset=".22" stop-color="#7a5236"/>
+      <stop offset=".45" stop-color="#c39a6e"/>
+      <stop offset="1" stop-color="#e6cfa6"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="110" cy="390" rx="54" ry="8" fill="#000" fill-opacity=".12"/>
+
+  <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- pelo largo de atrás (ondulado) -->
+    <path fill="url(#mHair)" d="M46 100c-18 38-2 66-12 96-8 26 4 46 0 70 14-6 20 8 32 0 4-18-4-34 4-52h80c8 18 0 34 4 52 12 8 18-6 32 0-4-24 8-44 0-70-10-30 6-58-12-96-14-50-114-50-128 0Z"/>
+    <g fill="none" stroke="#f1dfbf" stroke-width="2.4" opacity=".85"><path d="M44 190c8 18-4 36 4 58M176 190c-8 18 4 36-4 58M58 170c4 16-2 30 2 44M162 170c-4 16 2 30-2 44"/></g>
+
+    <!-- piernas y sandalias -->
+    <path fill="url(#mSkin)" d="M82 316h22v56H86ZM116 316h22l-4 56h-18Z"/>
+    <path fill="#c4843f" d="M80 372h28v8H78ZM112 372h28l2 8h-32Z"/>
+    <!-- short blanco -->
+    <path fill="#fbf8f2" d="M70 280h80l6 46h-40l-6-12-6 12H64Z"/>
+    <!-- brazos -->
+    <path fill="url(#mSkin)" d="M68 214c-14 20-18 50-14 78 2 8 15 7 16-1 0-24 4-44 12-58Z"/>
+    <path fill="url(#mSkin)" d="M152 214c14 20 18 50 14 78-2 8-15 7-16-1 0-24-4-44-12-58Z"/>
+    <!-- blusa azul marino de tirantes -->
+    <path fill="url(#mSkin)" d="M80 200c10-10 50-10 60 0l4 18H76Z"/>
+    <path fill="#2a4d93" d="M76 214c4-6 16-8 34-8s30 2 34 8c6 22 10 44 8 70H68c-2-26 2-48 8-70Z"/>
+    <path fill="none" stroke="#2a4d93" stroke-width="4" d="M86 212l-2-16M134 212l2-16"/>
+    <!-- collar de perlas -->
+    <g fill="#fff" stroke="#c9bfb3" stroke-width="1">
+      <circle cx="96" cy="196" r="2.4"/><circle cx="102" cy="199" r="2.4"/><circle cx="108" cy="200.5" r="2.4"/>
+      <circle cx="114" cy="200.5" r="2.4"/><circle cx="120" cy="199" r="2.4"/><circle cx="126" cy="196" r="2.4"/>
+    </g>
+    <!-- cuello -->
+    <path fill="url(#mSkin)" d="M98 160v34c6 6 18 6 24 0v-34Z"/>
+
+    <!-- ===== cabeza (misma que en couple.svg) ===== -->
+    <g transform="translate(110 104)">
+      <!-- cara redonda -->
+      <path fill="url(#mSkin)" d="M-58-8c0-50 116-50 116 0 0 48-26 74-58 74s-58-26-58-74Z"/>
+      <!-- mechones que enmarcan la cara (rubios con raíz oscura) -->
+      <path fill="url(#mHair)" d="M-60-30c-16 26-6 52-16 80 4 20 12 32 26 46-6-16 2-30-4-46 8-18-2-36 8-56 4-10 4-18 2-24Z"/>
+      <path fill="url(#mHair)" d="M60-30c16 26 6 52 16 80-4 20-12 32-26 46 6-16-2-30 4-46-8-18 2-36-8-56-4-10-4-18-2-24Z"/>
+      <g fill="none" stroke="#f1dfbf" stroke-width="2" opacity=".85"><path d="M-66 20c-4 16 4 28-2 42M66 20c4 16-4 28 2 42"/></g>
+      <path fill="#4e2d1f" d="M-54-32c14-9 32-13 54-13s40 4 54 13l-3 10c-13-6-31-10-51-10s-38 4-51 10Z"/>
+      <!-- ojos cafés almendrados con pestañas -->
+      <path fill="#2b1a12" d="M-29 4c3-9 15-9 18 0-3 6-15 6-18 0Z"/>
+      <path fill="#2b1a12" d="M11 4c3-9 15-9 18 0-3 6-15 6-18 0Z"/>
+      <circle cx="-18" cy="1" r="1.8" fill="#fff" stroke="none"/>
+      <circle cx="22" cy="1" r="1.8" fill="#fff" stroke="none"/>
+      <path fill="none" stroke-width="2.2" d="M-29 2l-5-3M29 2l5-3"/>
+      <path fill="none" stroke="#d0937a" stroke-width="1.4" d="M-29 9q9 4 18 0M11 9q9 4 18 0"/>
+      <!-- cejas arqueadas -->
+      <path fill="none" stroke="#6b4630" stroke-width="3" d="M-30-14q10-6 20-2M10-16q10-4 20 2"/>
+      <!-- pecas -->
+      <g fill="#c4835f" stroke="none" opacity=".7">
+        <circle cx="-30" cy="16" r="1.3"/><circle cx="-24" cy="20" r="1.3"/><circle cx="-34" cy="22" r="1.2"/><circle cx="-18" cy="16" r="1.1"/>
+        <circle cx="30" cy="16" r="1.3"/><circle cx="24" cy="20" r="1.3"/><circle cx="34" cy="22" r="1.2"/><circle cx="18" cy="16" r="1.1"/>
+        <circle cx="-4" cy="12" r="1"/><circle cx="4" cy="12" r="1"/>
+      </g>
+      <!-- nariz, rubor, sonrisa grande -->
+      <path fill="none" stroke="#c9845f" stroke-width="1.8" d="M-4 18q4 3 8 0"/>
+      <ellipse cx="-32" cy="26" rx="9" ry="5" fill="#f08a7a" fill-opacity=".4" stroke="none"/>
+      <ellipse cx="32" cy="26" rx="9" ry="5" fill="#f08a7a" fill-opacity=".4" stroke="none"/>
+      <path fill="#9c3a3a" d="M-24 30c10 22 38 22 48 0-16 5-32 5-48 0Z"/>
+      <path fill="#fff" stroke="none" d="M-20 31c12 4 28 4 40 0l-2 6c-12 3-24 3-36 0Z"/>
+      <path fill="none" stroke="#c97a73" stroke-width="2" d="M-25 30c12-4 38-4 50 0"/>
+      <!-- aretes dorados -->
+      <circle cx="-58" cy="16" r="3" fill="#f2c14e"/>
+      <circle cx="58" cy="16" r="3" fill="#f2c14e"/>
+      <!-- gorra roja con ancla (storyboard) -->
+      <path fill="#e2665a" d="M-60-26c-6-50 32-74 62-72 36 2 60 28 56 72-32-12-86-12-118 0Z"/>
+      <path fill="none" stroke="#c4483f" d="M-2-96c-6 24-8 46-6 66M-28-88c-10 18-14 38-14 58M26-90c8 18 12 38 12 58"/>
+      <circle cx="0" cy="-97" r="4" fill="#c4483f"/>
+      <path fill="#c4483f" d="M-70-20c18-18 104-22 132-4-34-8-90-8-120 6-6 2-10 2-12-2Z"/>
+      <use href="#mAnchor" transform="translate(0 -58)"/>
+    </g>
+  </g>
+</svg>

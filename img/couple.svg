@@ -18,8 +18,30 @@
       <stop offset="0" stop-color="#4a4a57"/><stop offset="1" stop-color="#25252d"/>
     </radialGradient>
     <linearGradient id="hairW" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#a8723f"/><stop offset=".5" stop-color="#cf9a5e"/><stop offset="1" stop-color="#e3bb82"/>
+      <stop offset="0" stop-color="#4e2d1f"/><stop offset=".18" stop-color="#7a5236"/><stop offset=".42" stop-color="#c39a6e"/><stop offset="1" stop-color="#e6cfa6"/>
     </linearGradient>
+    <radialGradient id="rSkin" cx=".45" cy=".38" r=".75">
+      <stop offset="0" stop-color="#f1c3ae"/><stop offset="1" stop-color="#d9957f"/>
+    </radialGradient>
+    <radialGradient id="rHair" cx=".5" cy=".15" r=".85">
+      <stop offset="0" stop-color="#4a3f3b"/><stop offset=".6" stop-color="#5f5450"/><stop offset="1" stop-color="#9a918c"/>
+    </radialGradient>
+    <linearGradient id="rTemple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8c837e"/><stop offset="1" stop-color="#bdb5b0"/>
+    </linearGradient>
+    <radialGradient id="mSkin" cx=".45" cy=".38" r=".75">
+      <stop offset="0" stop-color="#f6cfb2"/><stop offset="1" stop-color="#e3a684"/>
+    </radialGradient>
+    <linearGradient id="mHair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4e2d1f"/>
+      <stop offset=".22" stop-color="#7a5236"/>
+      <stop offset=".45" stop-color="#c39a6e"/>
+      <stop offset="1" stop-color="#e6cfa6"/>
+    </linearGradient>
+    <g id="mAnchor" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="0" cy="-11" r="3.2"/>
+      <path d="M0 -7.8V12M-6.5 -3H6.5M-11 3c1 7 6 10 11 10s10-3 11-10M-13.5 5.5l2.5-3 3 2M13.5 5.5l-2.5-3-3 2"/>
+    </g>
   </defs>
 
   <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
@@ -29,7 +51,7 @@
     <path fill="none" stroke="#f1cf98" stroke-width="3" d="M340 190c12 30 4 56 12 84 6 22 2 50-4 70M326 230c8 26-2 50 6 74M228 230c-6 30 0 54-6 80"/>
 
     <!-- ===== Mely: cuerpo ===== -->
-    <path fill="url(#skinW)" d="M228 380c-4-40 8-82 40-100 26-12 62-8 82 14 18 22 18 56 16 86Z"/>
+    <path fill="url(#mSkin)" d="M228 380c-4-40 8-82 40-100 26-12 62-8 82 14 18 22 18 56 16 86Z"/>
     <path fill="#2a4d93" d="M236 380c2-22 8-40 22-50 30-8 66-6 98 8 6 14 8 28 8 42Z"/>
     <path fill="none" stroke="#2a4d93" stroke-width="5" d="M262 332l-6-40M338 338l8-36"/>
 
@@ -45,62 +67,101 @@
     <path fill="none" d="M14 380C16 304 42 266 92 252l38-8 44 6c32 6 56 30 64 130"/>
     <path fill="none" stroke="#c9c2b5" d="M70 300c4 30 4 56 2 80"/>
 
-    <!-- ===== Richar: cabeza ===== -->
+    <!-- ===== Richar: cabeza (rasgos de richar.svg) ===== -->
     <g transform="rotate(7 142 160)">
-      <path fill="url(#skinM)" d="M120 196v52c16 12 40 10 52-2l-2-50Z"/>
+      <path fill="url(#rSkin)" d="M120 196v52c16 12 40 10 52-2l-2-50Z"/>
       <path fill="#fdfbf5" d="M106 250c10 10 30 16 46 14 14-2 26-8 32-16l-8-6c-10 10-48 12-62-2Z"/>
-      <ellipse cx="95" cy="140" rx="10" ry="15" fill="#e0a77b"/>
-      <ellipse cx="190" cy="138" rx="10" ry="15" fill="#e0a77b"/>
-      <path fill="url(#skinM)" d="M96 122c-2-52 92-56 94-2 2 42-16 90-48 92-34-2-46-48-46-90Z"/>
-      <!-- barba -->
-      <path fill="#3b2a20" d="M95 118c-4 34 6 92 47 98 42-6 52-62 48-98-2 22-6 36-16 44-12-6-52-6-64 0-10-8-14-24-15-44Z"/>
-      <path fill="#3b2a20" d="M120 172c10-9 34-9 44 0-8 4-36 4-44 0Z"/>
-      <path fill="#8e3d33" d="M124 180c8 12 30 12 38 0-10 4-28 4-38 0Z"/>
-      <path fill="#fff" stroke="none" d="M128 181c8 4 22 4 30 0l-2 3c-8 3-18 3-26 0Z"/>
-      <!-- cabello -->
-      <path fill="#2e211a" d="M90 128C76 98 84 66 110 54c4-16 24-22 38-14 12-12 36-10 46 4 14 4 22 18 18 34 2 16-4 30-12 40-4-16-10-26-20-30-14 8-36 6-50-4-12 8-26 14-28 36-4 0-8 2-12 8Z"/>
-      <path fill="none" stroke="#5a4334" stroke-width="2.4" d="M118 62c10-6 22-6 30 2M152 58c12-2 24 4 30 14M104 82c6-8 14-12 22-12"/>
-      <!-- cejas -->
-      <path fill="none" stroke="#2e211a" stroke-width="6" d="M106 110q16-8 32-2M152 106q16-6 32 2"/>
-      <!-- nariz -->
-      <path fill="none" stroke="#b97a55" d="M145 138c-3 9-6 15-2 18 3 2 8 2 10-1"/>
-      <!-- lentes de sol -->
-      <path fill="none" stroke="#1b1b22" stroke-width="3" d="M98 124l6 2M184 122l7-3M139 126q5-4 10 0"/>
-      <rect x="102" y="116" width="38" height="28" rx="11" fill="#26262f" stroke="#1b1b22" stroke-width="3"/>
-      <rect x="148" y="114" width="38" height="28" rx="11" fill="#26262f" stroke="#1b1b22" stroke-width="3"/>
-      <path fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3" d="M110 124l8-4M156 122l8-4"/>
+      <g transform="translate(143 140) scale(.78)">
+      <!-- orejas -->
+      <ellipse cx="-63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
+      <ellipse cx="63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
+      <!-- cara ancha y redonda -->
+      <path fill="url(#rSkin)" d="M-61-20c-2-52 124-52 122 0 4 50-18 94-61 96-43-2-65-46-61-96Z"/>
+      <!-- barba corta unida al bigote, más llena en la barbilla -->
+      <path fill="#2e221e" d="M-62-2c0 42 20 84 62 90 42-6 62-48 62-90-3 18-8 28-16 34-12-6-28-9-46-9s-34 3-46 9c-8-6-13-16-16-34Z"/>
+      <g fill="none" stroke="#8f8580" stroke-width="1.4" opacity=".75">
+        <path d="M-6 76l2 6M8 74l-1 7M20 68l-2 6M-20 68l2 6M0 82v3M-34 52l3 5M34 52l-3 5"/>
+      </g>
+      <!-- bigote -->
+      <path fill="#2e221e" d="M-30 34c10-10 50-10 60 0-6 4-14 4-20 2-6 3-14 3-20 0-6 2-14 2-20-2Z"/>
+      <!-- sonrisa amplia con dientes -->
+      <path fill="#7a2e28" d="M-25 42c8 20 42 20 50 0-14 6-36 6-50 0Z"/>
+      <path fill="#fff" stroke="none" d="M-21 43c12 4 30 4 42 0l-2 6c-12 4-26 4-38 0Z"/>
+      <!-- nariz ancha -->
+      <path fill="none" stroke="#b46f5b" d="M-5 2c-2 10-6 16-12 20 2 6 10 7 17 5 7 2 15 1 17-5-6-4-10-10-12-20"/>
+      <!-- mejillas -->
+      <ellipse cx="-38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
+      <ellipse cx="38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
+      <!-- ojos cafés que se achinan al sonreír -->
+      <path fill="#2b1a12" d="M-36-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
+      <path fill="#2b1a12" d="M14-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
+      <circle cx="-22" cy="-7" r="1.8" fill="#fff" stroke="none"/>
+      <circle cx="28" cy="-7" r="1.8" fill="#fff" stroke="none"/>
+      <path fill="none" stroke="#b46f5b" stroke-width="1.6" d="M-36 2q11 5 22 0M14 2q11 5 22 0"/>
+      <!-- cejas gruesas -->
+      <path fill="#2f1d15" d="M-44-20c8-9 26-11 34-5l-1 6c-9-4-22-3-31 4Z"/>
+      <path fill="#2f1d15" d="M44-20c-8-9-26-11-34-5l1 6c9-4 22-3 31 4Z"/>
+      <!-- pelo: peinado hacia atrás con volumen, sal y pimienta arriba, canas en los costados -->
+      <path fill="url(#rHair)" d="M-60-10c-10-40 8-80 50-88 40-8 74 12 78 44 2 16-1 30-6 44-2-14-6-24-12-30-12-10-34-14-56-14-22 0-40 8-48 18-4 6-6 14-6 26Z"/>
+      <path fill="url(#rTemple)" stroke="none" d="M-61-4c-4-18 0-32 9-40 4 6 6 10 6 14-5 6-8 14-9 24Z"/>
+      <path fill="url(#rTemple)" stroke="none" d="M61-2c3-16 2-30-5-40-4 6-6 10-6 14 4 6 7 14 7 24Z"/>
+      <g fill="none" stroke="#c9c1bc" stroke-width="2.6" opacity=".9">
+        <path d="M-32-62c18-22 54-30 82-12M-44-46c20-18 58-22 92-6M-18-80c16-8 38-8 54 2"/>
+      </g>
+      <g fill="none" stroke="#1d1613" stroke-width="1.8" opacity=".55">
+        <path d="M-22-54c14-16 40-22 66-12M-10-70c14-8 34-8 50 0"/>
+      </g>
+      <path fill="none" stroke="#2a221f" stroke-width="1.6" opacity=".6" d="M-34-48c6-14 14-26 26-34"/>
+    </g>
     </g>
 
-    <!-- ===== Mely: cabeza ===== -->
+    <!-- ===== Mely: cabeza (rasgos de mely.svg) ===== -->
     <g transform="translate(8 -18) rotate(-9 268 185)">
-      <path fill="url(#skinW)" d="M250 218v76c12 10 30 10 40 0l-2-76Z"/>
-      <path fill="url(#skinW)" d="M218 172c0-46 100-48 100-2 0 48-26 70-50 70-26 0-50-22-50-68Z"/>
-      <!-- mechones -->
-      <path fill="#c48d52" d="M220 150c-16 34-14 76-2 108 0-30 0-62 8-90Z"/>
-      <path fill="#c48d52" d="M316 150c16 36 12 80-2 110 2-32 0-64-8-92Z"/>
-      <!-- ojos -->
-      <ellipse cx="248" cy="180" rx="6.5" ry="7.5" fill="#3a2418"/>
-      <ellipse cx="288" cy="180" rx="6.5" ry="7.5" fill="#3a2418"/>
-      <circle cx="250" cy="177" r="2.2" fill="#fff" stroke="none"/>
-      <circle cx="290" cy="177" r="2.2" fill="#fff" stroke="none"/>
-      <path fill="none" stroke-width="2.4" d="M239 174l-5-3M297 174l5-3M240 162q8-5 16-1M280 161q8-4 16 1"/>
-      <!-- nariz, rubor, sonrisa -->
-      <path fill="none" stroke="#c98a62" d="M268 192q4 5-1 8"/>
-      <ellipse cx="238" cy="203" rx="9" ry="5" fill="#f08a7a" fill-opacity=".45" stroke="none"/>
-      <ellipse cx="298" cy="203" rx="9" ry="5" fill="#f08a7a" fill-opacity=".45" stroke="none"/>
-      <path fill="#9c3a3a" d="M250 207c8 16 30 16 38 0-12 4-26 4-38 0Z"/>
-      <path fill="#fff" stroke="none" d="M253 208c9 4 23 4 32 0l-2 4c-9 3-19 3-28 0Z"/>
-      <circle cx="223" cy="204" r="3.2" fill="#f2c14e"/>
-      <!-- gorra -->
-      <path fill="#e2665a" d="M216 158c-4-46 30-64 62-62 36 2 50 30 42 68-24-14-76-16-104-6Z"/>
-      <path fill="none" stroke="#c4483f" d="M268 98c-6 20-6 40-2 56M246 104c-10 16-14 34-12 52"/>
-      <circle cx="270" cy="97" r="4" fill="#c4483f"/>
-      <path fill="#c4483f" d="M200 166c14-18 72-24 120-4-30-6-70-2-98 10-10 4-18 2-22-6Z"/>
-      <use href="#anchor" transform="translate(286 128) scale(.95)"/>
+      <path fill="url(#mSkin)" d="M250 218v76c12 10 30 10 40 0l-2-76Z"/>
+      <g transform="translate(268 176) scale(.86)">
+      <!-- cara redonda -->
+      <path fill="url(#mSkin)" d="M-58-8c0-50 116-50 116 0 0 48-26 74-58 74s-58-26-58-74Z"/>
+      <!-- mechones que enmarcan la cara (rubios con raíz oscura) -->
+      <path fill="url(#mHair)" d="M-60-30c-16 26-6 52-16 80 4 20 12 32 26 46-6-16 2-30-4-46 8-18-2-36 8-56 4-10 4-18 2-24Z"/>
+      <path fill="url(#mHair)" d="M60-30c16 26 6 52 16 80-4 20-12 32-26 46 6-16-2-30 4-46-8-18 2-36-8-56-4-10-4-18-2-24Z"/>
+      <g fill="none" stroke="#f1dfbf" stroke-width="2" opacity=".85"><path d="M-66 20c-4 16 4 28-2 42M66 20c4 16-4 28 2 42"/></g>
+      <path fill="#4e2d1f" d="M-54-32c14-9 32-13 54-13s40 4 54 13l-3 10c-13-6-31-10-51-10s-38 4-51 10Z"/>
+      <!-- ojos cafés almendrados con pestañas -->
+      <path fill="#2b1a12" d="M-29 4c3-9 15-9 18 0-3 6-15 6-18 0Z"/>
+      <path fill="#2b1a12" d="M11 4c3-9 15-9 18 0-3 6-15 6-18 0Z"/>
+      <circle cx="-18" cy="1" r="1.8" fill="#fff" stroke="none"/>
+      <circle cx="22" cy="1" r="1.8" fill="#fff" stroke="none"/>
+      <path fill="none" stroke-width="2.2" d="M-29 2l-5-3M29 2l5-3"/>
+      <path fill="none" stroke="#d0937a" stroke-width="1.4" d="M-29 9q9 4 18 0M11 9q9 4 18 0"/>
+      <!-- cejas arqueadas -->
+      <path fill="none" stroke="#6b4630" stroke-width="3" d="M-30-14q10-6 20-2M10-16q10-4 20 2"/>
+      <!-- pecas -->
+      <g fill="#c4835f" stroke="none" opacity=".7">
+        <circle cx="-30" cy="16" r="1.3"/><circle cx="-24" cy="20" r="1.3"/><circle cx="-34" cy="22" r="1.2"/><circle cx="-18" cy="16" r="1.1"/>
+        <circle cx="30" cy="16" r="1.3"/><circle cx="24" cy="20" r="1.3"/><circle cx="34" cy="22" r="1.2"/><circle cx="18" cy="16" r="1.1"/>
+        <circle cx="-4" cy="12" r="1"/><circle cx="4" cy="12" r="1"/>
+      </g>
+      <!-- nariz, rubor, sonrisa grande -->
+      <path fill="none" stroke="#c9845f" stroke-width="1.8" d="M-4 18q4 3 8 0"/>
+      <ellipse cx="-32" cy="26" rx="9" ry="5" fill="#f08a7a" fill-opacity=".4" stroke="none"/>
+      <ellipse cx="32" cy="26" rx="9" ry="5" fill="#f08a7a" fill-opacity=".4" stroke="none"/>
+      <path fill="#9c3a3a" d="M-24 30c10 22 38 22 48 0-16 5-32 5-48 0Z"/>
+      <path fill="#fff" stroke="none" d="M-20 31c12 4 28 4 40 0l-2 6c-12 3-24 3-36 0Z"/>
+      <path fill="none" stroke="#c97a73" stroke-width="2" d="M-25 30c12-4 38-4 50 0"/>
+      <!-- aretes dorados -->
+      <circle cx="-58" cy="16" r="3" fill="#f2c14e"/>
+      <circle cx="58" cy="16" r="3" fill="#f2c14e"/>
+      <!-- gorra roja con ancla (storyboard) -->
+      <path fill="#e2665a" d="M-60-26c-6-50 32-74 62-72 36 2 60 28 56 72-32-12-86-12-118 0Z"/>
+      <path fill="none" stroke="#c4483f" d="M-2-96c-6 24-8 46-6 66M-28-88c-10 18-14 38-14 58M26-90c8 18 12 38 12 58"/>
+      <circle cx="0" cy="-97" r="4" fill="#c4483f"/>
+      <path fill="#c4483f" d="M-70-20c18-18 104-22 132-4-34-8-90-8-120 6-6 2-10 2-12-2Z"/>
+      <use href="#mAnchor" transform="translate(0 -58)"/>
+    </g>
     </g>
 
     <!-- ===== Brazos ===== -->
-    <path fill="url(#skinM)" d="M96 380c-6-26 4-48 26-56 14-4 26 2 30 12 4 10-6 18-18 18-12 2-16 14-14 26Z"/>
+    <path fill="url(#rSkin)" d="M96 380c-6-26 4-48 26-56 14-4 26 2 30 12 4 10-6 18-18 18-12 2-16 14-14 26Z"/>
 
     <!-- ===== Tesla ===== -->
     <g transform="translate(0 4)">
@@ -136,7 +197,7 @@
     </g>
 
     <!-- Mano de Richar sobre Tesla -->
-    <path fill="url(#skinM)" d="M126 352c4-12 16-18 28-14 8 4 8 12 2 16-6 4-6 10-4 26h-24c-4-10-4-20-2-28Z"/>
+    <path fill="url(#rSkin)" d="M126 352c4-12 16-18 28-14 8 4 8 12 2 16-6 4-6 10-4 26h-24c-4-10-4-20-2-28Z"/>
   </g>
 
   <!-- ===== Arena en primer plano ===== -->

@@ -11,7 +11,11 @@ export default function juegos() {
         <img class="deco hub-palm-r" src="img/palm.svg" alt="">
         <h2>Wedding Game</h2>
         <p class="sub">¿Quién conoce mejor a los novios?</p>
-        <img class="hub-art" src="${esc(CONFIG.portada || 'img/couple.svg')}" alt="">
+        <div class="hub-trio">
+          <img class="trio-richar" src="img/richar.svg" alt="Richar">
+          <img class="trio-tesla" src="img/tesla.svg" alt="${esc(CONFIG.perro)}">
+          <img class="trio-mely" src="img/mely.svg" alt="Mely">
+        </div>
 
         <a class="btn btn--sun btn--big play-cta" href="#trivia">${icon('play', 30)}Jugar</a>
 

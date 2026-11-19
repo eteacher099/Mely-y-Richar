@@ -99,10 +99,18 @@ export const CONFIG = {
     { q: '¿Quién dijo "te quiero" primero?', o: ['Mely', 'Richar', 'Los dos a la vez'], a: 1 },
     { q: '¿Cuál es nuestro plan favorito?', o: ['Ir al cine', 'Viajar', 'Cocinar en casa'], a: 1 },
   ],
+  // Trivia Marina: se baraja el orden de preguntas y opciones en cada partida (ver views/index.js).
   marina: [
     { q: '¿Cuántos corazones tiene un pulpo?', o: ['1', '3', '8'], a: 1 },
+    { q: '¿Cuántos brazos tiene un pulpo?', o: ['6', '8', '10'], a: 1 },
+    { q: '¿De qué color es la sangre del pulpo?', o: ['Roja', 'Verde', 'Azul'], a: 2 },
     { q: '¿Cuál es el mamífero más grande del mar?', o: ['Tiburón ballena', 'Ballena azul', 'Orca'], a: 1 },
-    { q: '¿Qué animal marino nunca duerme profundamente?', o: ['Delfín', 'Tortuga', 'Pez globo'], a: 0 },
+    { q: '¿Qué animal marino duerme con medio cerebro despierto?', o: ['Delfín', 'Tortuga', 'Pez globo'], a: 0 },
+    { q: 'En los caballitos de mar, ¿quién lleva a las crías en su bolsa?', o: ['La hembra', 'El macho', 'Los dos por turnos'], a: 1 },
+    { q: 'El coral es…', o: ['Una planta', 'Una roca', 'Un animal'], a: 2 },
+    { q: '¿Qué pueden regenerar las estrellas de mar?', o: ['Sus brazos', 'Sus ojos', 'Nada'], a: 0 },
+    { q: '¿Qué mar baña las costas de Cartagena?', o: ['Mar Caribe', 'Océano Pacífico', 'Mar Mediterráneo'], a: 0 },
+    { q: '¿Qué parque nacional protege los arrecifes de las Islas del Rosario?', o: ['Tayrona', 'Corales del Rosario y San Bernardo', 'Isla Gorgona'], a: 1 },
   ],
 
   bingo: ['Foto con los novios', 'Alguien llora', 'Baile de papás', 'Brindis', 'Foto con Tesla',
@@ -150,7 +158,7 @@ export const CONFIG = {
   // Google Sheets (ver google-scripts/README.md): ranking de juegos Y elecciones del menú.
   // Con endpoint vacío todo se guarda solo en el dispositivo.
   scores: {
-    endpoint: 'https://script.google.com/macros/s/AKfycbxMN2NaGP0gTzsf7imesxggdEZLuXPPjOSnFoErPW1nApcVznnKH5R6VTP83U3j9Irv7g/exec',   // URL ".../exec" del Web App de Apps Script
+    endpoint: 'https://script.google.com/macros/s/AKfycbx-qYG8ROIV0VENPU9gX1DQa-koiDLcb-izEslUQExsDVbiMMp3FNGycA1PKmIblplXSw/exec',   // URL ".../exec" del Web App de Apps Script
     token: '',         // opcional: debe coincidir con SCORES_TOKEN del script
     rankingSize: 10,    // cuántos puestos mostrar al terminar un juego
   },

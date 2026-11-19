@@ -10,7 +10,8 @@ le habla por `fetch`.
 | `appsscript.json` | Manifiesto: runtime V8, zona horaria y permisos del Web App |
 
 > **Actualización (menú de boda):** si ya tenías el Web App publicado, pega el `scores.gs`
-> nuevo en el editor, ejecuta `setup()` una vez (crea `Menu` y `Resumen menú`) y luego
+> nuevo en el editor, ejecuta `setup()` una vez (crea `Menu` y rehace `Resumen menú`; corrige el
+> `#ERROR!` de la versión anterior que usaba `QUERY`) y luego
 > **Implementar → Gestionar implementaciones → ✏ → Nueva versión**. La URL `/exec` no cambia.
 
 ## 1. Crear la hoja y pegar el script
@@ -96,7 +97,11 @@ la URL cambia y hay que actualizar `js/config.js`.
 | `POST` | body JSON `{ action:'menu', id, playerId, nombre, plato, postre, restricciones?, token? }` | `{ ok, saved, updated? }` · `{ ok:false, error }` |
 
 Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado) y
-`Resumen menú` (conteo por plato y por postre, con `QUERY`).
+`Resumen menú` (conteo por plato y por postre + lista de alergias/restricciones).
+
+`Resumen menú` se **reescribe con valores** (sin fórmulas) cada vez que alguien guarda su
+elección, así funciona igual en hojas en español o en inglés. Si editas o borras filas de
+`Menu` a mano, usa el menú de la hoja **Boda → Actualizar resumen del menú**.
 
 - El ranking muestra el **mejor puntaje por jugador**; en empate gana quien lo logró primero.
   Se cachea 30 s.

@@ -74,7 +74,8 @@ Kaushan Script, olas arriba (fondo de `.sea`) y abajo (`.wave`), rayitos de sol 
 títulos (`.sea h2::before`; se omiten si la pantalla tiene un `.view-icon`).
 
 Ilustraciones en `img/`, todas SVG dibujadas a mano (nítidas en cualquier pantalla):
-`couple.svg` (Mely, Richar y Tesla; portada y hub de juegos), `tesla.svg` (perrito del juego
+`couple.svg` (retrato de Mely, Richar y Tesla; portada e Historia), `mely.svg` y `richar.svg`
+(cuerpo entero; trío de pie en Wedding Game junto a Tesla), `tesla.svg` (perrito del juego
 y de Mensajes), `beach.svg` (fondo de portada, juego y carátula de la playlist) y
 decoraciones (`sun`, `palm`, `palm-leaves`, `hibiscus`, `starfish`, `shell`, `surfboard`,
 `lighthouse`). Las decoraciones usan `<img class="deco ...">` posicionadas en CSS;
@@ -96,11 +97,17 @@ con variables `--mn-*` dentro de `.menu-screen`; no lleva olas (`wave:false`, si
 ## Juego "Encuentra a Tesla" (`js/views/tesla.js`)
 
 Nivel = perritos encontrados + 1. `levelSettings(level)` define la dificultad (distractores,
-proporción de emojis oscuros `DARK`, perros parecidos `LOOKALIKES` desde el nivel 6, tamaño,
-Tesla tapado desde el 4 y girado desde el 5). `pointsFor(level, ms)` = nivel × (50 + hasta 150
+proporción de emojis oscuros `DARK`, perros parecidos `LOOKALIKES` desde el nivel 6, tamaño
+y giro desde el 5). Tesla siempre es el último hijo de `#bc` (capa superior): nunca queda tapado. `pointsFor(level, ms)` = nivel × (50 + hasta 150
 por rapidez; 0 de bono a los 10 s). `supportedEmojis()` descarta los emojis que el dispositivo no
 puede dibujar (comparando contra el glifo de "caja vacía" en un canvas). El nivel se envía como
 `nivel` y se guarda en la columna `Nivel`; `GAMES.tesla` en `scores.gs` limita puntaje y nivel.
+
+**Personajes:** los rasgos salen de fotos reales (Richar: cara ancha, pelo peinado hacia atrás
+sal y pimienta con canas en las sienes, barba corta unida al bigote, sin gafas; Mely: cara
+redonda, pelo largo ondulado con raíz castaña y largos rubios, pecas). La cabeza vive en el
+grupo `<g transform="translate(110 104)">` de `mely.svg`/`richar.svg`; `couple.svg` contiene una
+copia escalada de esas cabezas: si cambias un rasgo, cámbialo en ambos sitios.
 
 ## Google Sheets (puntajes + menú)
 
@@ -108,7 +115,8 @@ Flujo juegos: juego termina → `submitScore()` → `POST` (`action:'score'`) �
 → `getLeaderboard()` → ranking en `score-panel`.
 Flujo menú: `#carta` → `saveMenuChoice()` → `POST` (`action:'menu'`) → **una fila por
 invitado** (playerId) en `Menu`; la última elección reemplaza a la anterior. La pestaña
-`Resumen menú` cuenta platos y postres con `QUERY`.
+`Resumen menú` la reescribe el script con **valores** (no fórmulas: en hojas en español el
+separador es `;` y las fórmulas con `,` dan `#ERROR!`).
 
 - Se activa al poner la URL `/exec` en `CONFIG.scores.endpoint`. Vacío = solo local
   (mejor puntaje por dispositivo).

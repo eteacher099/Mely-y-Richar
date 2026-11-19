@@ -5,7 +5,7 @@
 - [ ] Ejecutar `setup()` y autorizar permisos
 - [x] Publicar como Web App (*Ejecutar como: Yo*, *Acceso: Cualquier persona*)
 - [x] Pegar la URL `/exec` en `CONFIG.scores.endpoint` (`js/config.js`)
-- [ ] **Menú de boda + niveles de Tesla:** pegar el `scores.gs` nuevo, ejecutar `setup()` y desplegar como
+- [ ] **Menú de boda + niveles de Tesla + resumen sin fórmulas:** pegar el `scores.gs` nuevo, ejecutar `setup()` y desplegar como
       *Nueva versión* (crea `Menu` y `Resumen menú`, agrega la columna `Nivel` y sube el tope de puntaje
       de Tesla a 200 000; sin esto, los puntajes de Tesla > 20 000 se rechazan). La URL `/exec` no cambia
 - [ ] Probar con `curl` y desde el celular; borrar las filas de prueba
@@ -63,5 +63,11 @@
 - [x] Cuenta regresiva con zona horaria de Colombia (-05:00)
 - [x] Menú de boda (`#carta`) estilo PDF: elegir plato + postre y guardar en Google Sheets
 - [x] Nuestra historia, dress code por día, planifica tu viaje y RSVP por WhatsApp (de Canva)
+- [x] Resumen del menú calculado por el script (sin `QUERY`: corrige `#ERROR!` en hojas en español)
+- [x] Tesla siempre en la capa superior (nunca tapado por otros emojis)
+- [x] Trivia Marina con 10 preguntas, barajadas en cada partida
+- [x] Mely y Richar con rasgos de sus fotos (`mely.svg`, `richar.svg`, cabezas de `couple.svg`);
+      trío de pie en Wedding Game
+- [ ] **Borrar las fotos de referencia** `img/WhatsApp Unknown 2026-11-18 at 7.33.53 PM/` (no subirlas)
 - [x] Encuentra a Tesla con niveles: más distractores y emojis oscuros (águila, hormiga, mono, burro,
       gato negro…), Tesla más pequeño/tapado/girado; puntos = nivel × rapidez; nivel en el ranking

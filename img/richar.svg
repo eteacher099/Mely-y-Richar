@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 400">
+  <title>Richar</title>
+  <defs>
+    <radialGradient id="rSkin" cx=".45" cy=".38" r=".75">
+      <stop offset="0" stop-color="#f1c3ae"/><stop offset="1" stop-color="#d9957f"/>
+    </radialGradient>
+    <radialGradient id="rHair" cx=".5" cy=".15" r=".85">
+      <stop offset="0" stop-color="#4a3f3b"/><stop offset=".6" stop-color="#5f5450"/><stop offset="1" stop-color="#9a918c"/>
+    </radialGradient>
+    <linearGradient id="rTemple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8c837e"/><stop offset="1" stop-color="#bdb5b0"/>
+    </linearGradient>
+    <clipPath id="rShirt"><path d="M44 236c0-30 26-48 66-48s66 18 66 48l4 70H40Z"/></clipPath>
+  </defs>
+
+  <ellipse cx="110" cy="390" rx="62" ry="8" fill="#000" fill-opacity=".12"/>
+
+  <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <g transform="translate(110 0) scale(1.18 1) translate(-110 0)">
+    <!-- piernas: bermuda beige + pantorrillas -->
+    <path fill="url(#rSkin)" d="M70 330h28v40H72ZM122 330h28l-2 40h-26Z"/>
+    <path fill="#e6d3ac" d="M58 296h104l-4 44h-40l-8-14-8 14H62Z"/>
+    <path fill="none" stroke="#c7b07f" d="M110 300v26"/>
+    <!-- tenis -->
+    <path fill="#fff" d="M66 368h34c4 0 6 4 6 8v6H62v-6c0-5 1-8 4-8Z"/>
+    <path fill="#fff" d="M120 368h34c3 0 4 3 4 8v6h-44v-6c0-4 2-8 6-8Z"/>
+    <path fill="none" stroke="#2a4d93" stroke-width="3" d="M66 376h36M118 376h36"/>
+
+    <!-- brazos -->
+    <path fill="url(#rSkin)" d="M44 230c-14 18-18 46-16 72 1 8 16 9 18 1 2-22 6-42 14-56Z"/>
+    <path fill="url(#rSkin)" d="M176 230c14 18 18 46 16 72-1 8-16 9-18 1-2-22-6-42-14-56Z"/>
+
+    <!-- camiseta a rayas (storyboard) -->
+    <g clip-path="url(#rShirt)" stroke="none">
+      <rect x="30" y="180" width="160" height="130" fill="#fdfbf5"/>
+      <g fill="#223a70">
+        <rect x="30" y="206" width="160" height="10"/><rect x="30" y="228" width="160" height="10"/>
+        <rect x="30" y="250" width="160" height="10"/><rect x="30" y="272" width="160" height="10"/>
+        <rect x="30" y="294" width="160" height="10"/>
+      </g>
+    </g>
+    <path fill="none" d="M44 236c0-30 26-48 66-48s66 18 66 48l4 70H40Z"/>
+    <!-- mangas -->
+    <path fill="#fdfbf5" d="M46 214c-10 6-16 16-18 30l22 6 6-24Z"/>
+    <path fill="#fdfbf5" d="M174 214c10 6 16 16 18 30l-22 6-6-24Z"/>
+    <path fill="none" stroke="#223a70" stroke-width="5" d="M30 238l20 5M190 238l-20 5"/>
+    <!-- cuello -->
+    <path fill="url(#rSkin)" d="M94 168v24c8 8 24 8 32 0v-24Z"/>
+    <path fill="#fdfbf5" d="M88 190c8 10 36 10 44 0l6 4c-10 14-46 14-56 0Z"/>
+
+    </g>
+
+    <!-- ===== cabeza (misma que en couple.svg) ===== -->
+    <g transform="translate(110 104)">
+      <!-- orejas -->
+      <ellipse cx="-63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
+      <ellipse cx="63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
+      <!-- cara ancha y redonda -->
+      <path fill="url(#rSkin)" d="M-61-20c-2-52 124-52 122 0 4 50-18 94-61 96-43-2-65-46-61-96Z"/>
+      <!-- barba corta unida al bigote, más llena en la barbilla -->
+      <path fill="#2e221e" d="M-62-2c0 42 20 84 62 90 42-6 62-48 62-90-3 18-8 28-16 34-12-6-28-9-46-9s-34 3-46 9c-8-6-13-16-16-34Z"/>
+      <g fill="none" stroke="#8f8580" stroke-width="1.4" opacity=".75">
+        <path d="M-6 76l2 6M8 74l-1 7M20 68l-2 6M-20 68l2 6M0 82v3M-34 52l3 5M34 52l-3 5"/>
+      </g>
+      <!-- bigote -->
+      <path fill="#2e221e" d="M-30 34c10-10 50-10 60 0-6 4-14 4-20 2-6 3-14 3-20 0-6 2-14 2-20-2Z"/>
+      <!-- sonrisa amplia con dientes -->
+      <path fill="#7a2e28" d="M-25 42c8 20 42 20 50 0-14 6-36 6-50 0Z"/>
+      <path fill="#fff" stroke="none" d="M-21 43c12 4 30 4 42 0l-2 6c-12 4-26 4-38 0Z"/>
+      <!-- nariz ancha -->
+      <path fill="none" stroke="#b46f5b" d="M-5 2c-2 10-6 16-12 20 2 6 10 7 17 5 7 2 15 1 17-5-6-4-10-10-12-20"/>
+      <!-- mejillas -->
+      <ellipse cx="-38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
+      <ellipse cx="38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
+      <!-- ojos cafés que se achinan al sonreír -->
+      <path fill="#2b1a12" d="M-36-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
+      <path fill="#2b1a12" d="M14-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
+      <circle cx="-22" cy="-7" r="1.8" fill="#fff" stroke="none"/>
+      <circle cx="28" cy="-7" r="1.8" fill="#fff" stroke="none"/>
+      <path fill="none" stroke="#b46f5b" stroke-width="1.6" d="M-36 2q11 5 22 0M14 2q11 5 22 0"/>
+      <!-- cejas gruesas -->
+      <path fill="#2f1d15" d="M-44-20c8-9 26-11 34-5l-1 6c-9-4-22-3-31 4Z"/>
+      <path fill="#2f1d15" d="M44-20c-8-9-26-11-34-5l1 6c9-4 22-3 31 4Z"/>
+      <!-- pelo: peinado hacia atrás con volumen, sal y pimienta arriba, canas en los costados -->
+      <path fill="url(#rHair)" d="M-60-10c-10-40 8-80 50-88 40-8 74 12 78 44 2 16-1 30-6 44-2-14-6-24-12-30-12-10-34-14-56-14-22 0-40 8-48 18-4 6-6 14-6 26Z"/>
+      <path fill="url(#rTemple)" stroke="none" d="M-61-4c-4-18 0-32 9-40 4 6 6 10 6 14-5 6-8 14-9 24Z"/>
+      <path fill="url(#rTemple)" stroke="none" d="M61-2c3-16 2-30-5-40-4 6-6 10-6 14 4 6 7 14 7 24Z"/>
+      <g fill="none" stroke="#c9c1bc" stroke-width="2.6" opacity=".9">
+        <path d="M-32-62c18-22 54-30 82-12M-44-46c20-18 58-22 92-6M-18-80c16-8 38-8 54 2"/>
+      </g>
+      <g fill="none" stroke="#1d1613" stroke-width="1.8" opacity=".55">
+        <path d="M-22-54c14-16 40-22 66-12M-10-70c14-8 34-8 50 0"/>
+      </g>
+      <path fill="none" stroke="#2a221f" stroke-width="1.6" opacity=".6" d="M-34-48c6-14 14-26 26-34"/>
+    </g>
+  </g>
+</svg>
