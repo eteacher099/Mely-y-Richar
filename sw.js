@@ -3,7 +3,9 @@
  * al instante desde el teléfono. Versión en version.js (ver comentarios allí).
  *
  * Estrategias:
- *   - Archivos propios (HTML, CSS, JS, SVG): caché primero; lo que no esté se baja y se guarda.
+ *   - Archivos propios (HTML, CSS, JS): caché primero; lo que no esté se baja y se guarda.
+ *   - Imágenes (img/): se muestran desde la caché y se revisan en segundo plano; si cambiaron,
+ *     la copia nueva se ve en la siguiente carga. Así una imagen vieja nunca queda pegada.
  *     Una versión nueva usa otra caché, así que nunca se mezclan archivos de dos versiones.
  *   - Google Fonts: caché propia que se revalida en segundo plano.
  *   - Apps Script (script.google.com / googleusercontent.com): SIEMPRE red, nunca caché.
@@ -60,12 +62,14 @@ self.addEventListener('fetch', event => {
 
   if (/(^|\.)script\.google\.com$|googleusercontent\.com$/.test(url.hostname)) return;   // API: red
   if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    event.respondWith(staleWhileRevalidate(req, FONTS));
+    event.respondWith(staleWhileRevalidate(event, req, FONTS));
     return;
   }
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(DEV ? networkFirst(req) : cacheFirst(req));
+  if (DEV) event.respondWith(networkFirst(req));
+  else if (url.pathname.includes('/img/')) event.respondWith(staleWhileRevalidate(event, req, CACHE));
+  else event.respondWith(cacheFirst(req));
 });
 
 /** La misma petición, pero revalidando con el servidor (sin usar la caché HTTP del navegador). */
@@ -96,11 +100,14 @@ async function networkFirst(req) {
   }
 }
 
-async function staleWhileRevalidate(req, name) {
+/** Responde con la copia guardada (si hay) y la actualiza en segundo plano. */
+async function staleWhileRevalidate(event, req, name) {
+  const own = name !== FONTS;                       // propias: sin query y revalidando con el servidor
   const cache = await caches.open(name);
-  const hit = await cache.match(req);
-  const update = fetch(req)
+  const hit = await cache.match(req, { ignoreSearch: own });
+  const update = fetch(own ? fresh(req) : req)
     .then(res => { if (res.ok || res.type === 'opaque') cache.put(req, res.clone()); return res; })
     .catch(() => hit);
+  event.waitUntil(update);                          // que la revisión no se corte
   return hit || update;
 }

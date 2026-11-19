@@ -20,7 +20,6 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
       y el del Muelle La Bodeguita (búsqueda de Google Maps)
 - [ ] Confirmar el número de WhatsApp de `menu.whatsapp` y `rsvp.whatsapp` (tomado de Canva)
 - [ ] Colores permitidos del dress code (en Canva son imágenes; no se copiaron)
-- [ ] Enlace real de la playlist colaborativa de Spotify
 - [ ] Respuestas reales de la trivia de los novios (las actuales son supuestas)
 - [ ] FAQ: qué llevar el Día 2, lanchas/traslados, hora límite del muelle, etc.
 - [ ] (Opcional) Reemplazar las ilustraciones SVG por arte final en alta resolución (`CONFIG.portada`)
@@ -46,6 +45,9 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
 
 ## ✅ Hecho y desplegado
 - [x] Separar el `index.html` monolítico en `css/` + módulos `js/` (config, router, vistas)
+- [x] Enlace real de la playlist de Spotify ("Boda Meli y Richi") en `CONFIG.playlist`
+- [x] Caché: el SW ya no usa la caché HTTP del navegador (`updateViaCache: 'none'`, `cache: 'no-cache'`)
+      y las imágenes se revisan en segundo plano; antes los invitados no veían los personajes nuevos
 - [x] Corregir el choque de la clase `.sun` (botones "▶ Jugar" / "Abrir en Spotify" que giraban)
 - [x] Eliminar CSS muerto; nombres de la portada desde `CONFIG.nombres`
 - [x] Limpieza de timers al cambiar de pantalla (contrato `mount → cleanup`)

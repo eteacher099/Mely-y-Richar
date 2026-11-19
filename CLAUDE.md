@@ -66,7 +66,8 @@ Las imágenes son SVG livianos (~70 KB en total); lo que hacía lenta la carga e
   corto en cada despliegue. Así **cada push a `main` crea una caché nueva** aunque no se cambie
   `APP_VERSION`. Sube `APP_VERSION` cuando quieras que la versión visible cambie.
 - **`sw.js`**: caché `boda-<APP_VERSION>+<APP_BUILD>`. Archivos propios = caché primero (se
-  precarga el `SHELL` y el resto se guarda la primera vez que se usa). Google Fonts = caché
+  precarga el `SHELL` y el resto se guarda la primera vez que se usa). **Imágenes (`img/`)** =
+  caché + revisión en segundo plano: si una imagen cambió, se ve en la siguiente carga. Google Fonts = caché
   aparte revalidada en segundo plano. **Apps Script nunca se cachea** (siempre red).
 - **Actualización**: el navegador detecta el `version.js`/`sw.js` nuevo → el SW nuevo queda
   esperando → `lib/sw-register.js` muestra "✨ Hay una nueva versión de la invitación" →

@@ -9,7 +9,7 @@ export const CONFIG = {
   // cuenta regresiva sea correcta aunque el invitado esté en otra zona horaria.
   fecha: '2026-12-19T14:00:00-05:00',
   fin: '2026-12-20T17:00:00-05:00',       // regreso a Cartagena del Día 2
-  playlist: 'https://open.spotify.com/',  // enlace a la playlist colaborativa de Spotify
+  playlist: 'https://open.spotify.com/playlist/1ykF5w4hW8sWIJxIJ8FhoZ',  // playlist de Spotify "Boda Meli y Richi"
   perro: 'Tesla',
   portada: 'img/couple.svg',              // ilustración de portada; cámbiala por img/portada.jpg/.png si tienes arte final
 
