@@ -1,97 +1,122 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 400">
   <title>Richar</title>
   <defs>
-    <radialGradient id="rSkin" cx=".45" cy=".38" r=".75">
-      <stop offset="0" stop-color="#f1c3ae"/><stop offset="1" stop-color="#d9957f"/>
+    <radialGradient id="rSkin" cx=".42" cy=".35" r=".8">
+      <stop offset="0" stop-color="#f6c9a2"/><stop offset=".7" stop-color="#e5a57a"/><stop offset="1" stop-color="#cf8a5f"/>
     </radialGradient>
-    <radialGradient id="rHair" cx=".5" cy=".15" r=".85">
-      <stop offset="0" stop-color="#4a3f3b"/><stop offset=".6" stop-color="#5f5450"/><stop offset="1" stop-color="#9a918c"/>
+    <radialGradient id="rHair" cx=".4" cy=".25" r=".85">
+      <stop offset="0" stop-color="#5a463c"/><stop offset=".55" stop-color="#3a2c26"/><stop offset="1" stop-color="#211814"/>
     </radialGradient>
-    <linearGradient id="rTemple" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#8c837e"/><stop offset="1" stop-color="#bdb5b0"/>
+    <linearGradient id="rBeard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b2e28"/><stop offset="1" stop-color="#221915"/>
     </linearGradient>
-    <clipPath id="rShirt"><path d="M44 236c0-30 26-48 66-48s66 18 66 48l4 70H40Z"/></clipPath>
+    <linearGradient id="rLens" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#3a4a72"/><stop offset=".55" stop-color="#18213a"/><stop offset="1" stop-color="#0b0f1c"/>
+    </linearGradient>
+    <linearGradient id="rShirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f4f97"/><stop offset="1" stop-color="#1a2f63"/>
+    </linearGradient>
+    <linearGradient id="rShorts" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1e3c4"/><stop offset="1" stop-color="#dcc69b"/>
+    </linearGradient>
+    <g id="rFl">
+      <g fill="#fff" stroke="#d9e2f2" stroke-width=".8">
+        <ellipse cx="0" cy="-6" rx="4.2" ry="6.4"/>
+        <ellipse cx="0" cy="-6" rx="4.2" ry="6.4" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="4.2" ry="6.4" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="4.2" ry="6.4" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="4.2" ry="6.4" transform="rotate(288)"/>
+      </g>
+      <circle r="2.8" fill="#f0a63a"/>
+    </g>
+    <g id="rLeaf"><path d="M0 0c4-6 12-7 16-4-4 5-11 7-16 4Z" fill="#7fb6d9" fill-opacity=".7"/></g>
   </defs>
 
-  <ellipse cx="110" cy="390" rx="62" ry="8" fill="#000" fill-opacity=".12"/>
-
-  <g stroke="#3a2418" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-    <g transform="translate(110 0) scale(1.18 1) translate(-110 0)">
-    <!-- piernas: bermuda beige + pantorrillas -->
-    <path fill="url(#rSkin)" d="M70 330h28v40H72ZM122 330h28l-2 40h-26Z"/>
-    <path fill="#e6d3ac" d="M58 296h104l-4 44h-40l-8-14-8 14H62Z"/>
-    <path fill="none" stroke="#c7b07f" d="M110 300v26"/>
-    <!-- tenis -->
-    <path fill="#fff" d="M66 368h34c4 0 6 4 6 8v6H62v-6c0-5 1-8 4-8Z"/>
-    <path fill="#fff" d="M120 368h34c3 0 4 3 4 8v6h-44v-6c0-4 2-8 6-8Z"/>
-    <path fill="none" stroke="#2a4d93" stroke-width="3" d="M66 376h36M118 376h36"/>
-
-    <!-- brazos -->
-    <path fill="url(#rSkin)" d="M44 230c-14 18-18 46-16 72 1 8 16 9 18 1 2-22 6-42 14-56Z"/>
-    <path fill="url(#rSkin)" d="M176 230c14 18 18 46 16 72-1 8-16 9-18 1-2-22-6-42-14-56Z"/>
-
-    <!-- camiseta a rayas (storyboard) -->
-    <g clip-path="url(#rShirt)" stroke="none">
-      <rect x="30" y="180" width="160" height="130" fill="#fdfbf5"/>
-      <g fill="#223a70">
-        <rect x="30" y="206" width="160" height="10"/><rect x="30" y="228" width="160" height="10"/>
-        <rect x="30" y="250" width="160" height="10"/><rect x="30" y="272" width="160" height="10"/>
-        <rect x="30" y="294" width="160" height="10"/>
-      </g>
+  <ellipse cx="110" cy="388" rx="64" ry="8" fill="#000" fill-opacity=".12"/>
+  <g stroke="#3a2418" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- piernas y sandalias -->
+    <path fill="url(#rSkin)" d="M70 330h28l-2 42H72ZM122 330h28l-2 42h-24Z"/>
+    <path fill="#5b3a26" d="M64 372h38c3 0 5 3 5 7v3H60v-3c0-4 1-7 4-7ZM118 372h38c3 0 4 3 4 7v3h-46v-3c0-4 1-7 4-7Z"/>
+    <path fill="none" stroke="#8a5a3a" stroke-width="4" d="M70 371q13-8 26 0M124 371q13-8 26 0"/>
+    <!-- bermuda beige -->
+    <path fill="url(#rShorts)" d="M58 288h104l6 50h-46l-12-20-12 20H52Z"/>
+    <path fill="none" stroke="#c4ab7b" d="M110 292v24M66 300c8 4 16 4 22 0M154 300c-8 4-16 4-22 0"/>
+    <!-- camisa hawaiana azul con flores blancas -->
+    <clipPath id="rShirtClip"><path d="M60 186c14-8 32-10 50-10s36 2 50 10l30 44-24 16-6-12v62H60v-62l-6 12-24-16Z"/></clipPath>
+    <g clip-path="url(#rShirtClip)" stroke="none">
+      <rect x="20" y="170" width="180" height="140" fill="url(#rShirt)"/>
+      <use href="#rLeaf" transform="translate(70 212) rotate(20)"/><use href="#rLeaf" transform="translate(100 242) rotate(-30)"/><use href="#rLeaf" transform="translate(140 226) rotate(160)"/><use href="#rLeaf" transform="translate(84 278) rotate(40)"/><use href="#rLeaf" transform="translate(128 292) rotate(-60)"/><use href="#rLeaf" transform="translate(156 266) rotate(200)"/>
+      <use href="#rFl" transform="translate(62 202) scale(0.9)"/><use href="#rFl" transform="translate(92 230) scale(1)"/><use href="#rFl" transform="translate(132 214) scale(0.9)"/><use href="#rFl" transform="translate(150 252) scale(1)"/><use href="#rFl" transform="translate(74 266) scale(1)"/><use href="#rFl" transform="translate(118 280) scale(0.9)"/><use href="#rFl" transform="translate(40 232) scale(0.8)"/><use href="#rFl" transform="translate(178 232) scale(0.8)"/><use href="#rFl" transform="translate(100 196) scale(0.7)"/><use href="#rFl" transform="translate(148 290) scale(0.8)"/><use href="#rFl" transform="translate(70 298) scale(0.7)"/><use href="#rFl" transform="translate(160 210) scale(0.7)"/>
     </g>
-    <path fill="none" d="M44 236c0-30 26-48 66-48s66 18 66 48l4 70H40Z"/>
-    <!-- mangas -->
-    <path fill="#fdfbf5" d="M46 214c-10 6-16 16-18 30l22 6 6-24Z"/>
-    <path fill="#fdfbf5" d="M174 214c10 6 16 16 18 30l-22 6-6-24Z"/>
-    <path fill="none" stroke="#223a70" stroke-width="5" d="M30 238l20 5M190 238l-20 5"/>
-    <!-- cuello -->
-    <path fill="url(#rSkin)" d="M94 168v24c8 8 24 8 32 0v-24Z"/>
-    <path fill="#fdfbf5" d="M88 190c8 10 36 10 44 0l6 4c-10 14-46 14-56 0Z"/>
+    <path fill="none" d="M60 186c14-8 32-10 50-10s36 2 50 10l30 44-24 16-6-12v62H60v-62l-6 12-24-16Z"/>
+    <!-- cuello abierto -->
+    <path fill="url(#rSkin)" d="M94 178h32l-16 34Z"/>
+    <path fill="#1f3878" d="M92 176l-10 18 16 10 12 8ZM128 176l10 18-16 10-12 8Z"/>
+    <path fill="none" stroke="#14244f" stroke-width="2" d="M110 212v74"/>
+    <g fill="#f5f0e6" stroke="#14244f" stroke-width="1"><circle cx="110" cy="230" r="2.4"/><circle cx="110" cy="252" r="2.4"/><circle cx="110" cy="274" r="2.4"/></g>
+    <!-- brazo derecho: mano en el bolsillo -->
+    <path fill="url(#rSkin)" d="M33 241C35 262 47 280 60 294L76 289C66 276 58 260 55 246Z"/>
+    <path fill="url(#rShorts)" d="M56 290c8 2 16 1 22-3l2 10c-8 4-18 4-26 0Z"/>
+    <!-- brazo izquierdo relajado -->
+    <path fill="url(#rSkin)" d="M165 244L188 236C193 254 194 270 190 282 189 294 172 297 169 288 171 272 170 258 165 244Z"/>
+    <path fill="none" stroke-width="1.6" d="M174 289c3 3 9 3 12 0"/>
+    <!-- bolsillo -->
+    <path fill="none" stroke="#c4ab7b" stroke-width="2" d="M60 296c6 4 12 4 16 0"/>
+  </g>
+  <g stroke="#3a2418" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" transform="translate(110 112) scale(.9)">
 
-    </g>
-
-    <!-- ===== cabeza (misma que en couple.svg) ===== -->
-    <g transform="translate(110 104)">
       <!-- orejas -->
-      <ellipse cx="-63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
-      <ellipse cx="63" cy="4" rx="10" ry="16" fill="#dc9a83"/>
-      <!-- cara ancha y redonda -->
-      <path fill="url(#rSkin)" d="M-61-20c-2-52 124-52 122 0 4 50-18 94-61 96-43-2-65-46-61-96Z"/>
-      <!-- barba corta unida al bigote, más llena en la barbilla -->
-      <path fill="#2e221e" d="M-62-2c0 42 20 84 62 90 42-6 62-48 62-90-3 18-8 28-16 34-12-6-28-9-46-9s-34 3-46 9c-8-6-13-16-16-34Z"/>
-      <g fill="none" stroke="#8f8580" stroke-width="1.4" opacity=".75">
-        <path d="M-6 76l2 6M8 74l-1 7M20 68l-2 6M-20 68l2 6M0 82v3M-34 52l3 5M34 52l-3 5"/>
-      </g>
-      <!-- bigote -->
-      <path fill="#2e221e" d="M-30 34c10-10 50-10 60 0-6 4-14 4-20 2-6 3-14 3-20 0-6 2-14 2-20-2Z"/>
-      <!-- sonrisa amplia con dientes -->
-      <path fill="#7a2e28" d="M-25 42c8 20 42 20 50 0-14 6-36 6-50 0Z"/>
-      <path fill="#fff" stroke="none" d="M-21 43c12 4 30 4 42 0l-2 6c-12 4-26 4-38 0Z"/>
-      <!-- nariz ancha -->
-      <path fill="none" stroke="#b46f5b" d="M-5 2c-2 10-6 16-12 20 2 6 10 7 17 5 7 2 15 1 17-5-6-4-10-10-12-20"/>
+      <ellipse cx="-60" cy="4" rx="11" ry="16" fill="url(#rSkin)"/>
+      <ellipse cx="60" cy="4" rx="11" ry="16" fill="url(#rSkin)"/>
+      <path fill="none" stroke-width="1.6" d="M-63-2c4 2 5 8 1 12M63-2c-4 2-5 8-1 12"/>
+      <!-- cara ancha -->
+      <path fill="url(#rSkin)" d="M-58-18C-58-62-28-76 0-76S58-62 58-18C58 22 42 56 0 60S-58 22-58-18Z"/>
       <!-- mejillas -->
-      <ellipse cx="-38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
-      <ellipse cx="38" cy="16" rx="11" ry="6" fill="#e07f6f" fill-opacity=".3" stroke="none"/>
-      <!-- ojos cafés que se achinan al sonreír -->
-      <path fill="#2b1a12" d="M-36-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
-      <path fill="#2b1a12" d="M14-6c4-7 18-7 22 0-5 5-17 5-22 0Z"/>
-      <circle cx="-22" cy="-7" r="1.8" fill="#fff" stroke="none"/>
-      <circle cx="28" cy="-7" r="1.8" fill="#fff" stroke="none"/>
-      <path fill="none" stroke="#b46f5b" stroke-width="1.6" d="M-36 2q11 5 22 0M14 2q11 5 22 0"/>
+      <ellipse cx="-38" cy="10" rx="11" ry="6" fill="#f2907f" fill-opacity=".45" stroke="none"/>
+      <ellipse cx="38" cy="10" rx="11" ry="6" fill="#f2907f" fill-opacity=".45" stroke="none"/>
+      <!-- barba completa y recortada -->
+      <path fill="url(#rBeard)" d="M-58-12C-61 28-42 63 0 66S61 28 58-12L53-2C51 14 42 26 30 28 22 20 12 17 0 19-12 17-22 20-30 28-42 26-51 14-53-2Z"/>
+      <g fill="none" stroke="#5c4a40" stroke-width="1.3" opacity=".8">
+        <path d="M-46 28l3 5M-36 42l2 5M-22 52l2 5M22 52l-2 5M36 42l-2 5M46 28l-3 5M-8 56l1 5M8 56l-1 5M-52 12l3 4M52 12l-3 4"/>
+      </g>
+      <!-- sonrisa con dientes -->
+      <path fill="#6b2626" d="M-25 25C-10 35 10 35 25 25 21 49-21 49-25 25Z"/>
+      <path fill="#fff" stroke-width="1.2" d="M-23 26.5C-9 35 9 35 23 26.5L21 33C7 38.5-7 38.5-21 33Z"/>
+      <path fill="#e97f82" stroke="none" d="M-10 43c3-4 17-4 20 0-4 3-16 3-20 0Z"/>
+      <!-- bigote -->
+      <path fill="url(#rBeard)" d="M-31 27C-22 16-9 15 0 19 9 15 22 16 31 27 20 23 9 22 0 24-9 22-20 23-31 27Z"/>
+      <!-- nariz -->
+      <path fill="#eaa77c" stroke-width="1.8" d="M-8 6C-12 14-8 19-3 18Q0 20 3 18C8 19 12 14 8 6 6 1-6 1-8 6Z"/>
+      <path fill="none" stroke="#a65a3a" stroke-width="1.4" d="M-4 15q1.5 2 3 0M4 15q-1.5 2-3 0"/>
+      <ellipse cx="-2.5" cy="8" rx="2.4" ry="1.8" fill="#fff" fill-opacity=".45" stroke="none"/>
       <!-- cejas gruesas -->
-      <path fill="#2f1d15" d="M-44-20c8-9 26-11 34-5l-1 6c-9-4-22-3-31 4Z"/>
-      <path fill="#2f1d15" d="M44-20c-8-9-26-11-34-5l1 6c9-4 22-3 31 4Z"/>
-      <!-- pelo: peinado hacia atrás con volumen, sal y pimienta arriba, canas en los costados -->
-      <path fill="url(#rHair)" d="M-60-10c-10-40 8-80 50-88 40-8 74 12 78 44 2 16-1 30-6 44-2-14-6-24-12-30-12-10-34-14-56-14-22 0-40 8-48 18-4 6-6 14-6 26Z"/>
-      <path fill="url(#rTemple)" stroke="none" d="M-61-4c-4-18 0-32 9-40 4 6 6 10 6 14-5 6-8 14-9 24Z"/>
-      <path fill="url(#rTemple)" stroke="none" d="M61-2c3-16 2-30-5-40-4 6-6 10-6 14 4 6 7 14 7 24Z"/>
-      <g fill="none" stroke="#c9c1bc" stroke-width="2.6" opacity=".9">
-        <path d="M-32-62c18-22 54-30 82-12M-44-46c20-18 58-22 92-6M-18-80c16-8 38-8 54 2"/>
+      <path fill="none" stroke="#2a1f1a" stroke-width="7" d="M-50-36C-40-45-22-45-10-38M50-36C40-45 22-45 10-38"/>
+      <!-- gafas de sol -->
+      <g stroke="#10131c" stroke-width="3.2">
+        <path fill="url(#rLens)" d="M-53-29H-8C-5-29-4-27-4-24-5-9-12 1-28 1S-52-9-54-22C-54-27-54-29-53-29Z"/>
+        <path fill="url(#rLens)" d="M53-29H8C5-29 4-27 4-24 5-9 12 1 28 1S52-9 54-22C54-27 54-29 53-29Z"/>
+        <path fill="none" d="M-4-24Q0-29 4-24M-54-25L-63-18M54-25L63-18"/>
       </g>
-      <g fill="none" stroke="#1d1613" stroke-width="1.8" opacity=".55">
-        <path d="M-22-54c14-16 40-22 66-12M-10-70c14-8 34-8 50 0"/>
+      <g fill="#fff" stroke="none">
+        <path fill-opacity=".55" d="M-45-25h7l-13 20c-2-2-3-4-3-6Z"/>
+        <path fill-opacity=".3" d="M-34-25h4l-14 24h-4Z"/>
+        <path fill-opacity=".55" d="M15-25h7L9-5c-2-2-3-4-3-6Z"/>
+        <path fill-opacity=".3" d="M26-25h4L16-1h-4Z"/>
       </g>
-      <path fill="none" stroke="#2a221f" stroke-width="1.6" opacity=".6" d="M-34-48c6-14 14-26 26-34"/>
-    </g>
+      <!-- pelo oscuro ondulado con volumen -->
+      <path fill="url(#rHair)" d="M-60.0 -4.0C-62.3 -4.0 -66.8 -21.3 -68.0 -30.0C-69.2 -38.7 -68.7 -48.3 -67.0 -56.0C-65.3 -63.7 -60.5 -70.3 -58.0 -76.0C-55.5 -81.7 -55.3 -86.3 -52.0 -90.0C-48.7 -93.7 -42.0 -95.0 -38.0 -98.0C-34.0 -101.0 -32.3 -107.0 -28.0 -108.0C-23.7 -109.0 -16.3 -103.0 -12.0 -104.0C-7.7 -105.0 -6.3 -113.5 -2.0 -114.0C2.3 -114.5 9.0 -107.7 14.0 -107.0C19.0 -106.3 23.7 -111.2 28.0 -110.0C32.3 -108.8 35.7 -102.7 40.0 -100.0C44.3 -97.3 50.3 -97.7 54.0 -94.0C57.7 -90.3 59.5 -83.7 62.0 -78.0C64.5 -72.3 68.0 -66.7 69.0 -60.0C70.0 -53.3 68.7 -44.7 68.0 -38.0C67.3 -31.3 66.3 -25.7 65.0 -20.0C63.7 -14.3 61.7 -2.7 60.0 -4.0C58.3 -5.3 57.0 -21.3 55.0 -28.0C53.0 -34.7 51.5 -40.3 48.0 -44.0C44.5 -47.7 38.7 -49.7 34.0 -50.0C29.3 -50.3 24.3 -45.3 20.0 -46.0C15.7 -46.7 12.3 -53.3 8.0 -54.0C3.7 -54.7 -1.3 -49.7 -6.0 -50.0C-10.7 -50.3 -15.3 -56.0 -20.0 -56.0C-24.7 -56.0 -29.7 -51.7 -34.0 -50.0C-38.3 -48.3 -42.7 -49.3 -46.0 -46.0C-49.3 -42.7 -51.7 -37.0 -54.0 -30.0C-56.3 -23.0 -57.7 -4.0 -60.0 -4.0Z"/>
+      <path fill="url(#rHair)" d="M-48.0 -50.0C-49.3 -52.7 -49.0 -67.0 -46.0 -74.0C-43.0 -81.0 -37.0 -87.7 -30.0 -92.0C-23.0 -96.3 -13.3 -99.3 -4.0 -100.0C5.3 -100.7 17.3 -99.0 26.0 -96.0C34.7 -93.0 42.3 -87.7 48.0 -82.0C53.7 -76.3 58.0 -68.0 60.0 -62.0C62.0 -56.0 61.7 -46.7 60.0 -46.0C58.3 -45.3 54.3 -54.7 50.0 -58.0C45.7 -61.3 39.3 -65.3 34.0 -66.0C28.7 -66.7 22.7 -61.7 18.0 -62.0C13.3 -62.3 10.7 -67.7 6.0 -68.0C1.3 -68.3 -5.3 -66.0 -10.0 -64.0C-14.7 -62.0 -18.7 -58.7 -22.0 -56.0C-25.3 -53.3 -27.3 -47.7 -30.0 -48.0C-32.7 -48.3 -35.0 -57.7 -38.0 -58.0C-41.0 -58.3 -46.7 -47.3 -48.0 -50.0Z"/>
+      <g fill="none" stroke="#86695a" stroke-width="2.6" opacity=".9">
+        <path d="M-38.0 -84.0C-35.3 -85.7 -28.0 -92.3 -22.0 -94.0C-16.0 -95.7 -7.7 -95.0 -2.0 -94.0C3.7 -93.0 9.7 -89.0 12.0 -88.0"/>
+        <path d="M-6.0 -78.0C-3.0 -79.7 5.3 -86.7 12.0 -88.0C18.7 -89.3 27.7 -88.7 34.0 -86.0C40.3 -83.3 47.3 -74.3 50.0 -72.0"/>
+        <path d="M-56.0 -50.0C-55.3 -52.7 -54.7 -61.7 -52.0 -66.0C-49.3 -70.3 -42.0 -74.3 -40.0 -76.0"/>
+        <path d="M20.0 -102.0C23.0 -101.0 32.7 -99.0 38.0 -96.0C43.3 -93.0 49.7 -86.0 52.0 -84.0"/>
+      </g>
+      <g fill="none" stroke="#130d0a" stroke-width="1.8" opacity=".75">
+        <path d="M-30.0 -66.0C-27.7 -67.3 -21.0 -73.3 -16.0 -74.0C-11.0 -74.7 -2.7 -70.7 0.0 -70.0"/>
+        <path d="M22.0 -68.0C24.3 -68.7 31.7 -72.7 36.0 -72.0C40.3 -71.3 46.0 -65.3 48.0 -64.0"/>
+        <path d="M-60.0 -20.0C-60.0 -22.7 -60.7 -31.0 -60.0 -36.0C-59.3 -41.0 -56.7 -47.7 -56.0 -50.0"/>
+        <path d="M60.0 -20.0C60.2 -22.7 61.3 -31.0 61.0 -36.0C60.7 -41.0 58.5 -47.7 58.0 -50.0"/>
+      </g>
   </g>
 </svg>

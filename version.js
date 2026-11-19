@@ -9,5 +9,5 @@
  * nueva, la app avisa "Hay una nueva versión" y la anterior se borra al actualizar.
  * Script clásico (no módulo) para que funcione tanto en la página como en importScripts().
  */
-self.APP_VERSION = '2026.11.19-2';
+self.APP_VERSION = '2026.11.19-3';
 self.APP_BUILD = 'dev';

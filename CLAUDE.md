@@ -50,6 +50,7 @@ js/
   views/*.js            Una pantalla por archivo
 img/                    Ilustraciones SVG del storyboard (ver abajo)
 google-scripts/         Apps Script (Web App) que guarda puntajes en Google Sheets
+tools/personajes.py     Genera los SVG de los personajes (no hace falta para el sitio)
 TODO.md                 Pendientes del proyecto
 ```
 
@@ -142,11 +143,17 @@ por rapidez con `speedFactor()` de `lib/scores.js`; 0 de bono a los 10 s). `supp
 puede dibujar (comparando contra el glifo de "caja vacía" en un canvas). El nivel se envía como
 `nivel` y se guarda en la columna `Nivel`; `GAMES.tesla` en `scores.gs` limita puntaje y nivel.
 
-**Personajes:** los rasgos salen de fotos reales (Richar: cara ancha, pelo peinado hacia atrás
-sal y pimienta con canas en las sienes, barba corta unida al bigote, sin gafas; Mely: cara
-redonda, pelo largo ondulado con raíz castaña y largos rubios, pecas). La cabeza vive en el
-grupo `<g transform="translate(110 104)">` de `mely.svg`/`richar.svg`; `couple.svg` contiene una
-copia escalada de esas cabezas: si cambias un rasgo, cámbialo en ambos sitios.
+**Personajes:** estilo caricatura chibi (cabeza grande, ojos grandes, contorno marrón, degradados
+suaves) según las ilustraciones de referencia de la pareja, con la ropa de "playa de boda".
+Richar: pelo oscuro ondulado con volumen, gafas de sol, barba completa recortada, camisa hawaiana
+azul con flores blancas, bermuda beige y sandalias. Mely: pelo largo ondulado de raíz castaña a
+puntas rubias, ojos cafés grandes, pecas, aretes dorados, sombrero de paja con cinta y moño rojos,
+vestido blanco de tiras. Tesla: bulldog francés negro (cabeza ancha y cuadrada, orejas de murciélago,
+hocico corto con pliegue sobre la nariz, belfos, lengua afuera, cuerpo robusto), cuello blanco y
+corbatín rojo (el corbatín ayuda a distinguirlo en el juego).
+**Los cuatro SVG se generan con `tools/personajes.py`** (Python, solo librería estándar): las
+cabezas se definen una vez y se reutilizan en las figuras y en `couple.svg`. Para cambiar un
+rasgo, edita el script y ejecuta `python tools/personajes.py`; no edites los SVG a mano.
 
 ## Esperas del Apps Script y rankings
 
