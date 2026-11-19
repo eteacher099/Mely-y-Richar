@@ -7,8 +7,12 @@ import { spinner } from '../components/spinner.js';
 import { apiEnabled } from '../lib/api.js';
 import { getLeaderboard } from '../lib/scores.js';
 
-/** Columnas del top en el hub: [id del juego, título corto]. */
-const BOARDS = [['trivia', 'Wedding Game'], ['marina', 'Trivia Marina'], ['tesla', 'Tesla']];
+/**
+ * Columnas del top en el hub: [id del juego, título corto].
+ * Solo los juegos que generan puntaje, en el mismo orden que los íconos de "Otros juegos"
+ * (Tesla, [Bingo: sin puntaje], Trivia Marina). Para sumar otro juego, agrégalo aquí.
+ */
+const BOARDS = [['tesla', 'Encuentra a Tesla'], ['marina', 'Trivia Marina']];
 const TOP = 5;
 
 const boardHtml = rows => rows.length

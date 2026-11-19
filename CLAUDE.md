@@ -152,8 +152,9 @@ copia escalada de esas cabezas: si cambias un rasgo, cámbialo en ambos sitios.
 
 - Toda espera al Apps Script muestra `spinner(texto, { small })` (`components/spinner.js`):
   guardar puntaje, cargar ranking, guardar el menú y el top del hub.
-- El hub `#juego` muestra el **Top 5 de cada juego en 3 columnas** (Wedding Game, Trivia Marina,
-  Tesla) con el mismo endpoint `leaderboard` (no requirió cambios en el Apps Script).
+- El hub `#juego` muestra el **Top 5 de los juegos con puntaje**, una columna por juego y en el
+  orden de los íconos de "Otros juegos": Encuentra a Tesla, Trivia Marina (el bingo no tiene
+  puntaje). Se configura en `BOARDS` (`views/juegos.js`) y usa el endpoint `leaderboard`.
 - `getLeaderboard()` guarda los rankings 30 s en memoria; `submitScore()` invalida el del juego
   y el panel de resultado pide `{ fresh: true }` para mostrar el puntaje recién guardado.
 

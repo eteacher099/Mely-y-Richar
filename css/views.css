@@ -527,7 +527,8 @@ input[aria-invalid="true"] { border-color: var(--coral); }
 /* ---------- Top de jugadores en el hub (3 columnas, letra pequeña) ---------- */
 .hub-rankings { margin-top: 14px; padding: 10px 8px 6px; background: #fff8; border: 1px solid #14337a22; border-radius: 18px; }
 .hub-rankings > .strong { margin-bottom: 6px; }
-.rank-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+/* Una columna por juego con puntaje (se adapta a cuántos haya en BOARDS) */
+.rank-cols { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; }
 .rank-col { min-width: 0; background: #fff; border-radius: 12px; padding: 6px 6px 4px; text-align: left; }
 .rank-title { display: block; text-align: center; font-size: 11px; font-weight: 800; color: var(--blue); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rank-mini { list-style: none; padding: 0; margin: 0; font-size: 11px; line-height: 1.35; }

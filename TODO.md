@@ -65,5 +65,5 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
 - [x] Caché versionada con Service Worker (`version.js` + `sw.js`), aviso "Hay una nueva versión",
       build automático por commit en el workflow y `modulepreload` de todos los módulos
 - [x] Trivia Marina: banco de 32 preguntas, 10 al azar por partida
-- [x] Top 5 de cada juego en el hub (3 columnas)
+- [x] Top 5 en el hub: Encuentra a Tesla y Trivia Marina (orden de los íconos)
 - [x] Nombre obligatorio para jugar ("¿Quién juega?" en trivia, marina y Tesla; validación en el hub)
