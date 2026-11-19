@@ -1,0 +1,45 @@
+/**
+ * Registra el Service Worker (sw.js) y avisa cuando hay una versión nueva de la invitación.
+ * Al tocar "Actualizar" se activa el SW nuevo y la página se recarga una vez.
+ */
+const SUPPORTED = 'serviceWorker' in navigator &&
+  (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname));
+
+function showUpdateToast(worker) {
+  if (document.querySelector('.update-toast')) return;
+  const toast = document.createElement('div');
+  toast.className = 'update-toast';
+  toast.setAttribute('role', 'status');
+  toast.innerHTML = '<span>✨ Hay una nueva versión de la invitación</span><button type="button">Actualizar</button>';
+  toast.querySelector('button').addEventListener('click', () => {
+    toast.querySelector('button').disabled = true;
+    worker.postMessage('SKIP_WAITING');
+  });
+  document.body.appendChild(toast);
+}
+
+export function registerServiceWorker() {
+  if (!SUPPORTED) return;
+
+  // Cuando el SW nuevo toma el control, recarga una sola vez con los archivos nuevos.
+  let reloading = false;
+  const hadController = Boolean(navigator.serviceWorker.controller);
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController || reloading) return;   // primera instalación: no hace falta recargar
+    reloading = true;
+    location.reload();
+  });
+
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    if (reg.waiting && navigator.serviceWorker.controller) showUpdateToast(reg.waiting);
+    reg.addEventListener('updatefound', () => {
+      const next = reg.installing;
+      next?.addEventListener('statechange', () => {
+        if (next.state === 'installed' && navigator.serviceWorker.controller) showUpdateToast(next);
+      });
+    });
+    // Busca versiones nuevas al volver a la pestaña y cada 30 min.
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update(); });
+    setInterval(() => reg.update(), 30 * 60 * 1000);
+  }).catch(() => { /* sin SW la invitación funciona igual, solo sin caché */ });
+}

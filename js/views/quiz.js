@@ -24,13 +24,15 @@ export function shuffleQuestions(questions) {
 /**
  * Crea una vista de trivia. Puntaje: cada acierto vale answerPoints(ms) — 50 base + hasta 150
  * por rapidez (ver lib/scores.js); los errores valen 0. El ranking ordena por puntos.
- * @param {{game: string, title: string, questions: {q: string, o: string[], a: number}[], shuffle?: boolean}} opts
+ * @param {{game: string, title: string, questions: {q: string, o: string[], a: number}[], shuffle?: boolean, pick?: number}} opts
  *   game:    id con el que se guarda el puntaje (debe existir en GAMES de google-scripts/scores.gs)
  *   shuffle: barajar preguntas y opciones en cada partida
+ *   pick:    cuántas preguntas tomar al azar del banco en cada partida (por defecto, todas)
  */
-export function createQuiz({ game, title, questions: source, shuffle: mix = false }) {
+export function createQuiz({ game, title, questions: source, shuffle: mix = false, pick = 0 }) {
   return () => {
-    const questions = mix ? shuffleQuestions(source) : source;
+    const all = mix || pick ? shuffleQuestions(source) : source;
+    const questions = pick ? all.slice(0, pick) : all;
 
     return {
       html: `

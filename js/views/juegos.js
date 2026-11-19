@@ -3,6 +3,22 @@ import { $, esc } from '../lib/dom.js';
 import { icon } from '../lib/icons.js';
 import { player } from '../lib/player.js';
 import { nameError } from '../components/name-gate.js';
+import { spinner } from '../components/spinner.js';
+import { apiEnabled } from '../lib/api.js';
+import { getLeaderboard } from '../lib/scores.js';
+
+/** Columnas del top en el hub: [id del juego, título corto]. */
+const BOARDS = [['trivia', 'Wedding Game'], ['marina', 'Trivia Marina'], ['tesla', 'Tesla']];
+const TOP = 5;
+
+const boardHtml = rows => rows.length
+  ? `<ol class="rank-mini">${rows.map(r => `
+      <li class="${r.me ? 'me' : ''}">
+        <span class="rm-pos">${esc(r.pos)}</span>
+        <span class="rm-name" title="${esc(r.nombre)}">${esc(r.nombre)}</span>
+        <b class="rm-score">${esc(r.puntaje)}</b>
+      </li>`).join('')}</ol>`
+  : '<p class="rm-empty">¡Sé el primero! 🏁</p>';
 
 export default function juegos() {
   return {
@@ -33,6 +49,18 @@ export default function juegos() {
             <a href="#marina"><span aria-hidden="true">🐙</span>Trivia Marina</a>
           </div>
         </div>
+
+        ${apiEnabled ? `
+        <div class="hub-rankings" aria-label="Top de jugadores">
+          <p class="strong">🏆 Top jugadores</p>
+          <div class="rank-cols">
+            ${BOARDS.map(([game, label]) => `
+              <div class="rank-col" data-board="${game}">
+                <b class="rank-title">${esc(label)}</b>
+                <div class="rank-body">${spinner('Cargando…', { small: true })}</div>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
       </section>`,
 
     mount(root) {
@@ -44,6 +72,15 @@ export default function juegos() {
           error.textContent = '';
           input.removeAttribute('aria-invalid');
         }
+      });
+
+      // Top de cada juego (mismo endpoint 'leaderboard' del Apps Script, en paralelo)
+      BOARDS.forEach(([game]) => {
+        const body = root.querySelector(`[data-board="${game}"] .rank-body`);
+        if (!body) return;
+        getLeaderboard(game, TOP)
+          .then(rows => { if (body.isConnected) body.innerHTML = boardHtml(rows); })
+          .catch(() => { if (body.isConnected) body.innerHTML = '<p class="rm-empty">Sin conexión</p>'; });
       });
 
       // Sin nombre no se entra a los juegos con ranking (el bingo no lleva puntaje).

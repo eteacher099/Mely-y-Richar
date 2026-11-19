@@ -6,6 +6,7 @@ import { CONFIG, coupleName } from '../config.js';
 import { $, esc } from '../lib/dom.js';
 import { player } from '../lib/player.js';
 import { saveMenuChoice, savedMenuChoice } from '../lib/menu.js';
+import { spinner } from '../components/spinner.js';
 
 const DATE_DOTS = '19 · 12 · 2026';
 const DATE_SHORT = '19.12.2026';
@@ -128,7 +129,7 @@ export default function menu() {
         const btn = form.querySelector('.mn-btn');
         btn.disabled = true;
         status.className = 'mn-status';
-        status.textContent = 'Guardando…';
+        status.innerHTML = spinner('Guardando tu elección…');
 
         const { status: result } = await saveMenuChoice(choice);
         if (!status.isConnected) return;

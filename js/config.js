@@ -99,7 +99,8 @@ export const CONFIG = {
     { q: '¿Quién dijo "te quiero" primero?', o: ['Mely', 'Richar', 'Los dos a la vez'], a: 1 },
     { q: '¿Cuál es nuestro plan favorito?', o: ['Ir al cine', 'Viajar', 'Cocinar en casa'], a: 1 },
   ],
-  // Trivia Marina: se baraja el orden de preguntas y opciones en cada partida (ver views/index.js).
+  // Trivia Marina: banco de preguntas; cada partida toma 10 al azar y baraja preguntas y opciones
+  // (ver `pick` en views/index.js). Puedes agregar más: q = pregunta, o = opciones, a = índice correcto.
   marina: [
     { q: '¿Cuántos corazones tiene un pulpo?', o: ['1', '3', '8'], a: 1 },
     { q: '¿Cuántos brazos tiene un pulpo?', o: ['6', '8', '10'], a: 1 },
@@ -111,6 +112,28 @@ export const CONFIG = {
     { q: '¿Qué pueden regenerar las estrellas de mar?', o: ['Sus brazos', 'Sus ojos', 'Nada'], a: 0 },
     { q: '¿Qué mar baña las costas de Cartagena?', o: ['Mar Caribe', 'Océano Pacífico', 'Mar Mediterráneo'], a: 0 },
     { q: '¿Qué parque nacional protege los arrecifes de las Islas del Rosario?', o: ['Tayrona', 'Corales del Rosario y San Bernardo', 'Isla Gorgona'], a: 1 },
+    { q: '¿Cuál es el pez más grande del mundo?', o: ['Tiburón blanco', 'Tiburón ballena', 'Pez luna'], a: 1 },
+    { q: '¿Cuál es el océano más grande del planeta?', o: ['Atlántico', 'Índico', 'Pacífico'], a: 2 },
+    { q: '¿Qué parte de la Tierra está cubierta por océanos?', o: ['Cerca del 30 %', 'Cerca del 50 %', 'Cerca del 70 %'], a: 2 },
+    { q: '¿Con qué respiran los peces?', o: ['Con pulmones', 'Con branquias', 'Por la piel'], a: 1 },
+    { q: '¿Qué pez vive entre los tentáculos de las anémonas?', o: ['Pez payaso', 'Pez globo', 'Pez espada'], a: 0 },
+    { q: '¿Qué usan los delfines para orientarse y cazar?', o: ['El olfato', 'La ecolocalización', 'Las estrellas'], a: 1 },
+    { q: 'Las ballenas son…', o: ['Peces', 'Mamíferos', 'Reptiles'], a: 1 },
+    { q: '¿Qué come principalmente la ballena azul?', o: ['Krill', 'Tiburones', 'Algas'], a: 0 },
+    { q: '¿De qué está hecho el esqueleto de los tiburones?', o: ['Hueso', 'Cartílago', 'Coral'], a: 1 },
+    { q: '¿Qué animal marino no tiene cerebro?', o: ['La medusa', 'El pulpo', 'El delfín'], a: 0 },
+    { q: '¿Qué animal marino es famoso por cambiar de color para camuflarse?', o: ['El pulpo', 'La tortuga', 'El tiburón'], a: 0 },
+    { q: '¿Cuántos brazos tiene normalmente una estrella de mar?', o: ['3', '5', '8'], a: 1 },
+    { q: '¿Qué pez invasor amenaza los arrecifes del Caribe?', o: ['Pez león', 'Pez payaso', 'Mero'], a: 0 },
+    { q: '¿Qué come el manatí, que también vive en el Caribe colombiano?', o: ['Peces', 'Plantas acuáticas', 'Cangrejos'], a: 1 },
+    { q: '¿Qué tortuga marina es la más grande del mundo?', o: ['Tortuga laúd', 'Tortuga carey', 'Tortuga verde'], a: 0 },
+    { q: '¿Cuánto puede vivir una tortuga marina?', o: ['Unos 5 años', 'Unos 15 años', 'Más de 50 años'], a: 2 },
+    { q: '¿Qué ave se lanza en picada al mar para pescar en la bahía de Cartagena?', o: ['El pelícano', 'El flamenco', 'El colibrí'], a: 0 },
+    { q: 'El caballito de mar es un…', o: ['Pez', 'Mamífero', 'Crustáceo'], a: 0 },
+    { q: '¿Qué es el plancton?', o: ['Arena del fondo', 'Organismos diminutos que flotan', 'Un tipo de coral'], a: 1 },
+    { q: '¿Qué animal marino es conocido como "inmortal"?', o: ['Una medusa', 'Una tortuga', 'Una ballena'], a: 0 },
+    { q: '¿Cuál es considerado el pez más rápido del océano?', o: ['El pez vela', 'El pez payaso', 'El caballito de mar'], a: 0 },
+    { q: '¿A qué departamento pertenecen las Islas del Rosario?', o: ['Magdalena', 'Bolívar', 'Sucre'], a: 1 },
   ],
 
   bingo: ['Foto con los novios', 'Alguien llora', 'Baile de papás', 'Brindis', 'Foto con Tesla',

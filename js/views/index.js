@@ -26,7 +26,7 @@ export const routes = {
   itin: itinerario,
   juego: juegos,
   trivia: withPlayerName(createQuiz({ game: 'trivia', title: 'Wedding Game', questions: CONFIG.trivia })),
-  marina: withPlayerName(createQuiz({ game: 'marina', title: 'Trivia Marina', questions: CONFIG.marina, shuffle: true })),
+  marina: withPlayerName(createQuiz({ game: 'marina', title: 'Trivia Marina', questions: CONFIG.marina, shuffle: true, pick: 10 })),
   tesla: withPlayerName(tesla),
   bingo,
   playlist,

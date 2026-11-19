@@ -1,9 +1,11 @@
 /**
  * Panel que se muestra al terminar un juego: estado del envío,
  * mejor puntaje local y ranking global (si Google Sheets está configurado).
+ * Mientras se espera al Apps Script se muestra el spinner playero.
  */
 import { esc } from '../lib/dom.js';
 import { bestScore, getLeaderboard } from '../lib/scores.js';
+import { spinner } from './spinner.js';
 
 const MESSAGES = {
   sent: '✓ ¡Puntaje guardado en el ranking!',
@@ -12,7 +14,12 @@ const MESSAGES = {
 };
 
 export const scorePanelHtml = () =>
-  '<div class="score-panel" data-score-panel aria-live="polite"><p class="status">Guardando puntaje…</p></div>';
+  `<div class="score-panel" data-score-panel aria-live="polite">${spinner('Guardando puntaje…')}</div>`;
+
+/** Detalle bajo el puntaje: aciertos (trivias) y nivel (Tesla). */
+export const scoreDetail = r =>
+  (r.aciertos != null && r.maximo ? ` <small>· ${esc(r.aciertos)}/${esc(r.maximo)}</small>` : '') +
+  (r.nivel ? ` <small>· Nv ${esc(r.nivel)}</small>` : '');
 
 const rankingHtml = rows => `
   <p class="ranking-title">🏆 Ranking</p>
@@ -20,7 +27,7 @@ const rankingHtml = rows => `
     ${rows.map(r => `
       <li class="${r.me ? 'me' : ''}">
         <span>${esc(r.pos)}. ${esc(r.nombre)}${r.me ? ' (tú)' : ''}</span>
-        <b>${esc(r.puntaje)}${r.aciertos != null && r.maximo ? ` <small>· ${esc(r.aciertos)}/${esc(r.maximo)}</small>` : ''}${r.nivel ? ` <small>· Nv ${esc(r.nivel)}</small>` : ''}</b>
+        <b>${esc(r.puntaje)}${scoreDetail(r)}</b>
       </li>`).join('')}
   </ol>`;
 
@@ -42,10 +49,12 @@ export async function mountScorePanel(root, game, submission) {
     (best != null ? `<p class="status">Tu mejor puntaje: ${esc(best)}</p>` : '');
 
   if (status === 'local') return;
+  panel.insertAdjacentHTML('beforeend', `<div data-ranking>${spinner('Cargando ranking…', { small: true })}</div>`);
+  const slot = panel.querySelector('[data-ranking]');
   try {
-    const rows = await getLeaderboard(game);
-    if (panel.isConnected && rows.length) panel.insertAdjacentHTML('beforeend', rankingHtml(rows));
+    const rows = await getLeaderboard(game, undefined, { fresh: true });
+    if (slot.isConnected) slot.innerHTML = rows.length ? rankingHtml(rows) : '';
   } catch {
-    /* el ranking es opcional: si falla, no se muestra */
+    if (slot.isConnected) slot.innerHTML = '';   // el ranking es opcional
   }
 }

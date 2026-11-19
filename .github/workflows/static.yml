@@ -31,6 +31,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Versión de build para la caché (version.js)
+        # Cada despliegue cambia APP_BUILD → nueva caché del Service Worker y aviso de actualización.
+        run: sed -i "s/self.APP_BUILD = 'dev';/self.APP_BUILD = '${GITHUB_SHA::7}';/" version.js && grep APP_BUILD version.js
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

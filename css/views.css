@@ -523,3 +523,23 @@
 .name-gate .btn { margin-top: 6px; }
 .form-error { min-height: 1.2em; margin: -4px 0 8px 8px; text-align: left; font-size: 13px; font-weight: 700; color: var(--coral); }
 input[aria-invalid="true"] { border-color: var(--coral); }
+
+/* ---------- Top de jugadores en el hub (3 columnas, letra pequeña) ---------- */
+.hub-rankings { margin-top: 14px; padding: 10px 8px 6px; background: #fff8; border: 1px solid #14337a22; border-radius: 18px; }
+.hub-rankings > .strong { margin-bottom: 6px; }
+.rank-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.rank-col { min-width: 0; background: #fff; border-radius: 12px; padding: 6px 6px 4px; text-align: left; }
+.rank-title { display: block; text-align: center; font-size: 11px; font-weight: 800; color: var(--blue); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-mini { list-style: none; padding: 0; margin: 0; font-size: 11px; line-height: 1.35; }
+.rank-mini li { display: flex; align-items: baseline; gap: 4px; padding: 2px 0; border-bottom: 1px solid #14337a12; }
+.rank-mini li:last-child { border-bottom: 0; }
+.rank-mini .me { color: var(--coral); font-weight: 800; }
+.rm-pos { flex: none; width: 12px; font-weight: 800; opacity: .7; }
+.rm-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rm-score { flex: none; font-weight: 800; }
+.rm-empty { font-size: 11px; text-align: center; opacity: .7; margin: 8px 0; }
+.rank-mini li:nth-child(1) .rm-pos::before { content: "🥇"; }
+.rank-mini li:nth-child(2) .rm-pos::before { content: "🥈"; }
+.rank-mini li:nth-child(3) .rm-pos::before { content: "🥉"; }
+.rank-mini li:nth-child(-n+3) .rm-pos { font-size: 0; width: 14px; }
+.rank-mini li:nth-child(-n+3) .rm-pos::before { font-size: 11px; }

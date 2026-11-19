@@ -15,6 +15,39 @@
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/views.css">
 
+<!-- Versión (script clásico: la usan la página y sw.js) -->
+<script src="version.js"></script>
+
+<!-- Descarga en paralelo todos los módulos (evita la cascada main → router → vistas → lib).
+     Si agregas un archivo en js/, agrégalo aquí también. -->
+<link rel="preload" as="image" href="img/couple.svg">
+<link rel="modulepreload" href="js/config.js">
+<link rel="modulepreload" href="js/router.js">
+<link rel="modulepreload" href="js/lib/api.js">
+<link rel="modulepreload" href="js/lib/dom.js">
+<link rel="modulepreload" href="js/lib/icons.js">
+<link rel="modulepreload" href="js/lib/menu.js">
+<link rel="modulepreload" href="js/lib/player.js">
+<link rel="modulepreload" href="js/lib/scores.js">
+<link rel="modulepreload" href="js/lib/storage.js">
+<link rel="modulepreload" href="js/lib/sw-register.js">
+<link rel="modulepreload" href="js/components/name-gate.js">
+<link rel="modulepreload" href="js/components/score-panel.js">
+<link rel="modulepreload" href="js/components/spinner.js">
+<link rel="modulepreload" href="js/views/album.js">
+<link rel="modulepreload" href="js/views/bingo.js">
+<link rel="modulepreload" href="js/views/historia.js">
+<link rel="modulepreload" href="js/views/home.js">
+<link rel="modulepreload" href="js/views/index.js">
+<link rel="modulepreload" href="js/views/info.js">
+<link rel="modulepreload" href="js/views/itinerario.js">
+<link rel="modulepreload" href="js/views/juegos.js">
+<link rel="modulepreload" href="js/views/mensajes.js">
+<link rel="modulepreload" href="js/views/menu.js">
+<link rel="modulepreload" href="js/views/playlist.js">
+<link rel="modulepreload" href="js/views/quiz.js">
+<link rel="modulepreload" href="js/views/tesla.js">
+
 <script type="module" src="js/main.js"></script>
 </head>
 <body>
@@ -31,6 +64,7 @@
   <a href="#album">Álbum</a>
   <a href="#mensajes">Mensajes</a>
   <a href="#info">Información</a>
+  <p class="menu-version" id="app-version"></p>
 </nav>
 
 <noscript>Activa JavaScript para ver la invitación.</noscript>

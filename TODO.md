@@ -1,14 +1,13 @@
 # TODO
 
 Sitio publicado: https://eteacher099.github.io/Mely-y-Richar/ (GitHub Pages, se despliega al hacer push a `main`).
-Apps Script publicado y verificado (health check, ranking con nivel, puntajes de Tesla > 20 000 aceptados).
+Apps Script publicado y verificado (health check, ranking con nivel y aciertos, Tesla > 20 000 y
+trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y menú llegan a la hoja.
 
 ## 🚀 Pendiente en Google Sheets / despliegue
-- [ ] **Trivia por rapidez:** pegar el `scores.gs` nuevo, ejecutar `setup()` (agrega la columna `Aciertos`)
-      y desplegar como *Nueva versión* **antes** de publicar el sitio: el script actual rechaza puntos de
-      trivia > 50. Luego borrar las filas viejas de trivia/marina (estaban en escala de aciertos, no de puntos)
-- [ ] Probar desde el celular: elegir menú, jugar y revisar que lleguen las filas; borrar filas de prueba
-      (en el ranking hay entradas "prueba" y "Handsome")
+- [ ] **Antes de compartir la invitación:** borrar las filas de prueba en `Scores` ("prueba", "Handsome")
+      y en `Menu`; las de trivia viejas están en escala de aciertos (3/4), no de puntos. Luego
+      **Boda → Actualizar resumen del menú** para que `Resumen menú` quede en cero
 - [ ] Revisar en la hoja que `Resumen menú` ya no muestre `#ERROR!` (si sigue: menú **Boda → Actualizar resumen del menú**)
 - [ ] Confirmar `timeZone` en `google-scripts/appsscript.json` (está `America/Bogota`)
 - [ ] (Opcional) Definir `SCORES_TOKEN` en el script y en `CONFIG.scores.token`
@@ -61,4 +60,10 @@ Apps Script publicado y verificado (health check, ranking con nivel, puntajes de
 - [x] Mely y Richar con rasgos de sus fotos (`mely.svg`, `richar.svg`, `couple.svg`); trío en Wedding Game
 - [x] Fotos de referencia borradas (nunca entraron a git)
 - [x] Trivias puntuadas por rapidez (50 + hasta 150 por acierto), ranking con puntos y aciertos
+- [x] Prueba desde el celular: envío de puntajes y elecciones del menú funcionando
+- [x] Spinner playero (pelota de playa) en todas las esperas del Apps Script
+- [x] Caché versionada con Service Worker (`version.js` + `sw.js`), aviso "Hay una nueva versión",
+      build automático por commit en el workflow y `modulepreload` de todos los módulos
+- [x] Trivia Marina: banco de 32 preguntas, 10 al azar por partida
+- [x] Top 5 de cada juego en el hub (3 columnas)
 - [x] Nombre obligatorio para jugar ("¿Quién juega?" en trivia, marina y Tesla; validación en el hub)

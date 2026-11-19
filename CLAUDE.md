@@ -17,17 +17,23 @@ python -m http.server 8000
 
 o la extensión *Live Server* de VS Code. No hay tests ni linter configurados.
 
+En local `APP_BUILD` vale `'dev'` y el Service Worker trabaja **red primero**, así que los
+cambios se ven al recargar. Si algo se queda pegado: DevTools → Application → Service Workers
+→ *Unregister* y *Clear site data*.
+
 ## Estructura
 
 ```
-index.html              Shell: <head>, #app, menú <nav id="menu">, carga js/main.js
+index.html              Shell: <head>, modulepreload de js/, #app, menú <nav id="menu">
+version.js              ★ Versión de la app (APP_VERSION / APP_BUILD) — página y Service Worker
+sw.js                   Service Worker: caché versionada y aviso de nueva versión
 css/
   base.css              Tokens (:root), reset, layout (#app, .s, .sea, h2, .wave)
   components.css        .bar, .btn, .card, inputs, .menu, details, .pill, ranking
   views.css             Estilos por pantalla (home, itinerario, juegos, playlist…)
 js/
   config.js             ★ TODO el contenido editable (nombres, fecha, trivia, FAQ, scores)
-  main.js               Arranque: título, router, reintento de puntajes pendientes
+  main.js               Arranque: título, router, cola offline, Service Worker, versión en el menú
   router.js             Router por hash + barra superior + menú + ciclo de vida de vistas
   lib/dom.js            $, $$, esc (escape HTML), timeAgo, uid
   lib/storage.js        localStorage con prefijo "boda_" y JSON, nunca lanza
@@ -36,13 +42,39 @@ js/
   lib/scores.js         Puntajes de juegos y ranking (usa api.js)
   lib/menu.js           Elección del menú de la cena (usa api.js)
   lib/icons.js          Iconos SVG inline (icon('camera', 56)), rayitos de sol y gaviota
+  lib/sw-register.js    Registra sw.js y muestra "✨ Hay una nueva versión" → Actualizar
   components/score-panel.js   Panel de resultado: estado del envío + ranking
+  components/spinner.js       Spinner playero (pelota de playa) para esperas del Apps Script
+  components/name-gate.js     Nombre obligatorio antes de los juegos con ranking
   views/index.js        Registro de rutas hash → vista
   views/*.js            Una pantalla por archivo
 img/                    Ilustraciones SVG del storyboard (ver abajo)
 google-scripts/         Apps Script (Web App) que guarda puntajes en Google Sheets
 TODO.md                 Pendientes del proyecto
 ```
+
+## Caché y versiones (Service Worker)
+
+Las imágenes son SVG livianos (~70 KB en total); lo que hacía lenta la carga era la cascada de
+~30 módulos JS pequeños sobre GitHub Pages (que solo cachea 10 min). Por eso:
+
+- **`version.js`** es la fuente única de la versión: `APP_VERSION` (a mano, formato
+  `AAAA.MM.DD-n`) y `APP_BUILD` (`'dev'` en local). Es un script clásico: lo carga
+  `index.html` (se ve al pie del menú: `v2026.11.19-1 · abc1234`) y `sw.js` con `importScripts`.
+- **El workflow de Pages** (`.github/workflows/static.yml`) reemplaza `APP_BUILD` por el commit
+  corto en cada despliegue. Así **cada push a `main` crea una caché nueva** aunque no se cambie
+  `APP_VERSION`. Sube `APP_VERSION` cuando quieras que la versión visible cambie.
+- **`sw.js`**: caché `boda-<APP_VERSION>+<APP_BUILD>`. Archivos propios = caché primero (se
+  precarga el `SHELL` y el resto se guarda la primera vez que se usa). Google Fonts = caché
+  aparte revalidada en segundo plano. **Apps Script nunca se cachea** (siempre red).
+- **Actualización**: el navegador detecta el `version.js`/`sw.js` nuevo → el SW nuevo queda
+  esperando → `lib/sw-register.js` muestra "✨ Hay una nueva versión de la invitación" →
+  *Actualizar* envía `SKIP_WAITING`, la página se recarga una vez y se borran las cachés viejas.
+  También se busca versión nueva al volver a la pestaña y cada 30 min.
+- **`index.html` precarga todos los módulos** con `<link rel="modulepreload">`. Si agregas un
+  archivo en `js/`, agrégalo a esa lista (si falta solo se pierde la precarga, no se rompe nada).
+  Si un archivo nuevo debe estar disponible sin red desde la primera visita, agrégalo a `SHELL`
+  en `sw.js` (todo lo de `SHELL` debe existir: si uno falta, la instalación del SW falla).
 
 ## Arquitectura
 
@@ -62,7 +94,9 @@ Hash desconocido → home. **No usar `#menu`** como ruta: choca con `<nav id="me
 - Los eventos se enlazan en `mount` con `addEventListener` (sin `onclick` inline ni
   globales). Para actualizar la pantalla se modifica el DOM local; no se re-renderiza
   toda la vista.
-- Las trivias se crean con `createQuiz({ game, title, questions, shuffle? })` (`views/quiz.js`).
+- Las trivias se crean con `createQuiz({ game, title, questions, shuffle?, pick? })` (`views/quiz.js`).
+  La marina usa `pick: 10`: cada partida toma 10 preguntas al azar del banco `CONFIG.marina`
+  (32 hoy) y baraja preguntas y opciones. Para agregar preguntas basta con sumarlas al banco.
   Puntaje = suma de `answerPoints(ms)` por acierto (50 + hasta 150 por rapidez, `lib/scores.js`);
   se envían `puntaje` (puntos), `maximo` (preguntas) y `aciertos`.
 - **Nombre obligatorio** en juegos con ranking: las rutas `trivia`, `marina` y `tesla` van envueltas
@@ -113,6 +147,15 @@ sal y pimienta con canas en las sienes, barba corta unida al bigote, sin gafas; 
 redonda, pelo largo ondulado con raíz castaña y largos rubios, pecas). La cabeza vive en el
 grupo `<g transform="translate(110 104)">` de `mely.svg`/`richar.svg`; `couple.svg` contiene una
 copia escalada de esas cabezas: si cambias un rasgo, cámbialo en ambos sitios.
+
+## Esperas del Apps Script y rankings
+
+- Toda espera al Apps Script muestra `spinner(texto, { small })` (`components/spinner.js`):
+  guardar puntaje, cargar ranking, guardar el menú y el top del hub.
+- El hub `#juego` muestra el **Top 5 de cada juego en 3 columnas** (Wedding Game, Trivia Marina,
+  Tesla) con el mismo endpoint `leaderboard` (no requirió cambios en el Apps Script).
+- `getLeaderboard()` guarda los rankings 30 s en memoria; `submitScore()` invalida el del juego
+  y el panel de resultado pide `{ fresh: true }` para mostrar el puntaje recién guardado.
 
 ## Google Sheets (puntajes + menú)
 
