@@ -16,16 +16,18 @@ import mensajes from './mensajes.js';
 import info from './info.js';
 import menu from './menu.js';
 import historia from './historia.js';
+import { withPlayerName } from '../components/name-gate.js';
 
 export const DEFAULT_ROUTE = 'home';
 
+// Los juegos con ranking exigen nombre (withPlayerName pide "¿Quién juega?" si falta).
 export const routes = {
   home,
   itin: itinerario,
   juego: juegos,
-  trivia: createQuiz({ game: 'trivia', title: 'Wedding Game', questions: CONFIG.trivia }),
-  marina: createQuiz({ game: 'marina', title: 'Trivia Marina', questions: CONFIG.marina, shuffle: true }),
-  tesla,
+  trivia: withPlayerName(createQuiz({ game: 'trivia', title: 'Wedding Game', questions: CONFIG.trivia })),
+  marina: withPlayerName(createQuiz({ game: 'marina', title: 'Trivia Marina', questions: CONFIG.marina, shuffle: true })),
+  tesla: withPlayerName(tesla),
   bingo,
   playlist,
   album,

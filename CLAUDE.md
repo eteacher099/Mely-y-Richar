@@ -62,7 +62,12 @@ Hash desconocido → home. **No usar `#menu`** como ruta: choca con `<nav id="me
 - Los eventos se enlazan en `mount` con `addEventListener` (sin `onclick` inline ni
   globales). Para actualizar la pantalla se modifica el DOM local; no se re-renderiza
   toda la vista.
-- Las trivias se crean con `createQuiz({ game, title, questions })` (`views/quiz.js`).
+- Las trivias se crean con `createQuiz({ game, title, questions, shuffle? })` (`views/quiz.js`).
+  Puntaje = suma de `answerPoints(ms)` por acierto (50 + hasta 150 por rapidez, `lib/scores.js`);
+  se envían `puntaje` (puntos), `maximo` (preguntas) y `aciertos`.
+- **Nombre obligatorio** en juegos con ranking: las rutas `trivia`, `marina` y `tesla` van envueltas
+  en `withPlayerName()` (`components/name-gate.js`), que muestra "¿Quién juega?" si falta; el hub
+  `#juego` también bloquea los enlaces sin nombre (mínimo 2 letras, `nameError()`).
 
 **Agregar una pantalla**: crear `js/views/x.js`, registrarla en `views/index.js`,
 añadir el enlace al `<nav id="menu">` de `index.html` y sus estilos en `css/views.css`.
@@ -99,7 +104,7 @@ con variables `--mn-*` dentro de `.menu-screen`; no lleva olas (`wave:false`, si
 Nivel = perritos encontrados + 1. `levelSettings(level)` define la dificultad (distractores,
 proporción de emojis oscuros `DARK`, perros parecidos `LOOKALIKES` desde el nivel 6, tamaño
 y giro desde el 5). Tesla siempre es el último hijo de `#bc` (capa superior): nunca queda tapado. `pointsFor(level, ms)` = nivel × (50 + hasta 150
-por rapidez; 0 de bono a los 10 s). `supportedEmojis()` descarta los emojis que el dispositivo no
+por rapidez con `speedFactor()` de `lib/scores.js`; 0 de bono a los 10 s). `supportedEmojis()` descarta los emojis que el dispositivo no
 puede dibujar (comparando contra el glifo de "caja vacía" en un canvas). El nivel se envía como
 `nivel` y se guarda en la columna `Nivel`; `GAMES.tesla` en `scores.gs` limita puntaje y nivel.
 

@@ -20,7 +20,7 @@ const rankingHtml = rows => `
     ${rows.map(r => `
       <li class="${r.me ? 'me' : ''}">
         <span>${esc(r.pos)}. ${esc(r.nombre)}${r.me ? ' (tú)' : ''}</span>
-        <b>${esc(r.puntaje)}${r.maximo ? `/${esc(r.maximo)}` : ''}${r.nivel ? ` <small>· Nv ${esc(r.nivel)}</small>` : ''}</b>
+        <b>${esc(r.puntaje)}${r.aciertos != null && r.maximo ? ` <small>· ${esc(r.aciertos)}/${esc(r.maximo)}</small>` : ''}${r.nivel ? ` <small>· Nv ${esc(r.nivel)}</small>` : ''}</b>
       </li>`).join('')}
   </ol>`;
 

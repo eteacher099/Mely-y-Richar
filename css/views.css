@@ -508,3 +508,18 @@
 .mn-status.is-error { color: #b0402c; }
 .mn-wa { display: inline-block; margin-top: 4px; color: #1f7a45; font-weight: 800; }
 .mn-foot { text-align: center; font-size: 11px; letter-spacing: .5px; color: var(--mn-muted); margin-top: 8px; }
+
+/* ---------- Trivia con puntos por rapidez ---------- */
+.quiz-hint { font-size: 13px; margin: -6px 0 10px; opacity: .85; }
+.quiz-hud { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; }
+.quiz-hud .pill { padding: 6px 14px; font-size: 14px; }
+.quiz-feedback { min-height: 1.4em; margin-top: 8px; font-weight: 800; font-size: 16px; }
+.quiz-feedback.is-ok { color: #2e8b4a; }
+.quiz-feedback.is-bad { color: var(--coral); }
+.quiz-summary { margin: -10px 0 10px; }
+
+/* ---------- Nombre obligatorio ---------- */
+.name-gate { max-width: 320px; margin: 18px auto 14px; }
+.name-gate .btn { margin-top: 6px; }
+.form-error { min-height: 1.2em; margin: -4px 0 8px 8px; text-align: left; font-size: 13px; font-weight: 700; color: var(--coral); }
+input[aria-invalid="true"] { border-color: var(--coral); }

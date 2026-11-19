@@ -92,8 +92,8 @@ la URL cambia y hay que actualizar `js/config.js`.
 | Método | Parámetros | Respuesta |
 |---|---|---|
 | `GET` | — | `{ ok, service, games }` |
-| `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, nivel, me }] }` |
-| `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, nivel?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
+| `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, aciertos, nivel, me }] }` |
+| `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, aciertos?, nivel?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
 | `POST` | body JSON `{ action:'menu', id, playerId, nombre, plato, postre, restricciones?, token? }` | `{ ok, saved, updated? }` · `{ ok:false, error }` |
 
 Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado) y
@@ -103,6 +103,9 @@ Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado
 elección, así funciona igual en hojas en español o en inglés. Si editas o borras filas de
 `Menu` a mano, usa el menú de la hoja **Boda → Actualizar resumen del menú**.
 
+- **Puntaje por rapidez** (trivias y Tesla): cada acierto vale 50 + hasta 150 según qué tan rápido
+  se responde (200 al instante, 50 desde los 10 s); en Tesla se multiplica por el nivel. En las
+  trivias `maximo` = nº de preguntas y `aciertos` = respuestas correctas (columna `Aciertos`).
 - El ranking muestra el **mejor puntaje por jugador**; en empate gana quien lo logró primero.
   Se cachea 30 s.
 - Juegos válidos y puntaje máximo: constante `GAMES` en `scores.gs`. Si agregas un juego

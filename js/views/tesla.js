@@ -1,6 +1,6 @@
 import { CONFIG } from '../config.js';
 import { $, esc } from '../lib/dom.js';
-import { submitScore } from '../lib/scores.js';
+import { submitScore, speedFactor } from '../lib/scores.js';
 import { icon } from '../lib/icons.js';
 import { scorePanelHtml, mountScorePanel } from '../components/score-panel.js';
 
@@ -40,8 +40,7 @@ export function levelSettings(level) {
  * Encontrarlo al instante en nivel 1 = 200; tardar 10 s o más = 50 × nivel.
  */
 export function pointsFor(level, ms) {
-  const speed = Math.max(0, 1 - ms / 10000);
-  return Math.round(level * (50 + 150 * speed));
+  return Math.round(level * (50 + 150 * speedFactor(ms)));
 }
 
 /**

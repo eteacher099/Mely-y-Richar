@@ -4,11 +4,12 @@
  *
  * Endpoints (URL .../exec de la implementación):
  *   GET  ?action=leaderboard&game=tesla&limit=5&player=<playerId>
- *        → { ok, rows: [{ pos, nombre, puntaje, maximo, nivel, me }] }   (mejor puntaje por jugador)
+ *        → { ok, rows: [{ pos, nombre, puntaje, maximo, aciertos, nivel, me }] }   (mejor puntaje por jugador)
  *   GET  (sin action)
  *        → { ok, service, games }                                   (health check)
  *   POST body JSON (Content-Type: text/plain):
- *        { action: 'score', id, playerId, nombre, juego, puntaje, maximo?, nivel?, duracionMs?, token? }
+ *        { action: 'score', id, playerId, nombre, juego, puntaje, maximo?, aciertos?, nivel?, duracionMs?, token? }
+ *        Trivias: puntaje = puntos por rapidez, maximo = nº de preguntas, aciertos = respuestas correctas.
  *        → { ok, saved } | { ok, duplicate } | { ok: false, error }
  *   POST body JSON (Content-Type: text/plain):
  *        { action: 'menu', id, playerId, nombre, plato, postre, restricciones?, token? }
@@ -26,13 +27,13 @@
  */
 
 const SHEET_NAME = 'Scores';
-const HEADERS = ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Juego', 'Puntaje', 'Máximo', 'Duración (s)', 'Nivel'];
-const COL = { fecha: 0, id: 1, playerId: 2, nombre: 3, juego: 4, puntaje: 5, maximo: 6, nivel: 8 };
+const HEADERS = ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Juego', 'Puntaje', 'Máximo', 'Duración (s)', 'Nivel', 'Aciertos'];
+const COL = { fecha: 0, id: 1, playerId: 2, nombre: 3, juego: 4, puntaje: 5, maximo: 6, nivel: 8, aciertos: 9 };
 
 /** Juegos aceptados y puntaje máximo posible (validación básica anti-trampa). */
 const GAMES = {
-  trivia: { maxScore: 50 },     // aciertos
-  marina: { maxScore: 50 },     // aciertos
+  trivia: { maxScore: 10000, maxQuestions: 50 },   // (50..200) puntos por acierto según rapidez
+  marina: { maxScore: 10000, maxQuestions: 50 },
   tesla: { maxScore: 200000, maxLevel: 200 },   // nivel × (50..200) por perrito, en 60 s
 };
 
@@ -94,10 +95,21 @@ function saveScore_(b) {
   const score = Number(b.puntaje);
   if (!Number.isInteger(score) || score < 0 || score > rules.maxScore) throw new Error('invalid_score');
 
+  const present = v => v !== null && v !== undefined && v !== '';
+
+  // maximo = nº de preguntas (trivias). Versiones anteriores enviaban puntaje = aciertos ≤ maximo.
   let max = '';
-  if (b.maximo !== null && b.maximo !== undefined && b.maximo !== '') {
+  if (present(b.maximo)) {
     max = Number(b.maximo);
-    if (!Number.isInteger(max) || max < score || max > rules.maxScore) throw new Error('invalid_max');
+    if (!Number.isInteger(max) || max < 0 || max > (rules.maxQuestions || rules.maxScore)) throw new Error('invalid_max');
+  }
+
+  let hits = '';
+  if (present(b.aciertos)) {
+    hits = Number(b.aciertos);
+    const limit = max === '' ? rules.maxQuestions : max;
+    if (!rules.maxQuestions || !Number.isInteger(hits) || hits < 0 || hits > limit) throw new Error('invalid_hits');
+    if (score > hits * 200) throw new Error('invalid_score');   // máximo 200 puntos por acierto
   }
 
   const id = cleanText_(b.id, 64);
@@ -118,7 +130,7 @@ function saveScore_(b) {
   try {
     const sheet = getSheet_();
     if (isDuplicate_(sheet, id)) return { duplicate: true };
-    sheet.appendRow([new Date(), id, playerId, name, game, score, max, seconds, level]);
+    sheet.appendRow([new Date(), id, playerId, name, game, score, max, seconds, level, hits]);
   } finally {
     lock.releaseLock();
   }
@@ -235,6 +247,7 @@ function leaderboard_(game, limit, me) {
     nombre: r.nombre,
     puntaje: r.puntaje,
     maximo: r.maximo,
+    aciertos: r.aciertos,
     nivel: r.nivel,
     me: Boolean(me) && r.playerId === me,
   }));
@@ -256,6 +269,7 @@ function bestByPlayer_(game) {
       puntaje: Number(row[COL.puntaje]),
       maximo: row[COL.maximo] === '' ? null : Number(row[COL.maximo]),
       nivel: row[COL.nivel] === '' || row[COL.nivel] === undefined ? null : Number(row[COL.nivel]),
+      aciertos: row[COL.aciertos] === '' || row[COL.aciertos] === undefined ? null : Number(row[COL.aciertos]),
       t: new Date(row[COL.fecha]).getTime() || 0,
     };
     const prev = byPlayer[entry.playerId];

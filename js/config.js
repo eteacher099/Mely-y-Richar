@@ -158,7 +158,7 @@ export const CONFIG = {
   // Google Sheets (ver google-scripts/README.md): ranking de juegos Y elecciones del menú.
   // Con endpoint vacío todo se guarda solo en el dispositivo.
   scores: {
-    endpoint: 'https://script.google.com/macros/s/AKfycbx-qYG8ROIV0VENPU9gX1DQa-koiDLcb-izEslUQExsDVbiMMp3FNGycA1PKmIblplXSw/exec',   // URL ".../exec" del Web App de Apps Script
+    endpoint: 'https://script.google.com/macros/s/AKfycbw7FHXilrhUIHbaLDVkkb2ly_ADj9cx7rd-sFI2CdXxlF7Z-urJIq57dGqyJqxZWJDRIQ/exec',   // URL ".../exec" del Web App de Apps Script
     token: '',         // opcional: debe coincidir con SCORES_TOKEN del script
     rankingSize: 10,    // cuántos puestos mostrar al terminar un juego
   },
