@@ -7,7 +7,7 @@ export const CONFIG = {
   ciudad: 'Cartagena de Indias',
   // Inicio de la boda (ceremonia civil). Con desfase de Colombia (-05:00) para que la
   // cuenta regresiva sea correcta aunque el invitado esté en otra zona horaria.
-  fecha: '2026-12-19T14:00:00-05:00',
+  fecha: '2026-12-19T11:00:00-05:00',
   fin: '2026-12-20T17:00:00-05:00',       // regreso a Cartagena del Día 2
   playlist: 'https://open.spotify.com/playlist/1ykF5w4hW8sWIJxIJ8FhoZ',  // playlist de Spotify "Boda Meli y Richi"
   perro: 'Tesla',
@@ -15,7 +15,7 @@ export const CONFIG = {
 
   // Lugares (se usan en Itinerario e Información)
   lugares: {
-    notaria: { nombre: 'Notaría 2 de Cartagena', detalle: 'Ceremonia · Centro Histórico', mapa: 'https://www.google.com/maps?q=place_id:ChIJ6fmgpgcv9o4R8Q1TVxQLkmA' },
+    notaria: { nombre: 'Notaría 7 de Cartagena', detalle: 'Ceremonia civil · 11:00 AM', mapa: 'https://www.google.com/maps/search/?api=1&query=Notar%C3%ADa+7+de+Cartagena' },
     muelle: { nombre: 'Muelle La Bodeguita', detalle: 'Traslado a Tierra Bomba', mapa: 'https://www.google.com/maps/search/?api=1&query=Muelle+La+Bodeguita+Cartagena' },
     fenix: { nombre: 'Fénix Beach Club', detalle: 'Recepción · Tierra Bomba', mapa: 'https://www.google.com/maps?q=place_id:ChIJ3Sx6WNUo9o4RgrpHElrzJrU' },
     nautico: { nombre: 'Club Náutico', detalle: 'Boat Day · salida del catamarán', mapa: 'https://www.google.com/maps?q=place_id:ChIJb8CLp9ZDYw0RQl_1sv6Wb30' },
@@ -29,8 +29,9 @@ export const CONFIG = {
       corto: 'Sáb 19',
       dia: '2026-12-19',
       eventos: [
-        { icono: '💍', hora: '2:00 PM', titulo: 'Ceremonia civil', detalle: 'Notaría 2 de Cartagena, en el corazón del Centro Histórico.', lugar: 'notaria' },
-        { icono: '📸', hora: '4:00 PM', titulo: 'Sesión de fotos', detalle: 'Recorreremos juntos las calles del Centro Histórico capturando los primeros recuerdos de nuestro nuevo capítulo.' },
+        { icono: '💍', hora: '11:00 AM', titulo: 'Ceremonia civil', detalle: 'En la Notaría 7 de Cartagena.', lugar: 'notaria' },
+        { icono: '📸', hora: '12:00 M', titulo: 'Sesión de fotos y paseo por el Centro Histórico', detalle: 'Recorreremos juntos las calles del Centro Histórico de Cartagena capturando los primeros recuerdos de nuestro nuevo capítulo.' },
+        { icono: '🍔', hora: '12:30 PM', titulo: 'Almuerzo: Mac Wedding', detalle: 'Un almuerzo delicioso y divertido para celebrar juntos.' },
         { icono: '🚤', hora: '5:00 PM', titulo: 'Traslado hacia Tierra Bomba', detalle: 'Nos encontraremos en el Muelle La Bodeguita.', lugar: 'muelle' },
         { icono: '🍹', hora: '5:30 PM', titulo: 'Llegada a Fénix Beach Club', detalle: 'Welcome drink frente al mar.', lugar: 'fenix' },
         { icono: '🍽️', hora: '7:30 PM', titulo: 'Cena y celebración', detalle: 'Disfrutaremos una cena a la carta, bebidas suaves y postre.', link: ['#carta', 'Elige tu plato →'] },
@@ -96,7 +97,7 @@ export const CONFIG = {
 
   // q = pregunta, o = opciones, a = índice de la respuesta correcta
   trivia: [
-    { q: '¿Dónde se conocieron Mely y Richar?', o: ['En la playa', 'En la universidad', 'En una fiesta'], a: 0 },
+    { q: '¿Dónde se conocieron Mely y Richar?', o: ['En la playa', 'En la universidad', 'En una fiesta'], a: 1 },
     { q: '¿Cómo se llama nuestro perrito?', o: ['Tesla', 'Edison', 'Newton'], a: 0 },
     { q: '¿Quién dijo "te quiero" primero?', o: ['Mely', 'Richar', 'Los dos a la vez'], a: 1 },
     { q: '¿Cuál es nuestro plan favorito?', o: ['Ir al cine', 'Viajar', 'Cocinar en casa'], a: 1 },

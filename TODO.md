@@ -20,7 +20,9 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
       y el del Muelle La Bodeguita (búsqueda de Google Maps)
 - [ ] Confirmar el número de WhatsApp de `menu.whatsapp` y `rsvp.whatsapp` (tomado de Canva)
 - [ ] Colores permitidos del dress code (en Canva son imágenes; no se copiaron)
-- [ ] Respuestas reales de la trivia de los novios (las actuales son supuestas)
+- [ ] Confirmar la dirección de la **Notaría 7** y cambiar el mapa de `lugares.notaria` por el punto exacto
+      (hoy es una búsqueda de Google Maps "Notaría 7 de Cartagena")
+- [ ] Respuestas reales de la trivia de los novios ("¿Dónde se conocieron?" ya está confirmada: en la universidad)
 - [ ] FAQ: qué llevar el Día 2, lanchas/traslados, hora límite del muelle, etc.
 - [ ] (Opcional) Reemplazar las ilustraciones SVG por arte final en alta resolución (`CONFIG.portada`)
 
