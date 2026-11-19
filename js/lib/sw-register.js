@@ -30,7 +30,9 @@ export function registerServiceWorker() {
     location.reload();
   });
 
-  navigator.serviceWorker.register('sw.js').then(reg => {
+  // updateViaCache 'none': al buscar versión nueva, sw.js y version.js (importScripts) se piden
+  // siempre al servidor; si no, la caché HTTP (10 min en GitHub Pages) escondía el despliegue.
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(reg => {
     if (reg.waiting && navigator.serviceWorker.controller) showUpdateToast(reg.waiting);
     reg.addEventListener('updatefound', () => {
       const next = reg.installing;

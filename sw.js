@@ -8,6 +8,10 @@
  *   - Google Fonts: caché propia que se revalida en segundo plano.
  *   - Apps Script (script.google.com / googleusercontent.com): SIEMPRE red, nunca caché.
  *   - En local (APP_BUILD = 'dev'): red primero, para ver los cambios al recargar.
+ *
+ * Todo lo que el SW baja de la red usa `cache: 'no-cache'`: el navegador revalida con el servidor
+ * (ETag → 304 si no cambió) en vez de usar su caché HTTP. GitHub Pages manda max-age=600, y sin
+ * esto una versión nueva podía llenar su caché con archivos viejos (p. ej. los SVG anteriores).
  */
 importScripts('version.js');
 
@@ -31,7 +35,7 @@ const SHELL = [
 
 self.addEventListener('install', event => {
   // No se activa solo: la página muestra "Hay una nueva versión" y decide (mensaje SKIP_WAITING).
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL.map(fresh))));
 });
 
 self.addEventListener('activate', event => {
@@ -64,12 +68,17 @@ self.addEventListener('fetch', event => {
   event.respondWith(DEV ? networkFirst(req) : cacheFirst(req));
 });
 
+/** La misma petición, pero revalidando con el servidor (sin usar la caché HTTP del navegador). */
+function fresh(req) {
+  return new Request(req, { cache: 'no-cache' });
+}
+
 async function cacheFirst(req) {
   const cache = await caches.open(CACHE);
   const hit = await cache.match(req, { ignoreSearch: true })
     || (req.mode === 'navigate' && await cache.match('index.html'));
   if (hit) return hit;
-  const res = await fetch(req);
+  const res = await fetch(fresh(req));
   if (res.ok) cache.put(req, res.clone());
   return res;
 }
@@ -77,7 +86,7 @@ async function cacheFirst(req) {
 async function networkFirst(req) {
   const cache = await caches.open(CACHE);
   try {
-    const res = await fetch(req);
+    const res = await fetch(fresh(req));
     if (res.ok) cache.put(req, res.clone());
     return res;
   } catch (err) {

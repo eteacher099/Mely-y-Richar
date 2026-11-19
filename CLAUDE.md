@@ -72,6 +72,10 @@ Las imágenes son SVG livianos (~70 KB en total); lo que hacía lenta la carga e
   esperando → `lib/sw-register.js` muestra "✨ Hay una nueva versión de la invitación" →
   *Actualizar* envía `SKIP_WAITING`, la página se recarga una vez y se borran las cachés viejas.
   También se busca versión nueva al volver a la pestaña y cada 30 min.
+- **Nunca usar la caché HTTP del navegador** (GitHub Pages manda `max-age=600`): el SW se registra
+  con `updateViaCache: 'none'` (si no, el `version.js` nuevo no se detecta) y todo lo que el SW
+  baja usa `fresh(req)` = `cache: 'no-cache'` (revalida con ETag). Sin esto, una versión nueva
+  llenaba su caché con los archivos viejos y los invitados que ya habían entrado no veían los cambios.
 - **`index.html` precarga todos los módulos** con `<link rel="modulepreload">`. Si agregas un
   archivo en `js/`, agrégalo a esa lista (si falta solo se pierde la precarga, no se rompe nada).
   Si un archivo nuevo debe estar disponible sin red desde la primera visita, agrégalo a `SHELL`
