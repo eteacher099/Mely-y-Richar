@@ -18,11 +18,17 @@ const MESSAGES = {
   rejected: 'No pudimos guardar tu elección 😕 Inténtalo de nuevo o escríbenos por WhatsApp.',
 };
 
-const option = (group, [name, desc], checked) => `
+/** Cada ítem es [nombre, descripción, emojis]; el valor que se guarda es solo el nombre. */
+const VEGGIE = '🌿';
+const option = (group, [name, desc, emoji = ''], checked) => `
   <label class="mn-opt">
     <input type="radio" name="${group}" value="${esc(name)}" ${checked ? 'checked' : ''}>
     <span class="mn-mark" aria-hidden="true"></span>
-    <span class="mn-text"><b>${esc(name)}</b>${desc ? `<small>${esc(desc)}</small>` : ''}</span>
+    <span class="mn-text">
+      <b>${esc(name)}${emoji.includes(VEGGIE) ? '<span class="sr-only"> (opción vegetariana)</span>' : ''}</b>
+      ${desc ? `<small>${esc(desc)}</small>` : ''}
+    </span>
+    ${emoji ? `<span class="mn-emoji" aria-hidden="true">${esc(emoji)}</span>` : ''}
   </label>`;
 
 function whatsappUrl(choice) {
@@ -56,6 +62,7 @@ export default function menu() {
             <fieldset class="mn-section">
               <legend class="mn-h3">Plato principal</legend>
               <p class="mn-note">Elige una sola opción.</p>
+              <p class="mn-legend">🌿 Vegetariano · 🐟 Pescado · 🦐 Mariscos · 🍗 Pollo · 🥩 Res · 🥥 Arroz con coco</p>
               <div class="mn-list">
                 ${CONFIG.menu.principales.map(p => option('plato', p, saved.plato === p[0])).join('')}
               </div>

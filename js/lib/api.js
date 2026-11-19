@@ -47,6 +47,9 @@ export function get(params) {
   return request(url);
 }
 
+/** ¿Esta entrada (por id) sigue esperando en la cola offline? */
+export const isQueued = id => storage.get(QUEUE_KEY, []).some(e => e.id === id);
+
 function enqueue(entry) {
   const queue = storage.get(QUEUE_KEY, []);
   queue.push(entry);

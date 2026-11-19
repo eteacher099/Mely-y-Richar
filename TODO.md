@@ -5,6 +5,9 @@ Apps Script publicado y verificado (health check, ranking con nivel y aciertos, 
 trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y menú llegan a la hoja.
 
 ## 🚀 Pendiente en Google Sheets / despliegue
+- [ ] **Mensajes y canciones:** pegar el `scores.gs` nuevo, ejecutar `setup()` (crea `Mensajes` y
+      `Canciones`) y desplegar como *Nueva versión* **antes** de publicar el sitio (el script actual
+      responde `unknown_action` y los invitados verían "No pudimos enviarlo")
 - [ ] **Antes de compartir la invitación:** borrar las filas de prueba en `Scores` ("prueba", "Handsome")
       y en `Menu`; las de trivia viejas están en escala de aciertos (3/4), no de puntos. Luego
       **Boda → Actualizar resumen del menú** para que `Resumen menú` quede en cero
@@ -23,12 +26,14 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
 - [ ] (Opcional) Reemplazar las ilustraciones SVG por arte final en alta resolución (`CONFIG.portada`)
 
 ## 🐛 Funcionalidad incompleta
-- [ ] **Mensajes**: solo se guardan en el teléfono del invitado → los novios nunca los leen.
-      Enviarlos a Sheets con una acción `message` en el mismo Apps Script
-- [ ] **Sugerencias de canciones**: mismo problema → acción `song` en el Apps Script
-- [ ] **Álbum**: las fotos quedan en `localStorage` (~5 MB, solo las ve quien las sube).
-      Opciones: subir a una carpeta de Google Drive vía Apps Script, o enlazar un álbum
-      compartido de Google Fotos
+- [ ] **Álbum: elegir proveedor y pegar el link en `CONFIG.album.subir`** (y `ver` / `nota`).
+      La pantalla ya está lista: sin link muestra "Muy pronto"; con link, "Subir fotos y videos".
+      | Opción | Cuenta de Google | Videos | Comentario |
+      |---|---|---|---|
+      | Carpeta de Drive con permiso de edición | Sí | Grandes | Simple; todo queda en una carpeta |
+      | Álbum compartido de Google Fotos | Sí | Grandes | El más cómodo en el celular; se ve como álbum |
+      | Google Form con carga de archivos | Sí | Hasta el límite del Form | Ordenado por invitado (nombre + archivos) |
+      | Subida vía Apps Script a Drive | No | Solo cortos (~20 MB) | Requiere permiso de Drive y más desarrollo |
 - [ ] **Reproductor**: es decorativo (el ▶ no reproduce nada). Reemplazar por el embed
       de Spotify o quitar los controles
 - [ ] Bingo: registrar en Sheets quién completó el cartón (opcional)
@@ -66,4 +71,9 @@ trivias puntuadas por rapidez aceptadas). Probado desde el celular: puntajes y m
       build automático por commit en el workflow y `modulepreload` de todos los módulos
 - [x] Trivia Marina: banco de 32 preguntas, 10 al azar por partida
 - [x] Top 5 en el hub: Encuentra a Tesla y Trivia Marina (orden de los íconos)
+- [x] Mensajes y canciones sugeridas a Google Sheets (privados para los novios; pestañas
+      `Mensajes` y `Canciones`), con nombre obligatorio, spinner y estado Enviado / Pendiente
+- [x] Álbum: arquitectura con link configurable (`CONFIG.album`), "Muy pronto" mientras tanto;
+      se quitó la subida a `localStorage` (las fotos viejas del teléfono se pueden ver y borrar)
+- [x] Menú de boda con emojis por plato (máx. 3) y leyenda (🌿 vegetariano, 🐟, 🦐, 🍗, 🥩, 🥥)
 - [x] Nombre obligatorio para jugar ("¿Quién juega?" en trivia, marina y Tesla; validación en el hub)

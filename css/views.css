@@ -223,25 +223,14 @@
   border: 0;
   cursor: pointer;
 }
-.suggest { margin-top: 20px; }
+.suggest { margin-top: 20px; background: #fffdf8; }
 .suggest-title { display: block; margin-bottom: 14px; }
-.sug-item { margin-top: 10px; }
 
 /* ---------- Álbum ---------- */
-.drop {
-  display: block;
-  border: 2px dashed #14337a66;
-  border-radius: 18px;
-  padding: 22px;
-  cursor: pointer;
-  margin-bottom: 16px;
-}
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
 
 /* ---------- Mensajes ---------- */
-.msg-list { margin-top: 18px; }
-.msg small { float: right; opacity: .6; font-size: 12px; }
 
 /* ---------- Información ---------- */
 
@@ -305,7 +294,6 @@
 .spotify-dot { width: 26px; height: 26px; border-radius: 50%; background: #1DB954; display: inline-grid; place-items: center; }
 
 /* Álbum */
-.drop { background: #fff6; color: var(--navy); }
 .al-shell { right: 10px; bottom: 70px; width: 64px; transform: rotate(-10deg); }
 
 /* Mensajes */
@@ -544,3 +532,49 @@ input[aria-invalid="true"] { border-color: var(--coral); }
 .rank-mini li:nth-child(3) .rm-pos::before { content: "🥉"; }
 .rank-mini li:nth-child(-n+3) .rm-pos { font-size: 0; width: 14px; }
 .rank-mini li:nth-child(-n+3) .rm-pos::before { font-size: 11px; }
+
+/* ---------- Mensajes y canciones (privados para los novios) ---------- */
+.note-form { text-align: left; }
+.note-form .field-label { margin-left: 8px; }
+.note-form textarea {
+  width: 100%;
+  border: 2px solid #14337a55;
+  border-radius: 18px;
+  padding: 12px 16px;
+  font: 16px var(--font-body);
+  color: var(--navy);
+  background: #fff;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+.note-form textarea[aria-invalid="true"] { border-color: var(--coral); }
+.note-status { min-height: 4px; text-align: center; }
+.note-result { font-weight: 800; font-size: 14px; margin: 10px 0 0; }
+.note-result.is-ok { color: #2e8b4a; }
+.note-result.is-error { color: var(--coral); }
+.suggest-hint { font-size: 13px; margin: -8px 0 12px; opacity: .85; }
+
+.sent-title { font-weight: 800; margin: 20px 0 8px; text-align: left; }
+.sent-list { list-style: none; padding: 0; margin: 0; text-align: left; }
+.sent-item { background: #fff8; border: 1px solid #14337a22; border-radius: 14px; padding: 10px 12px; margin-bottom: 8px; }
+.sent-item p { margin: 0 0 6px; overflow-wrap: anywhere; }
+.sent-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; }
+.sent-meta small { opacity: .6; }
+.chip { display: inline-block; border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 800; }
+.chip--ok { background: #d8f0dc; color: #24703b; }
+.chip--wait { background: #fde9b8; color: #7a5600; }
+.chip--local { background: #e6e8ef; color: #4b5470; }
+
+/* ---------- Álbum (link externo configurable) ---------- */
+.album-soon { padding: 22px 16px; }
+.album-soon-icon { display: block; font-size: 44px; margin-bottom: 4px; }
+.album-soon p { margin: 6px 0 0; font-size: 14px; }
+.album-actions { display: grid; gap: 10px; margin-bottom: 8px; }
+.album-actions .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; }
+.album-note { font-size: 13px; opacity: .8; margin: 0; }
+.album-clear { margin-top: 12px; background: #fff; color: var(--coral); border: 2px solid var(--coral); font-size: 15px; }
+
+/* ---------- Emojis del menú de boda ---------- */
+.mn-opt .mn-text { flex: 1; min-width: 0; }
+.mn-emoji { flex: none; align-self: center; font-size: 20px; letter-spacing: 1px; line-height: 1; white-space: nowrap; }
+.mn-legend { font-size: 11.5px; color: var(--mn-muted); text-align: center; margin: -6px 0 14px; line-height: 1.6; }

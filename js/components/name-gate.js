@@ -12,7 +12,7 @@ export const MIN_NAME = 2;
 /** Valida un nombre; devuelve el mensaje de error o '' si es válido. */
 export function nameError(value) {
   const name = String(value || '').trim();
-  if (!name) return 'Escribe tu nombre para jugar.';
+  if (!name) return 'Escribe tu nombre.';
   if (name.length < MIN_NAME) return `Tu nombre debe tener al menos ${MIN_NAME} letras.`;
   return '';
 }

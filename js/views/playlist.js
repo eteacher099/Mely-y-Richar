@@ -1,13 +1,13 @@
 import { CONFIG, coupleName } from '../config.js';
 import { $, esc } from '../lib/dom.js';
 import { icon } from '../lib/icons.js';
-import { storage } from '../lib/storage.js';
-
-const songItem = song => `<p class="sug-item">🎶 ${esc(song)}</p>`;
+import { player } from '../lib/player.js';
+import { suggestSong, history } from '../lib/notes.js';
+import { nameError } from '../components/name-gate.js';
+import { spinner } from '../components/spinner.js';
+import { sentListHtml, SEND_RESULT } from '../components/sent-list.js';
 
 export default function playlist() {
-  const songs = storage.get('sug', []);
-
   return {
     html: `
       <section class="s sea">
@@ -35,12 +35,23 @@ export default function playlist() {
           <span class="spotify-dot" aria-hidden="true">${icon('music', 16)}</span>Abrir en Spotify
         </a>
 
-        <div class="card suggest">
+        <form class="card suggest note-form" id="song-form" novalidate>
           <b class="suggest-title">Sugiere una canción</b>
-          <input type="text" id="sg" placeholder="Canción – Artista" maxlength="80">
-          <button type="button" class="btn btn--block" id="sgb">Enviar</button>
-          <div id="sgl">${songs.map(songItem).join('')}</div>
-        </div>
+          <p class="suggest-hint">Los novios reciben tu sugerencia para la playlist 🎶</p>
+
+          <label class="field-label" for="sg-name">Tu nombre <span aria-hidden="true">*</span></label>
+          <input type="text" id="sg-name" maxlength="30" autocomplete="given-name" required
+            aria-describedby="sg-name-error" value="${esc(player.name)}">
+          <p class="form-error" id="sg-name-error" aria-live="polite"></p>
+
+          <label class="field-label" for="sg">Canción <span aria-hidden="true">*</span></label>
+          <input type="text" id="sg" placeholder="Canción – Artista" maxlength="100" required aria-describedby="sg-error">
+          <p class="form-error" id="sg-error" aria-live="polite"></p>
+
+          <button type="submit" class="btn btn--block">Enviar</button>
+          <div class="note-status" id="sg-status" aria-live="polite"></div>
+          <div id="sgl">${sentListHtml(history('song'), 'Tus sugerencias')}</div>
+        </form>
       </section>`,
 
     mount(root) {
@@ -52,18 +63,38 @@ export default function playlist() {
         playBtn.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
       });
 
-      const input = $('#sg', root);
-      const list = $('#sgl', root);
-      const add = () => {
-        const song = input.value.trim();
-        if (!song) return;
-        songs.push(song);
-        storage.set('sug', songs);
-        list.insertAdjacentHTML('beforeend', songItem(song));
-        input.value = '';
+      const form = $('#song-form', root);
+      const name = $('#sg-name', root);
+      const song = $('#sg', root);
+      const status = $('#sg-status', root);
+      const btn = form.querySelector('button[type=submit]');
+
+      const fieldError = (input, msg) => {
+        $(`#${input.id}-error`, root).textContent = msg;
+        if (msg) input.setAttribute('aria-invalid', 'true');
+        else input.removeAttribute('aria-invalid');
       };
-      $('#sgb', root).addEventListener('click', add);
-      input.addEventListener('keydown', e => { if (e.key === 'Enter') add(); });
+      name.addEventListener('input', () => { if (!nameError(name.value)) fieldError(name, ''); });
+      song.addEventListener('input', () => { if (song.value.trim()) fieldError(song, ''); });
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const nErr = nameError(name.value);
+        const sErr = song.value.trim() ? '' : 'Escribe la canción y el artista.';
+        fieldError(name, nErr);
+        fieldError(song, sErr);
+        if (nErr || sErr) return (nErr ? name : song).focus();
+
+        player.name = name.value;
+        btn.disabled = true;
+        status.innerHTML = spinner('Enviando tu sugerencia…', { small: true });
+        const { status: result } = await suggestSong({ nombre: name.value.trim(), cancion: song.value.trim() });
+        if (!form.isConnected) return;
+        btn.disabled = false;
+        status.innerHTML = `<p class="note-result ${result === 'rejected' ? 'is-error' : 'is-ok'}">${SEND_RESULT[result]}</p>`;
+        if (result !== 'rejected') song.value = '';
+        $('#sgl', root).innerHTML = sentListHtml(history('song'), 'Tus sugerencias');
+      });
     },
   };
 }

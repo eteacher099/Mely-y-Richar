@@ -56,39 +56,41 @@ export const CONFIG = {
   // Menú de la cena del Día 1 (Fénix Beach Club). Solo platos incluidos, sin costo adicional.
   menu: {
     whatsapp: '573105902167',   // con indicativo, solo dígitos (el de confirmación de la invitación de Canva); '' = sin botón
+    // [nombre, descripción, emojis (máx. 3)] · 🌿 = vegetariano · 🥥 arroz con coco · 🍌 patacón/plátano
     principales: [
-      ['Pasta Alfredo con Pollo', 'Pasta en salsa Alfredo con pollo.'],
-      ['Tacos de Camarones', 'Camarones al ajillo, mojo de cebolla roja y alioli.'],
-      ['Pasta de Mar', 'Salsa cremosa y atomatada con mix de mariscos.'],
-      ['Tacos de Pescado Blanco', 'Pescado apanado, repollo encurtido, cilantro y alioli.'],
-      ['Paella de la Huerta', 'Preparación de arroz con vegetales.'],
-      ['Poke de Salmón', 'Salmón, arroz, aguacate, mango, pepino, lechugas y aderezo de yogur.'],
-      ['Pescado Isleño Entero', 'Acompañado de arroz con coco, patacones y ensalada.'],
-      ['Poke Costeño', 'Camarón apanado, arroz de coco, aguacate, tomate, cebolla, lechuga, chips de plátano y suero.'],
-      ['Filete de Corvina', 'A la sartén, con sabores cítricos; acompañado de arroz con coco y yuca con mojo.'],
-      ['Poke de Quinua', 'Quinua, aguacate, cebolla encurtida, zanahoria, pepino, coliflor, lechugas y aderezo ponzu.'],
-      ['Posta Negra Cartagenera', 'Tradicional preparación de posta de res con arroz con coco y plátano en tentación.'],
-      ['Poke Acevichado', 'Corvina, salsa acevichada, arroz, aguacate, maíz crocante, mango y chips de plátano.'],
-      ['Sancocho de Pescado', 'Al estilo de la isla, con posta de sierra local.'],
-      ['Pizza Margarita', 'Pizza de estilo clásico.'],
-      ['Pollo con Salsa Criolla', 'Acompañado de arroz con coco y patacón.'],
-      ['Pizza Cuatro Quesos', 'Mozzarella, búfala, queso azul, brie y salsa napolitana.'],
-      ['Hamburguesa Vegana', 'Mezcla de vegetales, proteínas y granos.'],
-      ['Pizza Hawaiana', 'Jamón, mozzarella, salsa napolitana y piña.'],
-      ['Hamburguesa de Pescado', 'Robalo al grill con coleslaw de repollo morado y bastones de yuca.'],
-      ['Uramaki de Salmón', 'Salmón, arroz, alga nori, queso crema, aguacate, masago y ajonjolí.'],
-      ['Hamburguesa Fénix', 'Carne de res con verduras y salsas de la casa, acompañada de papas rústicas.'],
-      ['Tempura Roll', 'Corvina, arroz, alga nori, queso crema, aguacate, camarón, mayonesa y sriracha.'],
-      ['Tacos de Pollo', 'Pollo a la parrilla, piña asada, guacamole y mojo de cebolla blanca.'],
-      ['Camarón Sweet', 'Camarón, arroz, alga nori, plátano amarillo, kanikama y sweet chili.'],
+      ['Pasta Alfredo con Pollo', 'Pasta en salsa Alfredo con pollo.', '🍝🍗'],
+      ['Tacos de Camarones', 'Camarones al ajillo, mojo de cebolla roja y alioli.', '🌮🦐'],
+      ['Pasta de Mar', 'Salsa cremosa y atomatada con mix de mariscos.', '🍝🦐🐙'],
+      ['Tacos de Pescado Blanco', 'Pescado apanado, repollo encurtido, cilantro y alioli.', '🌮🐟'],
+      ['Paella de la Huerta', 'Preparación de arroz con vegetales.', '🥘🥦🌿'],
+      ['Poke de Salmón', 'Salmón, arroz, aguacate, mango, pepino, lechugas y aderezo de yogur.', '🥗🐟🥭'],
+      ['Pescado Isleño Entero', 'Acompañado de arroz con coco, patacones y ensalada.', '🐟🥥🍌'],
+      ['Poke Costeño', 'Camarón apanado, arroz de coco, aguacate, tomate, cebolla, lechuga, chips de plátano y suero.', '🥗🦐🥥'],
+      ['Filete de Corvina', 'A la sartén, con sabores cítricos; acompañado de arroz con coco y yuca con mojo.', '🐟🍋🥥'],
+      ['Poke de Quinua', 'Quinua, aguacate, cebolla encurtida, zanahoria, pepino, coliflor, lechugas y aderezo ponzu.', '🥗🥑🌿'],
+      ['Posta Negra Cartagenera', 'Tradicional preparación de posta de res con arroz con coco y plátano en tentación.', '🥩🥥🍌'],
+      ['Poke Acevichado', 'Corvina, salsa acevichada, arroz, aguacate, maíz crocante, mango y chips de plátano.', '🥗🐟🌽'],
+      ['Sancocho de Pescado', 'Al estilo de la isla, con posta de sierra local.', '🍲🐟'],
+      ['Pizza Margarita', 'Pizza de estilo clásico.', '🍕🍅🌿'],
+      ['Pollo con Salsa Criolla', 'Acompañado de arroz con coco y patacón.', '🍗🥥🍌'],
+      ['Pizza Cuatro Quesos', 'Mozzarella, búfala, queso azul, brie y salsa napolitana.', '🍕🧀🌿'],
+      ['Hamburguesa Vegana', 'Mezcla de vegetales, proteínas y granos.', '🍔🌿'],
+      ['Pizza Hawaiana', 'Jamón, mozzarella, salsa napolitana y piña.', '🍕🍍'],
+      ['Hamburguesa de Pescado', 'Robalo al grill con coleslaw de repollo morado y bastones de yuca.', '🍔🐟'],
+      ['Uramaki de Salmón', 'Salmón, arroz, alga nori, queso crema, aguacate, masago y ajonjolí.', '🍣🐟🥑'],
+      ['Hamburguesa Fénix', 'Carne de res con verduras y salsas de la casa, acompañada de papas rústicas.', '🍔🥩🍟'],
+      ['Tempura Roll', 'Corvina, arroz, alga nori, queso crema, aguacate, camarón, mayonesa y sriracha.', '🍣🦐'],
+      ['Tacos de Pollo', 'Pollo a la parrilla, piña asada, guacamole y mojo de cebolla blanca.', '🌮🍗🍍'],
+      ['Camarón Sweet', 'Camarón, arroz, alga nori, plátano amarillo, kanikama y sweet chili.', '🍣🦐🍌'],
     ],
+    // [nombre, nota, emojis]
     postres: [
-      ['Arroz con Leche de la Abuela'],
-      ['Cremoso Frío de Limón'],
-      ['Flan de Coco'],
-      ['Torta de Chocolate'],
-      ['Copa de Helado', 'Vainilla o vegano.'],
-      ['Helado de Pistacho'],
+      ['Arroz con Leche de la Abuela', '', '🍚🥛'],
+      ['Cremoso Frío de Limón', '', '🍋🍮'],
+      ['Flan de Coco', '', '🍮🥥'],
+      ['Torta de Chocolate', '', '🍫🍰'],
+      ['Copa de Helado', 'Vainilla o vegano.', '🍨🌿'],
+      ['Helado de Pistacho', '', '🍨🥜'],
     ],
   },
 
@@ -178,10 +180,19 @@ export const CONFIG = {
     ['¿Se permiten niños?', 'Escríbenos y lo coordinamos.'],
   ],
 
+  // Álbum compartido. Mientras `subir` esté vacío se muestra "Muy pronto".
+  // Puede ser una carpeta de Drive (con permiso de edición), un álbum compartido de Google Fotos
+  // o un Google Form con carga de archivos (ver TODO.md: "Álbum: elegir proveedor").
+  album: {
+    subir: '',   // link donde los invitados suben sus fotos y videos
+    ver: '',     // link para ver el álbum (puede ser el mismo)
+    nota: '',    // aviso opcional bajo el botón, p. ej. 'Necesitas una cuenta de Google'
+  },
+
   // Google Sheets (ver google-scripts/README.md): ranking de juegos Y elecciones del menú.
   // Con endpoint vacío todo se guarda solo en el dispositivo.
   scores: {
-    endpoint: 'https://script.google.com/macros/s/AKfycbw7FHXilrhUIHbaLDVkkb2ly_ADj9cx7rd-sFI2CdXxlF7Z-urJIq57dGqyJqxZWJDRIQ/exec',   // URL ".../exec" del Web App de Apps Script
+    endpoint: 'https://script.google.com/macros/s/AKfycbydm0rwwnSBa83FvErwo4ERHV78x_r5_GVwegC4d52PbhZh4r4yA3wVchQ_6-z5NUDrkg/exec',   // URL ".../exec" del Web App de Apps Script
     token: '',         // opcional: debe coincidir con SCORES_TOKEN del script
     rankingSize: 10,    // cuántos puestos mostrar al terminar un juego
   },

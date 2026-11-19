@@ -1,34 +1,50 @@
+/**
+ * Álbum compartido. Las fotos y videos se suben a un servicio externo (Drive, Google Fotos o
+ * un Google Form) cuyo link se configura en CONFIG.album. Mientras no haya link: "Muy pronto".
+ *
+ * Antes las fotos se guardaban comprimidas en localStorage (solo las veía quien las subía y
+ * cabían ~5 MB). Si este teléfono tiene fotos de esa versión, se muestran para no perderlas.
+ */
+import { CONFIG } from '../config.js';
 import { $, esc } from '../lib/dom.js';
 import { storage } from '../lib/storage.js';
 import { icon } from '../lib/icons.js';
 
-const MAX_SIDE = 600;   // px del lado mayor tras comprimir
-const QUALITY = 0.7;    // calidad JPEG
+const LEGACY_KEY = 'fotos';
 
-function loadImage(file) {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('imagen inválida')); };
-    img.src = url;
-  });
+const linkBtn = (url, text, cls = '') =>
+  `<a class="btn btn--block ${cls}" href="${esc(url)}" target="_blank" rel="noopener">${text}</a>`;
+
+function shareHtml() {
+  const { subir, ver, nota } = CONFIG.album ?? {};
+  if (!subir) {
+    return `
+      <div class="card card--center album-soon">
+        <span class="album-soon-icon" aria-hidden="true">📸</span>
+        <b>¡Muy pronto!</b>
+        <p>Muy pronto podrás compartir aquí tus fotos y videos de la boda con todos.</p>
+      </div>`;
+  }
+  return `
+    <div class="album-actions">
+      ${linkBtn(subir, `${icon('camera', 22)}Subir fotos y videos`, 'btn--sun')}
+      ${ver ? linkBtn(ver, '🖼️ Ver el álbum') : ''}
+      ${nota ? `<p class="album-note">${esc(nota)}</p>` : ''}
+    </div>`;
 }
 
-/** Reduce la foto y la devuelve como data URL JPEG (para que quepa en localStorage). */
-async function compress(file) {
-  const img = await loadImage(file);
-  const k = Math.min(1, MAX_SIDE / Math.max(img.width, img.height));
-  const canvas = document.createElement('canvas');
-  canvas.width = Math.round(img.width * k);
-  canvas.height = Math.round(img.height * k);
-  canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-  return canvas.toDataURL('image/jpeg', QUALITY);
+function legacyHtml(photos) {
+  if (!photos.length) return '';
+  return `
+    <div class="album-legacy">
+      <p class="sent-title">Tus fotos en este teléfono</p>
+      <div class="grid">${photos.map(src => `<img src="${esc(src)}" alt="Foto guardada en este teléfono" loading="lazy">`).join('')}</div>
+      <button type="button" class="btn btn--block album-clear" id="album-clear">Borrar estas fotos del teléfono</button>
+    </div>`;
 }
 
 export default function album() {
-  const photos = storage.get('fotos', []);
-  const gridHtml = () => photos.map(src => `<img src="${esc(src)}" alt="Foto del álbum" loading="lazy">`).join('');
+  const photos = storage.get(LEGACY_KEY, []);
 
   return {
     html: `
@@ -37,32 +53,15 @@ export default function album() {
         ${icon('camera', 64, 'view-icon')}
         <h2>Nuestro Álbum</h2>
         <p class="sub">Comparte tus fotos y videos</p>
-        <label class="drop">
-          ${icon('camera', 38, 'drop-icon')}<br>
-          <b>Sube tus recuerdos</b><br>
-          <small>Toca para elegir fotos</small>
-          <input type="file" id="fi" accept="image/*" multiple hidden>
-        </label>
-        <div class="grid" id="grid">${gridHtml()}</div>
+        ${shareHtml()}
+        <div id="album-legacy">${legacyHtml(photos)}</div>
       </section>`,
 
     mount(root) {
-      const grid = $('#grid', root);
-      $('#fi', root).addEventListener('change', async e => {
-        const input = e.target;
-        const added = [];
-        for (const file of input.files) {
-          try { added.push(await compress(file)); } catch { /* archivo no legible: se omite */ }
-        }
-        input.value = '';
-        if (!added.length) return;
-
-        photos.unshift(...added);
-        if (!storage.set('fotos', photos)) {
-          photos.splice(0, added.length);
-          alert('No hay espacio para más fotos en este dispositivo.');
-        }
-        if (grid.isConnected) grid.innerHTML = gridHtml();
+      $('#album-clear', root)?.addEventListener('click', () => {
+        if (!window.confirm('¿Borrar las fotos guardadas en este teléfono? No se pueden recuperar.')) return;
+        storage.set(LEGACY_KEY, []);
+        $('#album-legacy', root).innerHTML = '';
       });
     },
   };

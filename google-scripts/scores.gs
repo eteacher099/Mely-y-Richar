@@ -1,5 +1,5 @@
 /**
- * Boda Mely & Richar — API de la invitación (puntajes de juegos + menú de la cena).
+ * Boda Mely & Richar — API de la invitación (puntajes, menú de la cena, mensajes y canciones).
  * Google Apps Script publicado como Web App; guarda en una hoja de Google Sheets.
  *
  * Endpoints (URL .../exec de la implementación):
@@ -17,6 +17,11 @@
  *        Una fila por invitado (playerId) en la pestaña "Menu": la última elección reemplaza a la anterior.
  *        La pestaña "Resumen menú" se reescribe con valores (conteo por plato y postre,
  *        restricciones) en cada elección; también desde el menú de la hoja "Boda".
+ *   POST body JSON (Content-Type: text/plain):
+ *        { action: 'message', id, playerId, nombre, texto, token? }     → pestaña "Mensajes"
+ *        { action: 'song',    id, playerId, nombre, cancion, token? }   → pestaña "Canciones"
+ *        → { ok, saved } | { ok, duplicate } | { ok: false, error: missing_name|missing_text|missing_id }
+ *        Privados: solo los novios los leen en la hoja (no hay GET).
  *
  * Script Properties opcionales (Configuración del proyecto → Propiedades de la secuencia de comandos):
  *   SPREADSHEET_ID  id de la hoja si el script NO está vinculado a ella.
@@ -40,6 +45,15 @@ const GAMES = {
 const MENU_SHEET = 'Menu';
 const MENU_HEADERS = ['Fecha', 'Jugador ID', 'Nombre', 'Plato principal', 'Postre', 'Alergias / restricciones'];
 const SUMMARY_SHEET = 'Resumen menú';
+
+/**
+ * Notas privadas para los novios (solo se leen en la hoja; no hay GET público).
+ *   message → pestaña "Mensajes"   ·   song → pestaña "Canciones"
+ */
+const NOTES = {
+  message: { sheet: 'Mensajes', headers: ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Mensaje'], field: 'texto', max: 300 },
+  song: { sheet: 'Canciones', headers: ['Fecha', 'ID', 'Jugador ID', 'Nombre', 'Canción'], field: 'cancion', max: 100 },
+};
 
 const MAX_LIMIT = 50;
 const CACHE_SECONDS = 30;
@@ -67,6 +81,8 @@ function doPost(e) {
     checkToken_(body.token);
     if (body.action === 'score') return json_(Object.assign({ ok: true }, saveScore_(body)));
     if (body.action === 'menu') return json_(Object.assign({ ok: true }, saveMenu_(body)));
+    if (body.action === 'message') return json_(Object.assign({ ok: true }, saveNote_(NOTES.message, body)));
+    if (body.action === 'song') return json_(Object.assign({ ok: true }, saveNote_(NOTES.song, body)));
     throw new Error('unknown_action');
   } catch (err) {
     return json_({ ok: false, error: err.message });
@@ -77,10 +93,11 @@ function doPost(e) {
 function setup() {
   const sheet = getSheet_();
   refreshMenuSummary_();   // crea "Menu" y reescribe "Resumen menú" (corrige el #ERROR! de versiones con QUERY)
+  Object.keys(NOTES).forEach(k => getOrCreateSheet_(getSpreadsheet_(), NOTES[k].sheet, NOTES[k].headers));
   const header = sheet.getRange(1, 1, 1, HEADERS.length);
   const current = header.getValues()[0];
   if (current.some((v, i) => v !== HEADERS[i])) header.setValues([HEADERS]).setFontWeight('bold');
-  Logger.log('Hoja lista: %s (pestañas "%s", "%s" y "%s")', sheet.getParent().getUrl(), SHEET_NAME, MENU_SHEET, SUMMARY_SHEET);
+  Logger.log('Hoja lista: %s (pestañas Scores, Menu, Resumen menú, Mensajes y Canciones)', sheet.getParent().getUrl());
 }
 
 /* ------------------------------------------------------------------ */
@@ -160,6 +177,32 @@ function saveMenu_(b) {
     else sheet.appendRow(row);
     refreshMenuSummary_();
     return found ? { saved: true, updated: true } : { saved: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/**
+ * Guarda un mensaje o una canción sugerida (una fila por envío, deduplicado por id).
+ * @param {{sheet: string, headers: string[], field: string, max: number}} kind  NOTES.message | NOTES.song
+ */
+function saveNote_(kind, b) {
+  const id = cleanText_(b.id, 64);
+  if (!id) throw new Error('missing_id');
+  const rawName = String(b.nombre == null ? '' : b.nombre).trim();
+  if (rawName.length < 2) throw new Error('missing_name');
+  const name = cleanText_(rawName, 30);
+  const text = cleanText_(String(b[kind.field] == null ? '' : b[kind.field]).replace(/\s+/g, ' '), kind.max);
+  if (!text) throw new Error('missing_text');
+  const playerId = cleanText_(b.playerId, 64) || 'anon';
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = getOrCreateSheet_(getSpreadsheet_(), kind.sheet, kind.headers);
+    if (isDuplicate_(sheet, id)) return { duplicate: true };
+    sheet.appendRow([new Date(), id, playerId, name, text]);
+    return { saved: true };
   } finally {
     lock.releaseLock();
   }

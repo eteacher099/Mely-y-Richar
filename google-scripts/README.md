@@ -1,7 +1,8 @@
 # API de la invitación (Google Apps Script → Google Sheets)
 
 `scores.gs` guarda en una hoja de cálculo los puntajes de los juegos (trivia, trivia marina y
-"Encuentra a Tesla"), devuelve el ranking y registra la elección del **menú de boda** de cada invitado. Se publica como **Web App** y la invitación
+"Encuentra a Tesla"), devuelve el ranking, registra la elección del **menú de boda** de cada
+invitado y recibe los **mensajes** y **canciones sugeridas** para los novios. Se publica como **Web App** y la invitación
 le habla por `fetch`.
 
 | Archivo | Qué es |
@@ -23,7 +24,7 @@ le habla por `fetch`.
    y pega `appsscript.json`. Ajusta `timeZone` si la boda no es en Colombia
    (p. ej. `America/Mexico_City`).
 5. Selecciona la función **`setup`** y pulsa **Ejecutar**. Acepta los permisos.
-   Se crean las pestañas `Scores`, `Menu` y `Resumen menú`.
+   Se crean las pestañas `Scores`, `Menu`, `Resumen menú`, `Mensajes` y `Canciones`.
 
 ## 2. Publicar ("postear") el Web App
 
@@ -95,9 +96,13 @@ la URL cambia y hay que actualizar `js/config.js`.
 | `GET` | `action=leaderboard&game=<id>&limit=<1-50>&player=<playerId>` | `{ ok, rows: [{ pos, nombre, puntaje, maximo, aciertos, nivel, me }] }` |
 | `POST` | body JSON `{ action:'score', id, playerId, nombre, juego, puntaje, maximo?, aciertos?, nivel?, duracionMs?, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
 | `POST` | body JSON `{ action:'menu', id, playerId, nombre, plato, postre, restricciones?, token? }` | `{ ok, saved, updated? }` · `{ ok:false, error }` |
+| `POST` | body JSON `{ action:'message', id, playerId, nombre, texto, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
+| `POST` | body JSON `{ action:'song', id, playerId, nombre, cancion, token? }` | `{ ok, saved }` · `{ ok, duplicate }` · `{ ok:false, error }` |
 
-Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado) y
-`Resumen menú` (conteo por plato y por postre + lista de alergias/restricciones).
+Pestañas que crea el script: `Scores` (puntajes), `Menu` (una fila por invitado),
+`Resumen menú` (conteo por plato y por postre + lista de alergias/restricciones),
+`Mensajes` y `Canciones` (privados: solo los novios los leen en la hoja; nombre ≥ 2 letras,
+mensaje hasta 300 caracteres, canción hasta 100; errores `missing_name` / `missing_text`).
 
 `Resumen menú` se **reescribe con valores** (sin fórmulas) cada vez que alguien guarda su
 elección, así funciona igual en hojas en español o en inglés. Si editas o borras filas de

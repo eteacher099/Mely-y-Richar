@@ -193,7 +193,23 @@ separador es `;` y las fórmulas con `,` dan `#ERROR!`).
 - Accesibilidad: emojis decorativos con `aria-hidden="true"`, botones con `type="button"`
   y `aria-label` cuando solo tienen icono.
 
+## Mensajes, canciones y álbum
+
+- **Mensajes** (`#mensajes`) y **canciones sugeridas** (`#playlist`) se envían a la hoja con
+  `sendMessage()` / `suggestSong()` (`lib/notes.js` → `send()`, con cola offline). Son
+  **privados**: van a las pestañas `Mensajes` y `Canciones` y solo los novios los leen; no hay GET.
+  Cada invitado ve "Tus mensajes" / "Tus sugerencias" (historial local `msgs` / `sug`) con
+  estado (`components/sent-list.js`): ✓ Enviado, 📶 Pendiente (`isQueued(id)` en la cola) o
+  "Solo en este teléfono" (ítems de antes de conectar con Sheets, sin `id`; no se envían).
+  El nombre es obligatorio (`nameError()`) y actualiza `player.name`.
+- **Álbum** (`#album`): las fotos y videos se suben a un servicio externo cuyo link va en
+  `CONFIG.album.subir` (y `ver`, `nota`). Vacío → tarjeta "Muy pronto". Ya no se guardan fotos
+  en `localStorage`; si un teléfono tenía fotos de la versión anterior, se muestran con botón
+  para borrarlas. Proveedor pendiente de decidir (ver TODO).
+- **Menú de boda**: cada plato es `[nombre, descripción, emojis]` (máx. 3; 🌿 = vegetariano).
+  El valor guardado en la hoja es solo el nombre (sin emojis).
+
 ## Limitaciones conocidas
 
-Mensajes, sugerencias de canciones, fotos del álbum y el bingo se guardan **solo en el
-`localStorage` del invitado**: los novios no los ven. Ver `TODO.md`.
+El bingo se guarda solo en el `localStorage` del invitado. El reproductor de la playlist es
+decorativo. Ver `TODO.md`.
